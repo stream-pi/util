@@ -92,4 +92,9 @@ public class Version {
         }
     }
 
+    public boolean isEqual(Version version)
+    {
+        return version.major == this.major && version.minor == this.minor && version.revision == this.revision;
+    }
+
 }
