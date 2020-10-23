@@ -48,6 +48,10 @@
 
         <SL4JVersion>1.7.30</SL4JVersion>
 
+
+        <IkonliVersion>11.5.0</IkonliVersion>
+        <IkonliFA5PackVersion>11.5.0</IkonliFA5PackVersion>
+
     </properties>
 
     <dependencies>
@@ -74,7 +78,19 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${SL4JVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+            <version>${IkonliFA5PackVersion}</version>
+        </dependency>
 
+
+
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>${IkonliVersion}</version>
+        </dependency>
     </dependencies>
 
 </project>
