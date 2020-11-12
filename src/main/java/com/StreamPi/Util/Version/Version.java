@@ -3,7 +3,9 @@ package com.StreamPi.Util.Version;
 
 import com.StreamPi.Util.Exception.MinorException;
 
-public class Version {
+import java.io.Serializable;
+
+public class Version implements Serializable {
     private int major, minor, revision;
 
     public Version()
