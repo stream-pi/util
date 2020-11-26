@@ -52,6 +52,9 @@
         <IkonliVersion>11.5.0</IkonliVersion>
         <IkonliFA5PackVersion>11.5.0</IkonliFA5PackVersion>
 
+
+        <JavaFXVersion>16-ea+4</JavaFXVersion>
+
     </properties>
 
     <dependencies>
@@ -82,6 +85,19 @@
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-fontawesome5-pack</artifactId>
             <version>${IkonliFA5PackVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${JavaFXVersion}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${JavaFXVersion}</version>
         </dependency>
 
 
