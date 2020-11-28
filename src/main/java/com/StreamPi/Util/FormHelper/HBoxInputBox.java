@@ -17,9 +17,7 @@ public class HBoxInputBox extends HBox {
         Label label = new Label(labelText);
 
 
-
         getChildren().addAll(label, new SpaceFiller(SpaceFiller.FillerType.HBox), textField);
-        setSpacing(5.0);
 
         if(enablerCheckBox != null)
         {
