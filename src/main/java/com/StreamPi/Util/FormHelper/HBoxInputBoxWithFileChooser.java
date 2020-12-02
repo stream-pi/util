@@ -17,16 +17,12 @@ import java.io.File;
 public class HBoxInputBoxWithFileChooser extends HBox {
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox, FileChooser.ExtensionFilter extensionFilter)
     {
-        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField);
+        textField.setDisable(true);
 
+        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, 300);
         setHgrow(hBoxInputBox, Priority.ALWAYS);
         getChildren().addAll(hBoxInputBox);
         setSpacing(5.0);
-
-        TextField tf = hBoxInputBox.getTextField();
-        tf.setPrefWidth(300);
-        tf.setDisable(true);
-
 
         Button button = new Button();
         FontIcon fontIcon = new FontIcon("far-folder");

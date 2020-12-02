@@ -10,9 +10,9 @@ import javafx.scene.layout.Region;
 
 public class HBoxInputBox extends HBox {
     private TextField textField;
-    public HBoxInputBox(String labelText, TextField textField, CheckBox enablerCheckBox)
+    public HBoxInputBox(String labelText, TextField textField, int prefWidth, CheckBox enablerCheckBox)
     {
-        textField.setPrefWidth(100);
+        textField.setPrefWidth(prefWidth);
 
         Label label = new Label(labelText);
 
@@ -29,10 +29,21 @@ public class HBoxInputBox extends HBox {
         this.textField = textField;
     }
 
+    public HBoxInputBox(String labelText, TextField textField, CheckBox enablerCheckBox)
+    {
+        this(labelText, textField, 100, enablerCheckBox);
+    }
+
     public HBoxInputBox(String labelText, TextField textField)
     {
-        this(labelText, textField, null);
+        this(labelText, textField, 100, null);
     }
+
+    public HBoxInputBox(String labelText, TextField textField, int prefWidth)
+    {
+        this(labelText, textField, prefWidth, null);
+    }
+
 
     public TextField getTextField()
     {
