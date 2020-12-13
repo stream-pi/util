@@ -9,4 +9,5 @@ module com.StreamPi.Util {
     exports com.StreamPi.Util.Exception;
     exports com.StreamPi.Util.Platform;
     exports com.StreamPi.Util.FormHelper;
+    exports com.StreamPi.Util.StartAtBoot;
 }
