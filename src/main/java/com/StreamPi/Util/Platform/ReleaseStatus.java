@@ -1,23 +1,25 @@
 /*
 ReleaseStatus.java
 
-Contributors : Debayan Sutradhar (@dubbadhar)
+Written By : Debayan Sutradhar (@rnayabed)
 
 Enum to store the current status of the Server Release
- */
+*/
+
 package com.StreamPi.Util.Platform;
 
 public enum ReleaseStatus {
-    EA, GA;
+    EA("Early Access"), GA("General Availability");
 
-    public static String getUIName(ReleaseStatus releaseStatus)
+    private final String UIName;
+
+    ReleaseStatus(String UIName)
     {
-        switch (releaseStatus)
-        {
-            case EA: return "Early Access";
-            case GA: return "General Availability";
-            default:
-                return null;
-        }
+        this.UIName = UIName;
+    }
+
+    public String getUIName()
+    {
+        return UIName;
     }
 }

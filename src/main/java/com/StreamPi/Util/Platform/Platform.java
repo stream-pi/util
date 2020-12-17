@@ -1,21 +1,23 @@
 package com.StreamPi.Util.Platform;
 
 public enum Platform {
-    WINDOWS, LINUX, MAC, ANDROID, IOS, LINUX_RPI, UNKNOWN;
+    WINDOWS("Windows"),
+    LINUX("Linux"), 
+    MAC("MacOS"),
+    ANDROID("Android"),
+    IOS("iOS"),
+    LINUX_RPI("Raspberry Pi"),
+    UNKNOWN("Unknown");
 
-    public static String getUIName(Platform platform)
+    final private String UIName;
+
+    Platform(String UIName)
     {
-        switch (platform)
-        {
-            case WINDOWS: return "Windows";
-            case LINUX: return "Linux";
-            case LINUX_RPI : return "Linux Raspberry Pi";
-            case MAC: return "MacOS";
-            case ANDROID: return "Android";
-            case IOS: return "iOS";
-            case UNKNOWN:
-            default:
-                return "Unknown";
-        }
+        this.UIName = UIName;
+    }
+
+    public String getUIName()
+    {
+        return UIName;
     }
 }
