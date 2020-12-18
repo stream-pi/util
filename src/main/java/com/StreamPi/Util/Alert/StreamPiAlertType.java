@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
 
 public enum StreamPiAlertType {
     INFORMATION("fas-info"),
-    ALERT("fas-exclamation-triangle"),
+    WARNING("fas-exclamation-triangle"),
     ERROR("fas-times");
 
     private final String fontAwesomeIconCode;
@@ -16,17 +16,8 @@ public enum StreamPiAlertType {
         this.fontAwesomeIconCode = fontAwesomeIconCode;
     }
 
-    public FontIcon getIcon()
+    public String getIconCode()
     {
-        return getIcon("#000000",13);
-    }
-
-    public FontIcon getIcon(String colorHex, int size)
-    {
-        FontIcon fontIcon = new FontIcon(fontAwesomeIconCode);
-        fontIcon.setIconSize(size);
-        fontIcon.setIconColor(Paint.valueOf(colorHex));
-
-        return fontIcon;
+        return fontAwesomeIconCode;
     }
 }
