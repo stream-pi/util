@@ -119,7 +119,7 @@ public class StreamPiAlert {
         label.getStyleClass().add("alert_pane_header_text");
 
         FontIcon fontIcon = new FontIcon(streamPiAlertType.getIconCode());
-        fontIcon.getStyleClass().add("alert_header_icon");
+        fontIcon.getStyleClass().addAll("alert_header_icon", streamPiAlertType.getIconStyleClassName());
 
         HBox header = new HBox(label, new SpaceFiller(FillerType.HBox), fontIcon);
         header.getStyleClass().add("alert_header");
@@ -181,6 +181,6 @@ public class StreamPiAlert {
     {
         stackPaneParent.getChildren().clear();
         stackPaneParent.toBack();
-        //stackPaneParent.setVisible(false);
+        stackPaneParent.setVisible(false);
     }
 }
