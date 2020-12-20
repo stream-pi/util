@@ -147,6 +147,7 @@ public class StreamPiAlert {
         alertPane.getStyleClass().add("alert_content_pane");
 
         ScrollPane scrollPane = new ScrollPane(alertPane);
+        scrollPane.getStyleClass().add("alert_scroll_pane");
 
         alertPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
 
