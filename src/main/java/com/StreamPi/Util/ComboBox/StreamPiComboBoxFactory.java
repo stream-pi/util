@@ -1,6 +1,6 @@
 package com.StreamPi.Util.ComboBox;
 
-public abstract class StreamPiComboBoxFactory
+public abstract class StreamPiComboBoxFactory<T>
 {
-    public abstra
+    public abstract String getOptionDisplayText(T object);
 }

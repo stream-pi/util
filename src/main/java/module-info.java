@@ -1,9 +1,9 @@
 module com.StreamPi.Util {
 
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.ikonli.fontawesome5;
-    requires javafx.base;
-    requires javafx.controls;
+    requires transitive org.kordamp.ikonli.javafx;
+    requires transitive org.kordamp.ikonli.fontawesome5;
+    requires transitive javafx.base;
+    requires transitive javafx.controls;
 
     exports com.StreamPi.Util.Version;
     exports com.StreamPi.Util.Exception;
@@ -11,4 +11,5 @@ module com.StreamPi.Util {
     exports com.StreamPi.Util.FormHelper;
     exports com.StreamPi.Util.StartAtBoot;
     exports com.StreamPi.Util.Alert;
+    exports com.StreamPi.Util.ComboBox;
 }
