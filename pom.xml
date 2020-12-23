@@ -8,6 +8,8 @@
     <artifactId>Util</artifactId>
     <version>1.0.0</version>
 
+    <url>https://stream-pi.com/</url>
+
     <build>
         <plugins>
             <plugin>

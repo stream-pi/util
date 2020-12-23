@@ -8,6 +8,8 @@ import com.StreamPi.Util.FormHelper.SpaceFiller.FillerType;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
@@ -26,6 +28,23 @@ public class StreamPiComboBox<T> extends HBox
         stackPaneParent = parent;
 
         stackPaneParent.getStyleClass().add("combobox_pane_parent");
+
+        stackPaneParent.getChildren().addListener(new ListChangeListener<Node>()
+        {
+            @Override
+            public void onChanged(Change<? extends Node> c) {
+                if(stackPaneParent.getChildren().size() > 0)
+                {
+                    stackPaneParent.setVisible(true);
+                    stackPaneParent.toFront();
+                }
+                else
+                {
+                    stackPaneParent.setVisible(false);
+                    stackPaneParent.toBack();
+                }
+            }
+        });
     }
     
     public StreamPiComboBox(List<T> options)
@@ -144,18 +163,16 @@ public class StreamPiComboBox<T> extends HBox
         this.streamPiComboBoxListener = streamPiComboBoxListener;
     }
 
+    private Node popupNode;
     public void show()
     {
-        stackPaneParent.getChildren().add(getPopupScrollPane());
-        stackPaneParent.toFront();
-        stackPaneParent.setVisible(true);
+        popupNode = getPopupScrollPane();
+        stackPaneParent.getChildren().add(popupNode);
     }
 
     public void destroy()
     {
-        stackPaneParent.getChildren().clear();
-        stackPaneParent.toBack();
-        stackPaneParent.setVisible(false);
+        stackPaneParent.getChildren().remove(popupNode);
     }
 
     private StreamPiComboBoxFactory<T> streamPiComboBoxFactory;

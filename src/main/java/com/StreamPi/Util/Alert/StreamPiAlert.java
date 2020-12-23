@@ -5,6 +5,7 @@ import com.StreamPi.Util.FormHelper.SpaceFiller.FillerType;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -31,6 +32,23 @@ public class StreamPiAlert {
         stackPaneParent = parent;
 
         stackPaneParent.getStyleClass().add("alert_pane_parent");
+
+        stackPaneParent.getChildren().addListener(new ListChangeListener<Node>()
+        {
+            @Override
+            public void onChanged(Change<? extends Node> c) {
+                if(stackPaneParent.getChildren().size() > 0)
+                {
+                    stackPaneParent.setVisible(true);
+                    stackPaneParent.toFront();
+                }
+                else
+                {
+                    stackPaneParent.setVisible(false);
+                    stackPaneParent.toBack();
+                }
+            }
+        });
     }
 
     public static StackPane getParent() {
@@ -171,17 +189,15 @@ public class StreamPiAlert {
         return contentPane;
     }
 
+    private Node popupNode;
     public void show()
     {
-        stackPaneParent.getChildren().add(getAlertPane(getTitle(), getContentPane()));
-        stackPaneParent.toFront();
-        stackPaneParent.setVisible(true);
+        popupNode = getAlertPane(getTitle(), getContentPane());
+        stackPaneParent.getChildren().add(popupNode);
     }
 
     public void destroy()
     {
-        stackPaneParent.getChildren().clear();
-        stackPaneParent.toBack();
-        stackPaneParent.setVisible(false);
+        stackPaneParent.getChildren().remove(popupNode);
     }
 }
