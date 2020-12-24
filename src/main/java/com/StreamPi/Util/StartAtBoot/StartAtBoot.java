@@ -77,7 +77,7 @@ public class StartAtBoot {
         {
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("cd "+runnerFile.getParentFile().getCanonicalPath()+"\n" +
+            bw.write("cd "+runnerFile.getAbsoluteFile().getParent()+"\n" +
                     runnerFile.getName());
             bw.close();
         }
