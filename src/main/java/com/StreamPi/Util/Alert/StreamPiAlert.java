@@ -59,8 +59,8 @@ public class StreamPiAlert {
     private StreamPiAlertListener streamPiAlertListener = null;
 
     public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType,
-     Pane contentPane, String... buttons) {
-       set(title, streamPiAlertType, contentPane, buttons);
+     Pane contentPane) {
+       set(title, streamPiAlertType, contentPane, new String[]{ "OK" });
     }
 
     public void setStreamPiAlertType(StreamPiAlertType streamPiAlertType)
@@ -102,7 +102,6 @@ public class StreamPiAlert {
         this.contentPane = contentPane;
         this.streamPiAlertType = streamPiAlertType;
     }
-
 
 
     public void setOnClicked(StreamPiAlertListener streamPiAlertListener) {
