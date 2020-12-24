@@ -2,6 +2,7 @@ package com.StreamPi.Util.Alert;
 
 import com.StreamPi.Util.FormHelper.SpaceFiller;
 import com.StreamPi.Util.FormHelper.SpaceFiller.FillerType;
+import com.StreamPi.Util.Platform.Platform;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -26,7 +27,7 @@ public class StreamPiAlert {
     private StreamPiAlertType streamPiAlertType;
     private Pane contentPane;
 
-    private static StackPane stackPaneParent;
+    private static StackPane stackPaneParent = null;
 
     public static void setParent(StackPane parent) {
         stackPaneParent = parent;
@@ -67,16 +68,6 @@ public class StreamPiAlert {
         this.streamPiAlertType = streamPiAlertType;
     }
 
-    public StreamPiAlert(String title, String contentText, String... buttons)
-    {
-        Label label = new Label(contentText);
-        label.setWrapText(true);
-
-        VBox vBox = new VBox(label);
-        
-        set(title, StreamPiAlertType.INFORMATION, vBox, buttons);
-    }
-
     public StreamPiAlert(String title, String contentText)
     {
         Label label = new Label(contentText);
@@ -85,6 +76,11 @@ public class StreamPiAlert {
         VBox vBox = new VBox(label);
         
         set(title, StreamPiAlertType.INFORMATION, vBox, new String[]{ "OK" });
+    }
+
+    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, String... buttons)
+    {
+        set(title, streamPiAlertType, null, new String[]{ "OK" });
     }
 
 
@@ -132,6 +128,9 @@ public class StreamPiAlert {
     public VBox getAlertPane(String title, Pane alertPane) {
         VBox alertVBox = new VBox();
         alertVBox.getStyleClass().add("alert_pane");
+
+        if(title.isEmpty())
+            title = "Alert";           
 
         Label label = new Label(title);
         label.getStyleClass().add("alert_pane_header_text");
@@ -192,12 +191,16 @@ public class StreamPiAlert {
     private Node popupNode;
     public void show()
     {
-        popupNode = getAlertPane(getTitle(), getContentPane());
-        stackPaneParent.getChildren().add(popupNode);
+        javafx.application.Platform.runLater(()->{
+            popupNode = getAlertPane(getTitle(), getContentPane());
+            stackPaneParent.getChildren().add(popupNode);
+        });
     }
 
     public void destroy()
     {
-        stackPaneParent.getChildren().remove(popupNode);
+        javafx.application.Platform.runLater(()->{
+            stackPaneParent.getChildren().remove(popupNode);
+        });
     }
 }

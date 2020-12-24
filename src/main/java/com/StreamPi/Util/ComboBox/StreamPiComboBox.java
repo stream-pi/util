@@ -8,6 +8,7 @@ import com.StreamPi.Util.FormHelper.SpaceFiller.FillerType;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -166,13 +167,17 @@ public class StreamPiComboBox<T> extends HBox
     private Node popupNode;
     public void show()
     {
-        popupNode = getPopupScrollPane();
-        stackPaneParent.getChildren().add(popupNode);
+        Platform.runLater(()->{
+            popupNode = getPopupScrollPane();
+            stackPaneParent.getChildren().add(popupNode);
+        });
     }
 
     public void destroy()
     {
-        stackPaneParent.getChildren().remove(popupNode);
+        Platform.runLater(()->{
+            stackPaneParent.getChildren().remove(popupNode);
+        });
     }
 
     private StreamPiComboBoxFactory<T> streamPiComboBoxFactory;
