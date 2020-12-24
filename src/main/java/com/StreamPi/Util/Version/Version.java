@@ -83,13 +83,20 @@ public class Version implements Serializable {
     {
         if(major>version.major)
             return true;
-        else
+        else if(major < version.major)
+            return false;
+        else 
         {
-            if(minor > version.minor)
+            if (minor > version.minor)
                 return true;
+            else if(minor < version.minor)
+                return false;
             else
             {
-                return revision > version.revision;
+                if(revision > version.revision)
+                    return true;
+                else 
+                    return false;
             }
         }
     }
