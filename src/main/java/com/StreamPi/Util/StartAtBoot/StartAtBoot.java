@@ -36,7 +36,7 @@ public class StartAtBoot {
         else if (platform == Platform.LINUX || platform == Platform.LINUX_RPI)
             return deleteStarterForLinux();
         else if(platform == Platform.MAC)
-            unknownPlatformException();
+            deleteStarterForMac();
         else if(platform == Platform.UNKNOWN)
             unknownPlatformException();
 
@@ -45,30 +45,33 @@ public class StartAtBoot {
 
     private void createStarterForLinux(File runnerFile) throws MinorException
     {
-        File initFile = new File("/etc/init.d/streampi_starter"+ softwareType);
+        File initFile = new File("/etc/init.d/streampi_starter_"+ softwareType);
 
         try
         {
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("cd "+runnerFile.getParentFile().getCanonicalPath()+"\n" +
-                    "./"+runnerFile.getName());
+            bw.write("#! /bin/sh\n" +
+                    "cd "+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                    "sudo ./"+runnerFile.getName()+"\n" +
+                    "exit 0\n");
             bw.close();
         }
         catch (Exception e)
         {
-            throw new MinorException(e.getMessage());
+            e.printStackTrace();
+            throw new MinorException(e.getMessage()+"\nTry running as root and try again");
         }
     }
 
     private boolean deleteStarterForLinux()
     {
-        return new File("/etc/init.d/streampi_starter"+ softwareType).delete();
+        return new File("/etc/init.d/streampi_starter_"+ softwareType).delete();
     }
 
     private void createStarterForWindows(File runnerFile) throws MinorException
     {
-        File initFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter"+ softwareType +".bat");
+        File initFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat");
 
         try
         {
@@ -86,7 +89,7 @@ public class StartAtBoot {
 
     private boolean deleteStarterForWindows()
     {
-        return new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter"+ softwareType +".bat").delete();
+        return new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat").delete();
     }
 
 
@@ -99,7 +102,7 @@ public class StartAtBoot {
     {
         throw new MinorException("Mac Starter feature is not implemented yet.");
     }
-
+    
     private void unknownPlatformException() throws MinorException
     {
         throw new MinorException("Cannot implemented starter feature. Unknown platform.");

@@ -4,7 +4,7 @@ module com.StreamPi.Util {
     requires transitive org.kordamp.ikonli.fontawesome5;
     requires transitive javafx.base;
     requires transitive javafx.controls;
-
+    
     exports com.StreamPi.Util.Version;
     exports com.StreamPi.Util.Exception;
     exports com.StreamPi.Util.Platform;
