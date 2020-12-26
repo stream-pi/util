@@ -3,6 +3,7 @@ module com.StreamPi.Util {
     requires transitive org.kordamp.ikonli.javafx;
     requires transitive org.kordamp.ikonli.fontawesome5;
     requires transitive javafx.base;
+    requires transitive java.logging;
     requires transitive javafx.controls;
     
     requires transitive java.xml;
@@ -15,4 +16,5 @@ module com.StreamPi.Util {
     exports com.StreamPi.Util.Alert;
     exports com.StreamPi.Util.ComboBox;
     exports com.StreamPi.Util.XMLConfigHelper;
+    exports com.StreamPi.Util.LoggerHelper;
 }
