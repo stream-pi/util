@@ -70,17 +70,18 @@ public class StreamPiAlert {
 
     public StreamPiAlert(String title, String contentText)
     {
-        Label label = new Label(contentText);
-        label.setWrapText(true);
-
-        VBox vBox = new VBox(label);
-        
-        set(title, StreamPiAlertType.INFORMATION, vBox, new String[]{ "OK" });
+        this(title, contentText, StreamPiAlertType.INFORMATION);
     }
+    
+    public StreamPiAlert(String contentText, StreamPiAlertType alertType)
+    {
+        this("Alert", contentText, alertType);
+    }
+    
 
     public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, String... buttons)
     {
-        set(title, streamPiAlertType, null, new String[]{ "OK" });
+        set(title, streamPiAlertType, null, buttons);
     }
 
 
