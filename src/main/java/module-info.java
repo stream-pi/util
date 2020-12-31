@@ -17,4 +17,5 @@ module com.StreamPi.Util {
     exports com.StreamPi.Util.ComboBox;
     exports com.StreamPi.Util.XMLConfigHelper;
     exports com.StreamPi.Util.LoggerHelper;
+    exports com.StreamPi.Util.IOHelper;
 }
