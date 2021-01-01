@@ -12,5 +12,10 @@ public class StreamPiLogFileHandler extends FileHandler {
 
         setFormatter(new StreamPiLogFormatter());
     }
+
+    public void closeHandler()
+    {
+        close();
+    }
     
 }
