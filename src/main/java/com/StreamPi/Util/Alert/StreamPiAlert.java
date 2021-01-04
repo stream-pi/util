@@ -2,10 +2,9 @@ package com.StreamPi.Util.Alert;
 
 import com.StreamPi.Util.FormHelper.SpaceFiller;
 import com.StreamPi.Util.FormHelper.SpaceFiller.FillerType;
-import com.StreamPi.Util.Platform.Platform;
-
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -191,7 +190,7 @@ public class StreamPiAlert {
     private Node popupNode;
     public void show()
     {
-        javafx.application.Platform.runLater(()->{
+        Platform.runLater(()->{
             popupNode = getAlertPane(getTitle(), getContentPane());
             stackPaneParent.getChildren().add(popupNode);
         });
@@ -199,7 +198,7 @@ public class StreamPiAlert {
 
     public void destroy()
     {
-        javafx.application.Platform.runLater(()->{
+        Platform.runLater(()->{
             stackPaneParent.getChildren().remove(popupNode);
         });
     }
