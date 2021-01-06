@@ -55,6 +55,11 @@ public class StreamPiComboBox<T> extends HBox
         setOptions(options);
     }
 
+    public List<T> getOptions()
+    {
+        return options;
+    }
+
     public StreamPiComboBox()
     {
         setup();
@@ -145,11 +150,6 @@ public class StreamPiComboBox<T> extends HBox
         this.currentIndex = index;
 
         setCurrentSelectedLabelText(streamPiComboBoxFactory.getOptionDisplayText(options.get(index)));
-    }
-
-    public void setCurrentSelectedItem(T object)
-    {
-        setCurrentSelectedItemIndex(options.indexOf(object));
     }
 
     private void setCurrentSelectedLabelText(String text)
