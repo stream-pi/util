@@ -83,6 +83,10 @@ public class StreamPiAlert {
         set(title, streamPiAlertType, null, buttons);
     }
 
+    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, Pane contentPane, String... buttons)
+    {
+        set(title, streamPiAlertType, contentPane, buttons);
+    }
 
     public StreamPiAlert(String title, String contentText, StreamPiAlertType streamPiAlertType)
     {
