@@ -31,6 +31,12 @@ public class XMLConfigHelper {
     }
 
 
+    public static double getDoubleProperty(Element parentElement, String propertyName) throws Exception
+    {
+        return Double.parseDouble(getProperty(parentElement, propertyName, false, null, null));
+    }
+
+
     public static boolean getBooleanProperty(Element parentElement, String propertyName) throws Exception
     {
         return getProperty(parentElement, propertyName, false, null, null).equals("true");
@@ -124,9 +130,33 @@ public class XMLConfigHelper {
         return tbr;
     }
 
-    public static int getIntProperty(Element parentElement, String propertyName, int ifNotPresent)
+    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent)
     {
-        return getIntProperty(parentElement, propertyName, ifNotPresent, true, false, null, null);
+        return getDoubleProperty(parentElement, propertyName, ifNotPresent, true, false, null, null);
+    }
+
+    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent, boolean printStackTrace)
+    {
+        return getDoubleProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
+    }
+
+    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
+        Document document, File file)
+    {
+        double tbr = ifNotPresent;
+
+        try
+        {
+            tbr = Double.parseDouble(getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file));
+        }
+        catch(Exception e)
+        {
+            if(printStackTrace)
+                e.printStackTrace();
+        }
+
+
+        return tbr;
     }
 
     public static String getStringProperty(Element parentElement, String propertyName, String ifNotPresent)
