@@ -6,7 +6,7 @@ import java.util.logging.FileHandler;
 
 public class StreamPiLogFileHandler extends FileHandler {
 
-    public StreamPiLogFileHandler(String logFilePath) throws IOException, SecurityException 
+    public StreamPiLogFileHandler(String logFilePath) throws Exception
     {
         super(logFilePath, false);
 
