@@ -167,6 +167,7 @@ public class StreamPiAlert {
         alertPane.getStyleClass().add("alert_content_pane");
 
         ScrollPane scrollPane = new ScrollPane(alertPane);
+        scrollPane.prefHeightProperty().bind(alertPane.heightProperty().add(20));
         scrollPane.getStyleClass().add("alert_scroll_pane");
 
         alertPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
@@ -182,6 +183,7 @@ public class StreamPiAlert {
             buttonBar
         );
 
+        alertVBox.setMaxHeight(Double.NEGATIVE_INFINITY);
 
         return alertVBox;
     }
