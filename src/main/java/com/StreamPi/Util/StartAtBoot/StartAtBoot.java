@@ -45,28 +45,55 @@ public class StartAtBoot {
 
     private void createStarterForLinux(File runnerFile) throws MinorException
     {
-        File initFile = new File("/etc/init.d/streampi_starter_"+ softwareType);
-
         try
         {
-            FileWriter fw = new FileWriter(initFile);
+            String sysDDirectoryPath = System.getProperty("user.home")+"/.local/share/systemd/user/";
+
+            File sysDDirectoryFile = new File(sysDDirectoryPath);
+
+            if(!sysDDirectoryFile.exists())
+                sysDDirectoryFile.mkdirs();
+
+            File sysDServiceFile = new File(sysDDirectoryPath+"stream-pi-"+ softwareType+".service");
+
+            FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("#! /bin/sh\n" +
-                    "cd "+runnerFile.getAbsoluteFile().getParent()+"\n" +
-                    "sudo ./"+runnerFile.getName()+"\n" +
-                    "exit 0\n");
+            bw.write("[Unit]\n" +
+                    "Description=Stream-Pi "+softwareType+"\n" +
+                    "[Service]\n" +
+                    "Type=oneshot\n" +
+                    "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                    "ExecStart="+runnerFile.getName()+"\n" +
+                    "[Install]\n" +
+                    "WantedBy=default.target");
             bw.close();
+
+            Runtime.getRuntime().exec("systemctl --user daemon-reload");
+            Runtime.getRuntime().exec("systemctl --user enable stream-pi-"+softwareType+".service");
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(e.getMessage()+"\nTry running as root and try again");
+            throw new MinorException("Unable to set start at boot",e.getMessage());
         }
     }
 
-    private boolean deleteStarterForLinux()
+    private boolean deleteStarterForLinux() throws MinorException
     {
-        return new File("/etc/init.d/streampi_starter_"+ softwareType).delete();
+        try
+        {
+            boolean f1 = new File(System.getProperty("user.home")+"/.local/share/systemd/user/stream-pi-"+
+                    softwareType+".service").delete();
+
+            Runtime.getRuntime().exec("systemctl --user daemon-reload");
+
+            return f1;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new MinorException("Unable to unset start at boot",e.getMessage());
+        }
     }
 
     private void createStarterForWindows(File runnerFile) throws MinorException
