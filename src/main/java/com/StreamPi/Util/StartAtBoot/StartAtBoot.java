@@ -63,9 +63,9 @@ public class StartAtBoot {
                     "[Service]\n" +
                     "Type=oneshot\n" +
                     "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
-                    "ExecStart="+runnerFile.getName()+"\n" +
+                    "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
                     "[Install]\n" +
-                    "WantedBy=default.target");
+                    "WantedBy=default.target\n");
             bw.close();
 
             Runtime.getRuntime().exec("systemctl --user daemon-reload");
