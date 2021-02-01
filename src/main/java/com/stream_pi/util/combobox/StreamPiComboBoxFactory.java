@@ -16,7 +16,15 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.combobox;
 
+/**
+ * Factory Class for Stream Pi Combo Box
+ * @param <T> Option Type
+ */
 public abstract class StreamPiComboBoxFactory<T>
 {
+    /**
+     * @param object Combo Box Option
+     * @return Label Text
+     */
     public abstract String getOptionDisplayText(T object);
 }
