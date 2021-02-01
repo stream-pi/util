@@ -1,4 +1,4 @@
-module com.streampi.util {
+module com.stream_pi.util {
 
     requires transitive org.kordamp.ikonli.javafx;
     requires transitive org.kordamp.ikonli.fontawesome5;
@@ -8,14 +8,14 @@ module com.streampi.util {
     
     requires transitive java.xml;
     
-    exports com.streampi.util.version;
-    exports com.streampi.util.exception;
-    exports com.streampi.util.platform;
-    exports com.streampi.util.uihelper;
-    exports com.streampi.util.startatboot;
-    exports com.streampi.util.alert;
-    exports com.streampi.util.combobox;
-    exports com.streampi.util.xmlconfighelper;
-    exports com.streampi.util.loggerhelper;
-    exports com.streampi.util.iohelper;
+    exports com.stream_pi.util.version;
+    exports com.stream_pi.util.exception;
+    exports com.stream_pi.util.platform;
+    exports com.stream_pi.util.uihelper;
+    exports com.stream_pi.util.startatboot;
+    exports com.stream_pi.util.alert;
+    exports com.stream_pi.util.combobox;
+    exports com.stream_pi.util.xmlconfighelper;
+    exports com.stream_pi.util.loggerhelper;
+    exports com.stream_pi.util.iohelper;
 }
