@@ -148,8 +148,12 @@ public class StreamPiComboBox<T> extends HBox
         VBox vBox = new VBox();
         vBox.getStyleClass().add("combo_box_popup_vbox");
         vBox.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
-    
+
+        scrollPane.maxHeightProperty().bind(vBox.heightProperty().add(20));
+
         scrollPane.setContent(vBox);
+
+        //scrollPane.setMaxHeight(Double.NEGATIVE_INFINITY);
 
         for(int i = 0;i<options.size();i++)
         {
