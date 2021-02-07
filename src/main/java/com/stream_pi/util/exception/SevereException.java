@@ -16,7 +16,8 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.exception;
 
-public class SevereException extends StreamPiException{
+public class SevereException extends StreamPiException {
+
     public SevereException(String message)
     {
         super(message);

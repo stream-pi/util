@@ -28,6 +28,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.io.File;
 
 public class HBoxInputBoxWithFileChooser extends HBox {
+
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox, FileChooser.ExtensionFilter extensionFilter)
     {
         textField.setDisable(true);
@@ -45,11 +46,9 @@ public class HBoxInputBoxWithFileChooser extends HBox {
 
         button.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
-
             fileChooser.getExtensionFilters().addAll(
                     extensionFilter
             );
-
 
             try {
                 File selectedDirectory = fileChooser.showOpenDialog(button.getScene().getWindow());

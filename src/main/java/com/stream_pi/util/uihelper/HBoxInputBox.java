@@ -23,15 +23,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class HBoxInputBox extends HBox {
+
     private TextField textField;
+
     public HBoxInputBox(String labelText, TextField textField, int prefWidth, CheckBox enablerCheckBox)
     {
         textField.setPrefWidth(prefWidth);
-
         Label label = new Label(labelText);
-
-
-        getChildren().addAll(label, new SpaceFiller(SpaceFiller.FillerType.HBox), textField);
+        getChildren().addAll(label, SpaceFiller.horizontal(), textField);
 
         if(enablerCheckBox != null)
         {
@@ -39,7 +38,6 @@ public class HBoxInputBox extends HBox {
             HBox.setMargin(enablerCheckBox, new Insets(0, 0, 0, 45));
             getChildren().add(enablerCheckBox);
         }
-
         this.textField = textField;
     }
 
@@ -57,7 +55,6 @@ public class HBoxInputBox extends HBox {
     {
         this(labelText, textField, prefWidth, null);
     }
-
 
     public TextField getTextField()
     {
