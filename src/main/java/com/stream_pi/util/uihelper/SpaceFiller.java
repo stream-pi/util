@@ -21,22 +21,19 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class SpaceFiller extends Region {
+public class SpaceFiller {
 
-    public SpaceFiller(FillerType fillerType)
+    public static Region horizontal()
     {
-        if(fillerType == FillerType.HBox)
-        {
-            HBox.setHgrow(this, Priority.ALWAYS);
-        }
-        else if(fillerType == FillerType.VBox)
-        {
-            VBox.setVgrow(this, Priority.ALWAYS);
-        }
+        final Region region = new Region();
+        HBox.setHgrow(region, Priority.ALWAYS);
+        return region;
     }
 
-    public enum FillerType
+    public static Region vertical()
     {
-        HBox, VBox
+        final Region region = new Region();
+        VBox.setVgrow(region, Priority.ALWAYS);
+        return region;
     }
 }

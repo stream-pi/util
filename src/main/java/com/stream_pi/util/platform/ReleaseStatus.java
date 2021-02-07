@@ -18,7 +18,9 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.platform;
 
 public enum ReleaseStatus {
-    EA("Early Access"), GA("General Availability");
+
+    EA("Early Access"),
+    GA("General Availability");
 
     private final String UIName;
 

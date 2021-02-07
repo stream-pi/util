@@ -17,9 +17,9 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.exception;
 
 public class StreamPiException extends Exception {
+
     private String title;
     private String message;
-
 
     public StreamPiException(String message)
     {

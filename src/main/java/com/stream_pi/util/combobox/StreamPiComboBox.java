@@ -41,7 +41,6 @@ import javafx.scene.layout.VBox;
 public class StreamPiComboBox<T> extends HBox
 {
     private List<T> options;
-
     private static StackPane stackPaneParent;
 
     /**
@@ -50,9 +49,7 @@ public class StreamPiComboBox<T> extends HBox
      */
     public static void setParent(StackPane parent) {
         stackPaneParent = parent;
-
         stackPaneParent.getStyleClass().add("combo_box_pane_parent");
-
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
         {
             if(stackPaneParent.getChildren().size() > 0)
@@ -75,7 +72,6 @@ public class StreamPiComboBox<T> extends HBox
     public StreamPiComboBox(List<T> options)
     {
         setup();
-
         setOptions(options);
     }
 
@@ -105,7 +101,7 @@ public class StreamPiComboBox<T> extends HBox
         buttons = new ArrayList<>();
 
         getStyleClass().add("combo_box");
-        setOnMouseClicked(event->show());
+        setOnMouseClicked(event -> show());
 
         currentSelectedLabel = new Label();
         currentSelectedLabel.getStyleClass().add("combo_box_current_selected_label");
@@ -115,7 +111,7 @@ public class StreamPiComboBox<T> extends HBox
 
         getChildren().addAll(
             currentSelectedLabel,
-            new SpaceFiller(SpaceFiller.FillerType.HBox),
+            SpaceFiller.horizontal(),
             fontIcon
         );
     }
@@ -202,7 +198,6 @@ public class StreamPiComboBox<T> extends HBox
     public void setCurrentSelectedItemIndex(int index)
     {
         this.currentIndex = index;
-
         setCurrentSelectedLabelText(streamPiComboBoxFactory.getOptionDisplayText(options.get(index)));
     }
 
