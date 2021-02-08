@@ -97,23 +97,20 @@ public class Version implements Serializable {
 
     public boolean isBiggerThan(Version version)
     {
-        if(major>version.major)
-            return true;
-        else if(major < version.major)
-            return false;
-        else 
+        if (major == version.major)
         {
-            if (minor > version.minor)
-                return true;
-            else if(minor < version.minor)
-                return false;
+            if (minor == version.minor)
+            {
+               return revision > version.revision;
+            }
             else
             {
-                if(revision > version.revision)
-                    return true;
-                else 
-                    return false;
+                return minor > version.minor;
             }
+        }
+        else
+        {
+            return major > version.major;
         }
     }
 

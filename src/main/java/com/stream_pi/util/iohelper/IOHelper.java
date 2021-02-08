@@ -23,14 +23,14 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class IOHelper {
-    public static void unzip(InputStream inputStream, String destDir) throws Exception{
+
+    public static void unzip(InputStream inputStream, String destDir) throws Exception {
         File dir = new File(destDir);
         // create output directory if it doesn't exist
         if(!dir.exists()) dir.mkdirs();
         InputStream fis;
         //buffer for read and write data to file
         byte[] buffer = new byte[1024];
-
 
         fis = inputStream;
             ZipInputStream zis = new ZipInputStream(fis);
@@ -48,11 +48,11 @@ public class IOHelper {
                 {
                     FileOutputStream fos = new FileOutputStream(newFile);
                     int len;
-                    while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
+                    while ((len = zis.read(buffer)) > 0)
+                    {
+                        fos.write(buffer, 0, len);
                     }
                     fos.close();
-                 
                 }
                 //close this ZipEntry
                 zis.closeEntry();

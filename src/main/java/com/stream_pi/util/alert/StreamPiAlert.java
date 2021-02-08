@@ -52,9 +52,7 @@ public class StreamPiAlert
     public static void setParent(StackPane parent)
     {
         stackPaneParent = parent;
-
         stackPaneParent.getStyleClass().add("alert_pane_parent");
-
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
         {
             if(stackPaneParent.getChildren().size() > 0)
@@ -157,9 +155,7 @@ public class StreamPiAlert
     {
         Label label = new Label(contentText);
         label.setWrapText(true);
-
         VBox vBox = new VBox(label);
-        
         set(title, streamPiAlertType, vBox, "OK");
     }
 
@@ -238,7 +234,7 @@ public class StreamPiAlert
         FontIcon fontIcon = new FontIcon(streamPiAlertType.getIconCode());
         fontIcon.getStyleClass().addAll("alert_header_icon", streamPiAlertType.getIconStyleClassName());
 
-        HBox header = new HBox(label, new SpaceFiller(SpaceFiller.FillerType.HBox), fontIcon);
+        HBox header = new HBox(label, SpaceFiller.horizontal(), fontIcon);
         header.getStyleClass().add("alert_header");
 
 
@@ -252,32 +248,28 @@ public class StreamPiAlert
             Button button = new Button(eachButtonString);
             button.setOnAction(event -> {
                 if(this.streamPiAlertListener != null)
+                {
                     this.streamPiAlertListener.onClick(eachButtonString);
-
+                }
                 destroy();
             });
 
             button.getStyleClass().add("alert_button");
-
             buttonBar.getChildren().add(button);
         }
-
-        contentPane.getStyleClass().add("alert_content_pane");
 
         ScrollPane scrollPane = new ScrollPane(contentPane);
         scrollPane.prefHeightProperty().bind(contentPane.heightProperty().add(20));
         scrollPane.getStyleClass().add("alert_scroll_pane");
-
-        contentPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
-
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        contentPane.getStyleClass().add("alert_content_pane");
+        contentPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
 
         VBox alertVBox = new VBox( header, scrollPane, buttonBar);
         alertVBox.getStyleClass().add("alert_pane");
-
         alertVBox.setMaxHeight(Double.NEGATIVE_INFINITY);
 
         return alertVBox;

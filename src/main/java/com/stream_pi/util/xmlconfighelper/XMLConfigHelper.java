@@ -33,7 +33,7 @@ import org.w3c.dom.Node;
 
 public class XMLConfigHelper {
     
-    private static Logger logger = Logger.getLogger(XMLConfigHelper.class.getName());
+    private static final Logger logger = Logger.getLogger(XMLConfigHelper.class.getName());
 
     public static String getStringProperty(Element parentElement, String propertyName) throws Exception
     {
@@ -66,16 +66,13 @@ public class XMLConfigHelper {
         {
             logger.warning("CANNOT get property "+parentElement.getNodeName()+"."+propertyName+"!");
 
-            if(createNewIfDoesntExist)
+            if (createNewIfDoesntExist)
             {
                 logger.warning("Creating new property by that name ...");
-
                 Element newProp = document.createElement(propertyName);
                 parentElement.appendChild(newProp);
-                
                 save(document, file);
             }
-
             throw e;
         }
     }
@@ -85,7 +82,6 @@ public class XMLConfigHelper {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         Result output = new StreamResult(file);
         Source input = new DOMSource(document);
-
         transformer.transform(input, output);
     }
 
@@ -99,7 +95,6 @@ public class XMLConfigHelper {
         Document document, File file)
     {
         String tbr = ifNotPresent;
-
         try
         {
             tbr = getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file);
@@ -109,8 +104,6 @@ public class XMLConfigHelper {
             if(printStackTrace)
                 e.printStackTrace();
         }
-
-
         return tbr;
     }
 
@@ -140,8 +133,6 @@ public class XMLConfigHelper {
             if(printStackTrace)
                 e.printStackTrace();
         }
-
-
         return tbr;
     }
 
@@ -169,8 +160,6 @@ public class XMLConfigHelper {
             if(printStackTrace)
                 e.printStackTrace();
         }
-
-
         return tbr;
     }
 
@@ -184,8 +173,7 @@ public class XMLConfigHelper {
         return getBooleanProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
     }
 
-
-    public static boolean getBooleanProperty(Element parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
+    public static boolean getBooleanProperty(Element parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist,
         Document document, File file)
     {
         boolean tbr = ifNotPresent;
@@ -199,7 +187,6 @@ public class XMLConfigHelper {
             if(printStackTrace)
                 e.printStackTrace();
         }
-
         return tbr;
     }
 
@@ -217,5 +204,4 @@ public class XMLConfigHelper {
     {
         return document.getElementsByTagName(nameOfElement).getLength() > 0;
     }
-
 }
