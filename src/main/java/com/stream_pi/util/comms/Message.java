@@ -5,21 +5,14 @@ import java.io.Serializable;
 public class Message implements Serializable
 {
     private String header;
-    private String meta;
     private MessageType messageType;
     private Object value;
 
-    public Message(String header, String meta, MessageType messageType, Object value)
+    public Message(String header, MessageType messageType, Object value)
     {
         this.header = header;
-        this.meta = meta;
         this.messageType = messageType;
         this.value = value;
-    }
-
-    public void setMeta(String meta)
-    {
-        this.meta = meta;
     }
 
     public void setHeader(String header)
@@ -35,11 +28,6 @@ public class Message implements Serializable
     public void setValue(Object value)
     {
         this.value = value;
-    }
-
-    public String getMeta()
-    {
-        return meta;
     }
 
     public String getHeader()

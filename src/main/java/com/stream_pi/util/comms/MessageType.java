@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public enum MessageType implements Serializable
 {
-    ACTION, SIMPLE_ARRAY, ICON
+    ICON, STRING_ARRAY;
 }
