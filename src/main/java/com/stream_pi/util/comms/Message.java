@@ -4,30 +4,30 @@ import java.io.Serializable;
 
 public class Message implements Serializable
 {
-    private String header;
-    private MessageType messageType;
-    private Object value;
+    private final String header;
 
-    public Message(String header, MessageType messageType, Object value)
-    {
-        this.header = header;
-        this.messageType = messageType;
-        this.value = value;
-    }
+    private String[] stringArrValue;
+    private String stringValue;
+    private byte[] byteArrValue;
 
-    public void setHeader(String header)
+    public Message(String header)
     {
         this.header = header;
     }
 
-    public void setMessageType(MessageType messageType)
+    public void setByteArrValue(byte[] byteArrValue)
     {
-        this.messageType = messageType;
+        this.byteArrValue = byteArrValue;
     }
 
-    public void setValue(Object value)
+    public void setStringArrValue(String[] stringArrValue)
     {
-        this.value = value;
+        this.stringArrValue = stringArrValue;
+    }
+
+    public void setStringValue(String stringValue)
+    {
+        this.stringValue = stringValue;
     }
 
     public String getHeader()
@@ -35,13 +35,19 @@ public class Message implements Serializable
         return header;
     }
 
-    public MessageType getMessageType()
+    public byte[] getByteArrValue()
     {
-        return messageType;
+        return byteArrValue;
     }
 
-    public Object getValue()
+    public String[] getStringArrValue()
     {
-        return value;
+        return stringArrValue;
     }
+
+    public String getStringValue()
+    {
+        return stringValue;
+    }
+
 }
