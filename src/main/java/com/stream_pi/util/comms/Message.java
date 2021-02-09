@@ -20,7 +20,7 @@ public class Message implements Serializable
         this.byteArrValue = byteArrValue;
     }
 
-    public void setStringArrValue(String[] stringArrValue)
+    public void setStringArrValue(String... stringArrValue)
     {
         this.stringArrValue = stringArrValue;
     }
