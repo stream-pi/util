@@ -8,14 +8,14 @@ public class Message implements Serializable
 
     private String[] stringArrValue;
     private String stringValue;
-    private byte[] byteArrValue;
+    private Byte[] byteArrValue;
 
     public Message(String header)
     {
         this.header = header;
     }
 
-    public void setByteArrValue(byte[] byteArrValue)
+    public void setByteArrValue(Byte[] byteArrValue)
     {
         this.byteArrValue = byteArrValue;
     }
@@ -35,7 +35,7 @@ public class Message implements Serializable
         return header;
     }
 
-    public byte[] getByteArrValue()
+    public Byte[] getByteArrValue()
     {
         return byteArrValue;
     }

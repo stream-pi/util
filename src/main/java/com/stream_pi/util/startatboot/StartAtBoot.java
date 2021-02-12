@@ -39,7 +39,19 @@ public class StartAtBoot {
         if(platform == Platform.WINDOWS)
             createStarterForWindows(runnerFile);
         else if(platform == Platform.LINUX || platform == Platform.LINUX_RPI)
-            createStarterForLinux(runnerFile);
+            createStarterForLinux(runnerFile, true);
+        else if(platform == Platform.MAC)
+            createStarterForMac(runnerFile);
+        else if(platform == Platform.UNKNOWN)
+            unknownPlatformException();
+    }
+
+    public void create(File runnerFile, boolean isXMode)  throws MinorException
+    {
+        if(platform == Platform.WINDOWS)
+            createStarterForWindows(runnerFile);
+        else if(platform == Platform.LINUX || platform == Platform.LINUX_RPI)
+            createStarterForLinux(runnerFile, isXMode);
         else if(platform == Platform.MAC)
             createStarterForMac(runnerFile);
         else if(platform == Platform.UNKNOWN)
@@ -59,7 +71,7 @@ public class StartAtBoot {
         return false;
     }
 
-    private void createStarterForLinux(File runnerFile) throws MinorException
+    private void createStarterForLinux(File runnerFile, boolean isXMode) throws MinorException
     {
         try
         {
@@ -74,14 +86,31 @@ public class StartAtBoot {
 
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("[Unit]\n" +
-                    "Description=Stream-Pi "+softwareType+"\n" +
-                    "[Service]\n" +
-                    "Type=oneshot\n" +
-                    "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
-                    "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
-                    "[Install]\n" +
-                    "WantedBy=default.target\n");
+
+            if(isXMode)
+            {
+                bw.write("[Unit]\n" +
+                        "Description=Stream-Pi "+softwareType+"\n" +
+                        "[Service]\n" +
+                        "Type=simple\n" +
+                        "Environment=\"DISPLAY=:0\"\n" +
+                        "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                        "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
+                        "[Install]\n" +
+                        "WantedBy=default.target\n");
+            }
+            else
+            {
+                bw.write("[Unit]\n" +
+                        "Description=Stream-Pi "+softwareType+"\n" +
+                        "[Service]\n" +
+                        "Type=oneshot\n" +
+                        "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                        "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
+                        "[Install]\n" +
+                        "WantedBy=default.target\n");
+            }
+
             bw.close();
 
             Runtime.getRuntime().exec("systemctl --user daemon-reload");

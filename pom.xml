@@ -73,6 +73,7 @@
             <artifactId>ikonli-javafx</artifactId>
             <version>${IkonliVersion}</version>
         </dependency>
+
     </dependencies>
 
 </project>
