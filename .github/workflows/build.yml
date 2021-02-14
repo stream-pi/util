@@ -24,11 +24,6 @@ jobs:
       - name: Verify project
         run: mvn clean verify
 
-      - name: Configure GIT
-        run: |
-          git config user.name "${{ github.event.head_commit.committer.name }}"
-          git config user.email "${{ github.event.head_commit.committer.email }}"
-
       - name: Deploy snapshots
         run: |
           mvn deploy -DskipTests=true -Dgpg.skip
