@@ -1,9 +1,8 @@
-# util
+# Stream-Pi Utilities Library
 
 ![version](https://img.shields.io/badge/Version-1.0.0-green)
 
-This package contains the shared code between Server and Client,
-like Alerts, ComboBox, etc.
+Repository contains controls like Alerts, ComboBox, etc. used in both Server and Client.
 
 ## Prerequisites
 

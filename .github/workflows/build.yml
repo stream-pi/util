@@ -24,4 +24,10 @@ jobs:
       - name: Verify project
         run: mvn clean verify
 
-# TODO: Deploy Snapshots
+      - name: Deploy snapshots
+        run: |
+          mvn deploy -DskipTests=true -Dgpg.skip
+        with:
+          server-id: ossrh
+          server-username: ${{ secrets.SONATYPE_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_PASSWORD }}
