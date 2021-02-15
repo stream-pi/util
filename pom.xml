@@ -147,8 +147,14 @@
         <developer>
             <name>Debayan Sutradhar</name>
             <email>debayansutradhar3@gmail.com</email>
-            <organization>Stream Pi</organization>
+            <organization>Stream-Pi</organization>
             <organizationUrl>https://www.stream-pi.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Abhinay Agarwal</name>
+            <email>abhinay.agarwal@gluonhq.com</email>
+            <organization>Gluon</organization>
+            <organizationUrl>https://www.gluonhq.com</organizationUrl>
         </developer>
     </developers>
 
