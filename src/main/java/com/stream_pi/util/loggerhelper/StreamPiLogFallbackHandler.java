@@ -20,7 +20,7 @@ import java.util.logging.ConsoleHandler;
 
 public class StreamPiLogFallbackHandler extends ConsoleHandler{
 
-    public StreamPiLogFallbackHandler() throws Exception
+    public StreamPiLogFallbackHandler()
     {
         super();
 
