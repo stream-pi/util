@@ -17,6 +17,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.alert;
 
 import com.stream_pi.util.uihelper.SpaceFiller;
+import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
@@ -293,6 +294,14 @@ public class StreamPiAlert
         {
             popupNode = getAlertPane(getTitle(), getContentPane());
             stackPaneParent.getChildren().add(popupNode);
+
+            Stage stage = (Stage) stackPaneParent.getScene().getWindow();
+
+            if(!stage.isShowing())
+                stage.show();
+
+            stage.setAlwaysOnTop(true);
+            stage.setAlwaysOnTop(false);
         });
     }
 
