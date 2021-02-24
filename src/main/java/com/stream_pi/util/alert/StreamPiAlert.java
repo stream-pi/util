@@ -300,6 +300,9 @@ public class StreamPiAlert
             if(!stage.isShowing())
                 stage.show();
 
+            if(stage.isIconified())
+                stage.setIconified(false);
+
             stage.setAlwaysOnTop(true);
             stage.setAlwaysOnTop(false);
         });
