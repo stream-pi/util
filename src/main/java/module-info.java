@@ -22,6 +22,7 @@ module com.stream_pi.util
     requires transitive java.logging;
     requires transitive javafx.controls;
     requires transitive java.xml;
+    requires com.google.gson;
     
     exports com.stream_pi.util.version;
     exports com.stream_pi.util.exception;
@@ -29,6 +30,7 @@ module com.stream_pi.util
     exports com.stream_pi.util.uihelper;
     exports com.stream_pi.util.startatboot;
     exports com.stream_pi.util.alert;
+    exports com.stream_pi.util.checkforupdates;
     exports com.stream_pi.util.combobox;
     exports com.stream_pi.util.xmlconfighelper;
     exports com.stream_pi.util.loggerhelper;

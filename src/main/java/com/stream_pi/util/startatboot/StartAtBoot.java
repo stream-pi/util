@@ -18,6 +18,7 @@ package com.stream_pi.util.startatboot;
 
 import com.stream_pi.util.platform.Platform;
 import com.stream_pi.util.exception.MinorException;
+import com.stream_pi.util.platform.PlatformType;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,10 +26,10 @@ import java.io.FileWriter;
 
 public class StartAtBoot {
 
-    SoftwareType softwareType;
+    PlatformType softwareType;
     Platform platform;
 
-    public StartAtBoot(SoftwareType softwareType, Platform platform)
+    public StartAtBoot(PlatformType softwareType, Platform platform)
     {
         this.softwareType = softwareType;
         this.platform = platform;
@@ -38,7 +39,7 @@ public class StartAtBoot {
     {
         if(platform == Platform.WINDOWS)
             createStarterForWindows(runnerFile);
-        else if(platform == Platform.LINUX || platform == Platform.LINUX_RPI)
+        else if(platform == Platform.LINUX)
             createStarterForLinux(runnerFile, true);
         else if(platform == Platform.MAC)
             createStarterForMac(runnerFile);
@@ -50,7 +51,7 @@ public class StartAtBoot {
     {
         if(platform == Platform.WINDOWS)
             createStarterForWindows(runnerFile);
-        else if(platform == Platform.LINUX || platform == Platform.LINUX_RPI)
+        else if(platform == Platform.LINUX)
             createStarterForLinux(runnerFile, isXMode);
         else if(platform == Platform.MAC)
             createStarterForMac(runnerFile);
@@ -61,7 +62,7 @@ public class StartAtBoot {
     public boolean delete() throws MinorException {
         if(platform == Platform.WINDOWS)
             return deleteStarterForWindows();
-        else if (platform == Platform.LINUX || platform == Platform.LINUX_RPI)
+        else if (platform == Platform.LINUX)
             return deleteStarterForLinux();
         else if(platform == Platform.MAC)
             deleteStarterForMac();
