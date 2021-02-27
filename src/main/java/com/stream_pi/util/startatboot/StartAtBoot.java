@@ -150,8 +150,8 @@ public class StartAtBoot {
         {
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("cd "+runnerFile.getAbsoluteFile().getParent()+"\n" +
-                    runnerFile.getName());
+            bw.write("cd "+runnerFile.getAbsoluteFile().getParent()+"\r\n" +
+                    "start \"\" "+runnerFile.getName());
             bw.close();
         }
         catch (Exception e)
