@@ -23,6 +23,6 @@ public class StreamPiLogFormatter extends SimpleFormatter{
     @Override
     public String format(LogRecord record)
     {
-        return "["+Thread.currentThread().getName()+"] :: "+ record.getSourceClassName()+"@"+record.getSourceMethodName()+" -> " + ":" + record.getLevel() + " = "+ record.getMessage() + "\n";
+        return "["+Thread.currentThread().getName()+"] :: "+ record.getSourceClassName()+" @ "+record.getSourceMethodName()+" -> " + ":" + record.getLevel() + " = "+ record.getMessage() + "\r\n";
     }
 }
