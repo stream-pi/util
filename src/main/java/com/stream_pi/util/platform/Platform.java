@@ -21,6 +21,7 @@ public enum Platform {
     LINUX("Linux"), 
     MAC("MacOS"),
     ANDROID("Android"),
+    IOS("iOS"),
     UNKNOWN("Unknown");
 
     final private String UIName;
