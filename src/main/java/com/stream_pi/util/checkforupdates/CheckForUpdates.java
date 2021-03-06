@@ -6,7 +6,6 @@ import com.stream_pi.util.alert.StreamPiAlert;
 import com.stream_pi.util.alert.StreamPiAlertType;
 import com.stream_pi.util.platform.PlatformType;
 import com.stream_pi.util.version.Version;
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
@@ -22,17 +21,17 @@ public class CheckForUpdates extends Task<Void>
 {
 
     private final Button checkForUpdatesButton;
-    private final HostServices hostServices;
     private final PlatformType platformType;
     private final Version currentVersion;
+    private final UpdateHyperlinkOnClick updateHyperlinkOnClick;
 
-    public CheckForUpdates(Button checkForUpdatesButton, HostServices hostServices,
-                           PlatformType platformType, Version currentVersion)
+    public CheckForUpdates(Button checkForUpdatesButton, PlatformType platformType, Version currentVersion,
+                           UpdateHyperlinkOnClick updateHyperlinkOnClick)
     {
         this.checkForUpdatesButton = checkForUpdatesButton;
-        this.hostServices = hostServices;
         this.platformType = platformType;
         this.currentVersion = currentVersion;
+        this.updateHyperlinkOnClick = updateHyperlinkOnClick;
 
         new Thread(this).start();
     }
@@ -69,8 +68,9 @@ public class CheckForUpdates extends Task<Void>
             {
                 VBox vBox = new VBox();
 
-                Hyperlink urlLabel = new Hyperlink(releasePage);
-                urlLabel.setOnAction(event->hostServices.showDocument(releasePage));
+                Hyperlink updateHyperlink = new Hyperlink(releasePage);
+                updateHyperlinkOnClick.setURL(releasePage);
+                updateHyperlink.setOnAction(event->updateHyperlinkOnClick.handle(event));
 
                 Label label = new Label(
                         "New Version "+latestVersionRaw+" Available.\n" +
@@ -81,7 +81,7 @@ public class CheckForUpdates extends Task<Void>
 
                 vBox.setSpacing(5);
                 vBox.getChildren().addAll(
-                        urlLabel,
+                        updateHyperlink,
                         label
                 );
 
