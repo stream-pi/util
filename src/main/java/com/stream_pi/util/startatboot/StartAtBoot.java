@@ -95,7 +95,7 @@ public class StartAtBoot {
                         "[Service]\n" +
                         "Type=simple\n" +
                         "Environment=\"DISPLAY=:0\"\n" +
-                        "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                        "WorkingDirectory=\""+runnerFile.getAbsoluteFile().getParent()+"\"\n" +
                         "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
                         "[Install]\n" +
                         "WantedBy=default.target\n");
@@ -106,7 +106,7 @@ public class StartAtBoot {
                         "Description=Stream-Pi "+softwareType+"\n" +
                         "[Service]\n" +
                         "Type=oneshot\n" +
-                        "WorkingDirectory="+runnerFile.getAbsoluteFile().getParent()+"\n" +
+                        "WorkingDirectory=\""+runnerFile.getAbsoluteFile().getParent()+"\"\n" +
                         "ExecStart="+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\n" +
                         "[Install]\n" +
                         "WantedBy=default.target\n");
