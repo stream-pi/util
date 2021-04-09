@@ -37,14 +37,7 @@ public class StartAtBoot {
 
     public void create(File runnerFile) throws MinorException
     {
-        if(platform == Platform.WINDOWS)
-            createStarterForWindows(runnerFile);
-        else if(platform == Platform.LINUX)
-            createStarterForLinux(runnerFile, true);
-        else if(platform == Platform.MAC)
-            createStarterForMac(runnerFile);
-        else if(platform == Platform.UNKNOWN)
-            unknownPlatformException();
+        create(runnerFile, true);
     }
 
     public void create(File runnerFile, boolean isXMode)  throws MinorException
@@ -144,14 +137,27 @@ public class StartAtBoot {
 
     private void createStarterForWindows(File runnerFile) throws MinorException
     {
-        File initFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat");
+        //File initFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat");
 
         try
         {
+            File initFile = new File("streampi_starter_batch_"+ softwareType +".bat");
+
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("cd "+runnerFile.getAbsoluteFile().getParent()+"\r\n" +
                     "start \"\" "+runnerFile.getName());
+            bw.close();
+
+
+
+            File vbsStarterFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".vbs");
+
+            fw = new FileWriter(vbsStarterFile);
+            bw = new BufferedWriter(fw);
+            bw.write("Set WshShell = CreateObject(\"WScript.Shell\") \r\n" +
+                    "WshShell.Run chr(34) & \""+initFile.getAbsolutePath()+"+\" & Chr(34), 0\r\n" +
+                    "Set WshShell = Nothing");
             bw.close();
         }
         catch (Exception e)
