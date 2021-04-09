@@ -141,7 +141,7 @@ public class StartAtBoot {
 
         try
         {
-            File initFile = new File("streampi_starter_batch_"+ softwareType +".bat");
+            File initFile = new File(System.getenv("APPDATA")+"streampi_starter_batch_"+ softwareType +".bat");
 
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -168,7 +168,10 @@ public class StartAtBoot {
 
     private boolean deleteStarterForWindows()
     {
-        return new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat").delete();
+        boolean f1 = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".vbs").delete();
+        boolean f2 = new File(System.getenv("APPDATA")+"streampi_starter_batch_"+ softwareType +".bat").delete();
+
+        return f1 && f2;
     }
 
 
