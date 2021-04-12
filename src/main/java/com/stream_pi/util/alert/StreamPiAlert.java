@@ -80,6 +80,12 @@ public class StreamPiAlert
 
     private StreamPiAlertListener streamPiAlertListener = null;
 
+
+    public StreamPiAlert(String contextText)
+    {
+        this("Alert", contextText);
+    }
+
     /**
      * Public constructor to make an alert with just title, pre-made content pane (mainly for forms, complex dialogs)
      * @param title Heading of the Alert
