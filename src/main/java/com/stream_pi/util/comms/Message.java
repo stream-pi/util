@@ -19,7 +19,7 @@ public class Message implements Serializable
         this.header = header;
     }
 
-    public void setDoubleArrValue(double[] doubleArrValue)
+    public void setDoubleArrValue(double... doubleArrValue)
     {
         this.doubleArrValue = doubleArrValue;
     }
@@ -39,7 +39,7 @@ public class Message implements Serializable
         return doubleValue;
     }
 
-    public void setIntArrValue(int[] intArrValue)
+    public void setIntArrValue(int... intArrValue)
     {
         this.intArrValue = intArrValue;
     }
