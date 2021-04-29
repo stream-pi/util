@@ -11,10 +11,32 @@ public class Message implements Serializable
     private byte[] byteArrValue;
     private int intValue;
     private int[] intArrValue;
+    private double doubleValue;
+    private double[] doubleArrValue;
 
     public Message(String header)
     {
         this.header = header;
+    }
+
+    public void setDoubleArrValue(double[] doubleArrValue)
+    {
+        this.doubleArrValue = doubleArrValue;
+    }
+
+    public double[] getDoubleArrValue()
+    {
+        return doubleArrValue;
+    }
+
+    public void setDoubleValue(double doubleValue)
+    {
+        this.doubleValue = doubleValue;
+    }
+
+    public double getDoubleValue()
+    {
+        return doubleValue;
     }
 
     public void setIntArrValue(int[] intArrValue)
