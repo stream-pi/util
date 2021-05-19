@@ -137,26 +137,24 @@ public class StartAtBoot {
 
     private void createStarterForWindows(File runnerFile) throws MinorException
     {
-        //File initFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".bat");
-
         try
         {
-            File initFile = new File(System.getenv("APPDATA")+"/streampi_starter_batch_"+ softwareType +".bat");
+            File initFile = new File(System.getenv("APPDATA")+"/stream_pi_starter_batch_"+ softwareType +".bat");
 
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("cd "+runnerFile.getAbsoluteFile().getParent()+"\r\n" +
-                    "start \"\" "+runnerFile.getName());
+            bw.write("cd \""+runnerFile.getAbsoluteFile().getParent()+"\"\r\n" +
+                    "start \"\" \""+runnerFile.getName()+"\"");
             bw.close();
 
 
 
-            File vbsStarterFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".vbs");
+            File vbsStarterFile = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/stream_pi_starter_"+ softwareType +".vbs");
 
             fw = new FileWriter(vbsStarterFile);
             bw = new BufferedWriter(fw);
             bw.write("Set WshShell = CreateObject(\"WScript.Shell\") \r\n" +
-                    "WshShell.Run chr(34) & \""+initFile.getAbsolutePath()+"+\" & Chr(34), 0\r\n" +
+                    "WshShell.Run chr(34) & \""+initFile.getAbsolutePath()+"\" & Chr(34), 0\r\n" +
                     "Set WshShell = Nothing");
             bw.close();
         }
@@ -168,8 +166,8 @@ public class StartAtBoot {
 
     private boolean deleteStarterForWindows()
     {
-        boolean f1 = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/streampi_starter_"+ softwareType +".vbs").delete();
-        boolean f2 = new File(System.getenv("APPDATA")+"/streampi_starter_batch_"+ softwareType +".bat").delete();
+        boolean f1 = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/stream_pi_starter_"+ softwareType +".vbs").delete();
+        boolean f2 = new File(System.getenv("APPDATA")+"/stream_pi_starter_batch_"+ softwareType +".bat").delete();
 
         return f1 && f2;
     }
