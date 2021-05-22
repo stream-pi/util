@@ -34,33 +34,33 @@ public class IOHelper
         byte[] buffer = new byte[1024];
 
         fis = inputStream;
-            ZipInputStream zis = new ZipInputStream(fis);
-            ZipEntry ze = zis.getNextEntry();
-            while(ze != null)
+        ZipInputStream zis = new ZipInputStream(fis);
+        ZipEntry ze = zis.getNextEntry();
+        while(ze != null)
+        {
+            String fileName = ze.getName();
+
+            File newFile = new File(destDir + File.separator + fileName);
+
+            if(ze.isDirectory())
             {
-                String fileName = ze.getName();
-
-                File newFile = new File(destDir + File.separator + fileName);
-
-                if(ze.isDirectory())
+                newFile.mkdirs();
+            }
+            else
+            {
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+                while ((len = zis.read(buffer)) > 0)
                 {
-                    newFile.mkdirs();
+                    fos.write(buffer, 0, len);
                 }
-                else
-                {
-                    FileOutputStream fos = new FileOutputStream(newFile);
-                    int len;
-                    while ((len = zis.read(buffer)) > 0)
-                    {
-                        fos.write(buffer, 0, len);
-                    }
-                    fos.close();
-                }
-                zis.closeEntry();
-                ze = zis.getNextEntry();
+                fos.close();
             }
             zis.closeEntry();
-            zis.close();
-            fis.close();
+            ze = zis.getNextEntry();
+        }
+        zis.closeEntry();
+        zis.close();
+        fis.close();
     }
 }
