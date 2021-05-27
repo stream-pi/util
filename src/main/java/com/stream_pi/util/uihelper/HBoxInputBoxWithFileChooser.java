@@ -27,13 +27,20 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 
-public class HBoxInputBoxWithFileChooser extends HBox {
+public class HBoxInputBoxWithFileChooser extends HBox
+{
+    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
+                                       FileChooser.ExtensionFilter... extensionFilters)
+    {
+        this(labelText, textField, enablerCheckBox, 150, extensionFilters);
+    }
 
-    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox, FileChooser.ExtensionFilter... extensionFilter)
+    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
+                                       int prefWidth,  FileChooser.ExtensionFilter... extensionFilter)
     {
         textField.setDisable(true);
 
-        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, 300);
+        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, prefWidth);
         setHgrow(hBoxInputBox, Priority.ALWAYS);
         getChildren().addAll(hBoxInputBox);
         setSpacing(5.0);
