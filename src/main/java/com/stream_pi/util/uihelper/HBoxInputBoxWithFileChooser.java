@@ -47,8 +47,6 @@ public class HBoxInputBoxWithFileChooser extends HBox
 
         Button button = new Button();
         FontIcon fontIcon = new FontIcon("far-folder");
-        //fontIcon.setIconColor(Paint.valueOf(iconColorHex));
-        //fontIcon.setIconSize(iconSize);
         button.setGraphic(fontIcon);
 
         button.setOnAction(event -> {
