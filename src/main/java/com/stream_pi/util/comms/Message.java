@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Message implements Serializable
 {
+    private static final long SerialVersionUID = 2004200019671976L;
     private final String header;
-
     private String[] stringArrValue;
     private String stringValue;
     private byte[] byteArrValue;
