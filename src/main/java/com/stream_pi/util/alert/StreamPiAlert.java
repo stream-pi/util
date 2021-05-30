@@ -301,16 +301,20 @@ public class StreamPiAlert
             popupNode = getAlertPane(getTitle(), getContentPane());
             stackPaneParent.getChildren().add(popupNode);
 
-            Stage stage = (Stage) stackPaneParent.getScene().getWindow();
 
-            if(!stage.isShowing())
-                stage.show();
+            if(isIsShowPopup())
+            {
+                Stage stage = (Stage) stackPaneParent.getScene().getWindow();
 
-            if(stage.isIconified())
-                stage.setIconified(false);
+                if(!stage.isShowing())
+                    stage.show();
 
-            stage.setAlwaysOnTop(true);
-            stage.setAlwaysOnTop(false);
+                if(stage.isIconified())
+                    stage.setIconified(false);
+
+                stage.setAlwaysOnTop(true);
+                stage.setAlwaysOnTop(false);
+            }
         });
     }
 
@@ -320,5 +324,17 @@ public class StreamPiAlert
     public void destroy()
     {
         Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
+    }
+
+    private static boolean isShowPopup = false;
+
+    public static void setIsShowPopup(boolean isShowPopup)
+    {
+        StreamPiAlert.isShowPopup = isShowPopup;
+    }
+
+    public static boolean isIsShowPopup()
+    {
+        return isShowPopup;
     }
 }
