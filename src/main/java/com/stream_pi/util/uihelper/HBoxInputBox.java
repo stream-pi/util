@@ -17,6 +17,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.uihelper;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -30,6 +31,9 @@ public class HBoxInputBox extends HBox {
     {
         textField.setPrefWidth(prefWidth);
         Label label = new Label(labelText);
+        label.setWrapText(true);
+        label.setAlignment(Pos.CENTER_LEFT);
+        label.prefHeightProperty().bind(heightProperty());
         getChildren().addAll(label, SpaceFiller.horizontal(), textField);
 
         if(enablerCheckBox != null)
