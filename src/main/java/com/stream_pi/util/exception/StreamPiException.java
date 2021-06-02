@@ -18,8 +18,8 @@ package com.stream_pi.util.exception;
 
 public class StreamPiException extends Exception {
 
-    private String title;
-    private String message;
+    private String title = null;
+    private String message = null;
 
     public StreamPiException(String message)
     {
