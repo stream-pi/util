@@ -16,7 +16,6 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.combobox;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.stream_pi.util.uihelper.SpaceFiller;
@@ -47,7 +46,8 @@ public class StreamPiComboBox<T> extends HBox
      * Sets the parent where the Combo Box will be shown
      * @param parent StackPane where the Combo Box dialog will be shown
      */
-    public static void setParent(StackPane parent) {
+    public static void setParent(StackPane parent)
+    {
         stackPaneParent = parent;
         stackPaneParent.getStyleClass().add("combo_box_pane_parent");
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
@@ -98,8 +98,6 @@ public class StreamPiComboBox<T> extends HBox
      */
     private void setup()
     {
-        buttons = new ArrayList<>();
-
         getStyleClass().add("combo_box");
         setOnMouseClicked(event -> show());
 
@@ -127,15 +125,12 @@ public class StreamPiComboBox<T> extends HBox
     }
 
     private int currentIndex = 0;
-    private List<ToggleButton> buttons;
 
     /**
      * @return Final Scroll Pane
      */
     public ScrollPane getPopupScrollPane()
     {
-        buttons.clear();
-
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -170,7 +165,6 @@ public class StreamPiComboBox<T> extends HBox
                 destroy();
             });
             vBox.getChildren().addAll(optionButton);
-            buttons.add(optionButton);
         }
 
         return scrollPane;
@@ -238,9 +232,7 @@ public class StreamPiComboBox<T> extends HBox
      */
     public void destroy()
     {
-        Platform.runLater(()->{
-            stackPaneParent.getChildren().remove(popupNode);
-        });
+        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
     }
 
     private StreamPiComboBoxFactory<T> streamPiComboBoxFactory;

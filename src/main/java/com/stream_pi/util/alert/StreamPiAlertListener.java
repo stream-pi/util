@@ -19,7 +19,8 @@ package com.stream_pi.util.alert;
 /**
  * Alert Listener. Triggered when a button on StreamPiAlert is clicked.
  */
-public abstract class StreamPiAlertListener {
+public abstract class StreamPiAlertListener
+{
     /**
      * @param buttonClicked Button choice which was clicked
      */

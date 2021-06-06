@@ -19,7 +19,8 @@ package com.stream_pi.util.combobox;
 /**
  * Combo Box Listener. Triggered when an option in Combo Box is clicked.
  */
-public abstract class StreamPiComboBoxListener<T> {
+public abstract class StreamPiComboBoxListener<T>
+{
     /**
      * @param selectedItem Choice which was clicked
      */

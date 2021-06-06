@@ -290,10 +290,11 @@ public class StreamPiAlert
         return contentPane;
     }
 
-    /**
-     * Adds the Alert Box to the parent node
-     */
     private Node popupNode;
+
+    /**
+     * Shows the alert
+     */
     public void show()
     {
         Platform.runLater(()->
@@ -328,11 +329,19 @@ public class StreamPiAlert
 
     private static boolean isShowPopup = false;
 
+    /**
+     * Sets whether Alert will act as a popup when shown.
+     * In other words, the parent window (Server/Client) will act as a popup and appear on top
+     * of all windows, if this is set true
+     */
     public static void setIsShowPopup(boolean isShowPopup)
     {
         StreamPiAlert.isShowPopup = isShowPopup;
     }
 
+    /**
+     * @return Returns if alert system acts as a popup or not
+     */
     public static boolean isIsShowPopup()
     {
         return isShowPopup;

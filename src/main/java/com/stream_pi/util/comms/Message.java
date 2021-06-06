@@ -1,7 +1,26 @@
+/*
+Stream-Pi - Free & Open-Source Modular Cross-Platform Programmable Macro Pad
+Copyright (C) 2019-2021  Debayan Sutradhar (rnayabed),  Samuel Quiñones (SamuelQuinones)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Originally Written by : Debayan Sutradhar (rnayabed)
+*/
+
 package com.stream_pi.util.comms;
 
 import java.io.Serializable;
 
+/**
+ * Message class to be sent between Server and Client using sockets
+ */
 public class Message implements Serializable
 {
     private static final long SerialVersionUID = 2004200019671976L;
@@ -14,26 +33,42 @@ public class Message implements Serializable
     private double doubleValue;
     private double[] doubleArrValue;
 
+    /**
+     * Default Constructor for Message
+     * @param header Message Header Text
+     */
     public Message(String header)
     {
         this.header = header;
     }
 
+    /**
+     * @param doubleArrValue Double Array
+     */
     public void setDoubleArrValue(double... doubleArrValue)
     {
         this.doubleArrValue = doubleArrValue;
     }
 
+    /**
+     * @return Double Array
+     */
     public double[] getDoubleArrValue()
     {
         return doubleArrValue;
     }
 
+    /**
+     * @param doubleValue Double argument
+     */
     public void setDoubleValue(double doubleValue)
     {
         this.doubleValue = doubleValue;
     }
 
+    /**
+     * @return Double argument
+     */
     public double getDoubleValue()
     {
         return doubleValue;

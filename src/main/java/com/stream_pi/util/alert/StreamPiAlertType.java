@@ -19,7 +19,8 @@ package com.stream_pi.util.alert;
 /**
  * Stream-Pi Alert Type Enumerator
  */
-public enum StreamPiAlertType {
+public enum StreamPiAlertType
+{
     /**
      * Information Type Alert
      */
