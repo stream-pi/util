@@ -2,7 +2,8 @@
 
 ![version](https://img.shields.io/badge/Version-1.0.0-green)
 
-Repository contains controls like Alerts, ComboBox, etc. used in both Server and Client.
+This library contains shared components between [Server](https://github.com/stream-pi/server) and
+[Client](https://github.com/stream-pi/client) like Alerts, Combo Boxes, URL to Discord, GitHub, etc.
 
 ## Prerequisites
 
@@ -12,5 +13,13 @@ Repository contains controls like Alerts, ComboBox, etc. used in both Server and
 ## Build And Install Locally
 
 `mvn clean install`
+
+## Documentation
+
+[JavaDoc](https://stream-pi.github.io/util/)
+
+## License
+
+This is licensed under [GNU GPL v3](https://github.com/stream-pi/client/blob/master/LICENSE)
 
 
