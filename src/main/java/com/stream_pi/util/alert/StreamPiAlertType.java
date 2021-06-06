@@ -20,8 +20,19 @@ package com.stream_pi.util.alert;
  * Stream-Pi Alert Type Enumerator
  */
 public enum StreamPiAlertType {
+    /**
+     * Information Type Alert
+     */
     INFORMATION("fas-info", "alert_information_icon"),
+
+    /**
+     * Warning Type Alert
+     */
     WARNING("fas-exclamation-triangle", "alert_warning_icon"),
+
+    /**
+     * Error Type Alert
+     */
     ERROR("fas-times", "alert_error_icon");
 
     private final String fontAwesomeIconCode;
