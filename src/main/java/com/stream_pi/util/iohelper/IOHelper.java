@@ -20,12 +20,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class IOHelper
 {
-
     public static void unzip(InputStream inputStream, String destDir) throws IOException
     {
         File dir = new File(destDir);
@@ -62,5 +62,32 @@ public class IOHelper
         zis.closeEntry();
         zis.close();
         fis.close();
+    }
+
+    public static boolean deleteFile(String path)
+    {
+        return deleteFile(new File(path));
+    }
+
+    public static boolean deleteFile(File file)
+    {
+        if(file.isDirectory())
+        {
+            File[] files = file.listFiles();
+            if(files == null)
+            {
+                return false;
+            }
+
+            for(File eachFile : files)
+            {
+                if(!deleteFile(eachFile))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return file.delete();
     }
 }
