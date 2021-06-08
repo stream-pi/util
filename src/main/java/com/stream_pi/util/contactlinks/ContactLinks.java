@@ -4,7 +4,7 @@ public class ContactLinks
 {
     public static String getGitHub()
     {
-        return "https://github.com/Stream-Pi";
+        return "https://github.com/stream-pi";
     }
 
     public static String getDiscord()
@@ -19,7 +19,7 @@ public class ContactLinks
 
     public static String getTwitter()
     {
-        return "https://twitter.com/Stream_Pi";
+        return "https://twitter.com/stream_pi";
     }
 
     public static String getMatrix()
