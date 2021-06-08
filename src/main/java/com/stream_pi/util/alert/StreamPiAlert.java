@@ -327,7 +327,7 @@ public class StreamPiAlert
         Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
     }
 
-    private static boolean isShowPopup = false;
+    private static boolean isShowPopup = true;
 
     /**
      * Sets whether Alert will act as a popup when shown.
