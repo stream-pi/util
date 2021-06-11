@@ -56,8 +56,15 @@ public class HBoxInputBoxWithFileChooser extends HBox
         fileChooser.setInitialDirectory(initialDirectory);
     }
 
+    private final Button fileChooseButton;
+
+    public Button getFileChooseButton()
+    {
+        return fileChooseButton;
+    }
+
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       int prefWidth,  boolean useLast,
+                                       int prefWidth, boolean useLast,
                                        FileChooser.ExtensionFilter... extensionFilter)
     {
         textField.setDisable(true);
@@ -67,11 +74,11 @@ public class HBoxInputBoxWithFileChooser extends HBox
         getChildren().addAll(hBoxInputBox);
         setSpacing(5.0);
 
-        Button button = new Button();
+        fileChooseButton = new Button();
         FontIcon fontIcon = new FontIcon("far-folder");
-        button.setGraphic(fontIcon);
+        fileChooseButton.setGraphic(fontIcon);
 
-        button.setOnAction(event -> {
+        fileChooseButton.setOnAction(event -> {
             fileChooser = new FileChooser();
 
             if(useLast && initialDirectory != null)
@@ -88,7 +95,7 @@ public class HBoxInputBoxWithFileChooser extends HBox
 
             try
             {
-                File selectedFile = fileChooser.showOpenDialog(button.getScene().getWindow());
+                File selectedFile = fileChooser.showOpenDialog(fileChooseButton.getScene().getWindow());
                 initialDirectory = selectedFile.getParentFile();
                 textField.setText(selectedFile.getAbsolutePath());
             }
@@ -98,11 +105,11 @@ public class HBoxInputBoxWithFileChooser extends HBox
             }
         });
 
-        getChildren().add(button);
+        getChildren().add(fileChooseButton);
 
         if(enablerCheckBox!=null)
         {
-            button.disableProperty().bind(enablerCheckBox.selectedProperty());
+            fileChooseButton.disableProperty().bind(enablerCheckBox.selectedProperty());
             HBox.setMargin(enablerCheckBox, new Insets(0, 0, 0, 45));
             getChildren().add(enablerCheckBox);
         }

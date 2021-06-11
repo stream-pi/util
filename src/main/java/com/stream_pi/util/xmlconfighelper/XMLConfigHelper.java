@@ -18,6 +18,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.xmlconfighelper;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.transform.Result;
@@ -35,32 +36,45 @@ public class XMLConfigHelper {
     
     private static final Logger logger = Logger.getLogger(XMLConfigHelper.class.getName());
 
-    public static String getStringProperty(Element parentElement, String propertyName) throws Exception
+    public static String getStringProperty(Node parentElement, String propertyName) throws Exception
     {
         return getProperty(parentElement, propertyName, false, null, null);
     }
 
-    public static int getIntProperty(Element parentElement, String propertyName) throws Exception
+    public static int getIntProperty(Node parentElement, String propertyName) throws Exception
     {
         return Integer.parseInt(getProperty(parentElement, propertyName, false, null, null));
     }
 
 
-    public static double getDoubleProperty(Element parentElement, String propertyName) throws Exception
+    public static double getDoubleProperty(Node parentElement, String propertyName) throws Exception
     {
         return Double.parseDouble(getProperty(parentElement, propertyName, false, null, null));
     }
 
 
-    public static boolean getBooleanProperty(Element parentElement, String propertyName) throws Exception
+    public static boolean getBooleanProperty(Node parentElement, String propertyName) throws Exception
     {
         return getProperty(parentElement, propertyName, false, null, null).equals("true");
     }
 
-    public static String getProperty(Element parentElement, String propertyName, boolean createNewIfDoesntExist, Document document, File file) throws Exception
+    public static String getProperty(Node parentElement, String propertyName, boolean createNewIfDoesntExist, Document document, File file) throws Exception
     {
-        try {
-               return parentElement.getElementsByTagName(propertyName).item(0).getTextContent();
+        try 
+        {
+            if(parentElement instanceof Document)
+            {
+                return ((Document) parentElement).getElementsByTagName(propertyName).item(0).getTextContent();
+            }
+            else if(parentElement instanceof Element)
+            {
+                return ((Element) parentElement).getElementsByTagName(propertyName).item(0).getTextContent();
+            }
+            else
+            {
+                logger.severe("Passed parentElement is not Document/Element");
+                return null;
+            }
         }
         catch (Exception e)
         {
@@ -85,13 +99,13 @@ public class XMLConfigHelper {
         transformer.transform(input, output);
     }
 
-    public static String getStringProperty(Element parentElement, String propertyName, String ifNotPresent, boolean printStackTrace)
+    public static String getStringProperty(Node parentElement, String propertyName, String ifNotPresent, boolean printStackTrace)
     {
         return getStringProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
     }
 
 
-    public static String getStringProperty(Element parentElement, String propertyName, String ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
+    public static String getStringProperty(Node parentElement, String propertyName, String ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
         Document document, File file)
     {
         String tbr = ifNotPresent;
@@ -113,13 +127,13 @@ public class XMLConfigHelper {
             node.removeChild(node.getFirstChild());
     }
 
-    public static int getIntProperty(Element parentElement, String propertyName, int ifNotPresent, boolean printStackTrace)
+    public static int getIntProperty(Node parentElement, String propertyName, int ifNotPresent, boolean printStackTrace)
     {
         return getIntProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
     }
 
 
-    public static int getIntProperty(Element parentElement, String propertyName, int ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
+    public static int getIntProperty(Node parentElement, String propertyName, int ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
         Document document, File file)
     {
         int tbr = ifNotPresent;
@@ -136,17 +150,17 @@ public class XMLConfigHelper {
         return tbr;
     }
 
-    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent)
+    public static double getDoubleProperty(Node parentElement, String propertyName, double ifNotPresent)
     {
         return getDoubleProperty(parentElement, propertyName, ifNotPresent, true, false, null, null);
     }
 
-    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent, boolean printStackTrace)
+    public static double getDoubleProperty(Node parentElement, String propertyName, double ifNotPresent, boolean printStackTrace)
     {
         return getDoubleProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
     }
 
-    public static double getDoubleProperty(Element parentElement, String propertyName, double ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
+    public static double getDoubleProperty(Node parentElement, String propertyName, double ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist, 
         Document document, File file)
     {
         double tbr = ifNotPresent;
@@ -163,17 +177,17 @@ public class XMLConfigHelper {
         return tbr;
     }
 
-    public static String getStringProperty(Element parentElement, String propertyName, String ifNotPresent)
+    public static String getStringProperty(Node parentElement, String propertyName, String ifNotPresent)
     {
         return getStringProperty(parentElement, propertyName, ifNotPresent, true, false, null, null);
     }
 
-    public static boolean getBooleanProperty(Element parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace)
+    public static boolean getBooleanProperty(Node parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace)
     {
         return getBooleanProperty(parentElement, propertyName, ifNotPresent, printStackTrace, false, null, null);
     }
 
-    public static boolean getBooleanProperty(Element parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist,
+    public static boolean getBooleanProperty(Node parentElement, String propertyName, boolean ifNotPresent, boolean printStackTrace, boolean createNewIfDoesntExist,
         Document document, File file)
     {
         boolean tbr = ifNotPresent;
@@ -190,7 +204,7 @@ public class XMLConfigHelper {
         return tbr;
     }
 
-    public static boolean getBooleanProperty(Element parentElement, String propertyName, boolean ifNotPresent)
+    public static boolean getBooleanProperty(Node parentElement, String propertyName, boolean ifNotPresent)
     {
         return getBooleanProperty(parentElement, propertyName, ifNotPresent, true, false, null, null);
     }
