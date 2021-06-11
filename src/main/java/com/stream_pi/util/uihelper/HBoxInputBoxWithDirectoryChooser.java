@@ -22,29 +22,26 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.stage.FileChooser;
+import javafx.stage.DirectoryChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 
-public class HBoxInputBoxWithFileChooser extends HBox
+public class HBoxInputBoxWithDirectoryChooser extends HBox
 {
-    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       FileChooser.ExtensionFilter... extensionFilters)
+    public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox)
     {
-        this(labelText, textField, enablerCheckBox, 150, null, extensionFilters);
+        this(labelText, textField, enablerCheckBox, 150, null);
     }
 
-    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       File initialDirectory,
-                                       FileChooser.ExtensionFilter... extensionFilters)
+    public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
+                                       File initialDirectory)
     {
-        this(labelText, textField, enablerCheckBox, 150, initialDirectory, extensionFilters);
+        this(labelText, textField, enablerCheckBox, 150, initialDirectory);
     }
 
-    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       int prefWidth,  File initialDirectory,
-                                       FileChooser.ExtensionFilter... extensionFilter)
+    public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
+                                       int prefWidth,  File initialDirectory)
     {
         textField.setDisable(true);
 
@@ -58,24 +55,17 @@ public class HBoxInputBoxWithFileChooser extends HBox
         button.setGraphic(fontIcon);
 
         button.setOnAction(event -> {
-            FileChooser fileChooser = new FileChooser();
+            DirectoryChooser directoryChooser = new DirectoryChooser();
 
             if(initialDirectory!=null)
             {
-                fileChooser.setInitialDirectory(initialDirectory);
-            }
-
-            if(extensionFilter!=null)
-            {
-                fileChooser.getExtensionFilters().addAll(
-                        extensionFilter
-                );
+                directoryChooser.setInitialDirectory(initialDirectory);
             }
 
             try
             {
-                File selectedFile = fileChooser.showOpenDialog(button.getScene().getWindow());
-                textField.setText(selectedFile.getAbsolutePath());
+                File selectedDirectory = directoryChooser.showDialog(button.getScene().getWindow());
+                textField.setText(selectedDirectory.getAbsolutePath());
             }
             catch (NullPointerException e)
             {
