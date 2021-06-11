@@ -40,13 +40,13 @@ public class HBoxInputBoxWithFileChooser extends HBox
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, enablerCheckBox, 150, useLast, extensionFilters);
+        this(labelText, textField, enablerCheckBox, 150, useLast, true, extensionFilters);
     }
 
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, enablerCheckBox, 150, true, extensionFilters);
+        this(labelText, textField, enablerCheckBox, 150, true, true, extensionFilters);
     }
 
     FileChooser fileChooser;
@@ -63,10 +63,25 @@ public class HBoxInputBoxWithFileChooser extends HBox
         return fileChooseButton;
     }
 
+    private boolean useLast,rememberThis;
+
+    public void setUseLast(boolean useLast)
+    {
+        this.useLast = useLast;
+    }
+
+    public void setRememberThis(boolean rememberThis)
+    {
+        this.rememberThis = rememberThis;
+    }
+
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       int prefWidth, boolean useLast,
+                                       int prefWidth, boolean useLast, boolean rememberThis,
                                        FileChooser.ExtensionFilter... extensionFilter)
     {
+        this.useLast = useLast;
+        this.rememberThis = rememberThis;
+
         textField.setDisable(true);
 
         HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, prefWidth);
@@ -96,7 +111,10 @@ public class HBoxInputBoxWithFileChooser extends HBox
             try
             {
                 File selectedFile = fileChooser.showOpenDialog(fileChooseButton.getScene().getWindow());
-                initialDirectory = selectedFile.getParentFile();
+                if(rememberThis)
+                {
+                    initialDirectory = selectedFile.getParentFile();
+                }
                 textField.setText(selectedFile.getAbsolutePath());
             }
             catch (NullPointerException e)
