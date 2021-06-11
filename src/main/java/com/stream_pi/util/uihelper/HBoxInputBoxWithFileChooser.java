@@ -29,27 +29,35 @@ import java.io.File;
 
 public class HBoxInputBoxWithFileChooser extends HBox
 {
+    private static File initialDirectory = null;
+
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, null, extensionFilters);
+        this(labelText, textField, null, true, extensionFilters);
+    }
+
+    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
+                                       boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
+    {
+        this(labelText, textField, enablerCheckBox, 150, useLast, extensionFilters);
     }
 
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, enablerCheckBox, 150, null, extensionFilters);
+        this(labelText, textField, enablerCheckBox, 150, true, extensionFilters);
     }
 
-    public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       File initialDirectory,
-                                       FileChooser.ExtensionFilter... extensionFilters)
+    FileChooser fileChooser;
+
+    public void setInitialDirectory(File initialDirectory)
     {
-        this(labelText, textField, enablerCheckBox, 150, initialDirectory, extensionFilters);
+        fileChooser.setInitialDirectory(initialDirectory);
     }
 
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       int prefWidth,  File initialDirectory,
+                                       int prefWidth,  boolean useLast,
                                        FileChooser.ExtensionFilter... extensionFilter)
     {
         textField.setDisable(true);
@@ -64,11 +72,11 @@ public class HBoxInputBoxWithFileChooser extends HBox
         button.setGraphic(fontIcon);
 
         button.setOnAction(event -> {
-            FileChooser fileChooser = new FileChooser();
+            fileChooser = new FileChooser();
 
-            if(initialDirectory!=null)
+            if(useLast && initialDirectory != null)
             {
-                fileChooser.setInitialDirectory(initialDirectory);
+                setInitialDirectory(initialDirectory);
             }
 
             if(extensionFilter!=null)
@@ -81,6 +89,7 @@ public class HBoxInputBoxWithFileChooser extends HBox
             try
             {
                 File selectedFile = fileChooser.showOpenDialog(button.getScene().getWindow());
+                initialDirectory = selectedFile.getParentFile();
                 textField.setText(selectedFile.getAbsolutePath());
             }
             catch (NullPointerException e)
