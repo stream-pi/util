@@ -29,6 +29,12 @@ import java.io.File;
 
 public class HBoxInputBoxWithFileChooser extends HBox
 {
+    public HBoxInputBoxWithFileChooser(String labelText, TextField textField,
+                                       FileChooser.ExtensionFilter... extensionFilters)
+    {
+        this(labelText, textField, null, extensionFilters);
+    }
+
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {

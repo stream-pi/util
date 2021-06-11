@@ -29,6 +29,11 @@ import java.io.File;
 
 public class HBoxInputBoxWithDirectoryChooser extends HBox
 {
+    public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField)
+    {
+        this(labelText, textField, null);
+    }
+
     public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox)
     {
         this(labelText, textField, enablerCheckBox, 150, null);
