@@ -72,8 +72,7 @@ public class XMLConfigHelper {
             }
             else
             {
-                logger.severe("Passed parentElement is not Document/Element");
-                return null;
+                throw new Exception("Passed parentElement asking for property "+propertyName+" is not Document/Element");
             }
         }
         catch (Exception e)
