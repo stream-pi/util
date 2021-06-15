@@ -24,6 +24,7 @@ import java.io.Serializable;
 public class Message implements Serializable
 {
     private final String header;
+    private static final long serialVersionUID = 2004200019671976L;
     private String[] stringArrValue;
     private String stringValue;
     private byte[] byteArrValue;
