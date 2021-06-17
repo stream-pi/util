@@ -10,7 +10,6 @@
 
     <name>Stream-Pi Utilities</name>
     <description>Utilities library for the Stream-Pi Client and Server</description>
-
     <url>https://stream-pi.com/</url>
 
     <properties>
@@ -19,10 +18,17 @@
 
         <javafx.version>16</javafx.version>
         <ikonli.version>11.5.0</ikonli.version>
+        <gson.version>2.8.6</gson.version>
+
+        <maven.test.skip>true</maven.test.skip>
 
         <source.plugin.version>2.2.1</source.plugin.version>
         <javadoc.plugin.version>3.1.0</javadoc.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
+        <jar.plugin.version>3.1.0</jar.plugin.version>
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <source.plugin.version>2.2.1</source.plugin.version>
+        <nexus.staging.plugin.version>1.6.7</nexus.staging.plugin.version>
     </properties>
 
     <dependencies>
@@ -37,17 +43,17 @@
             <artifactId>ikonli-javafx</artifactId>
             <version>${ikonli.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-fontawesome5-pack</artifactId>
             <version>${ikonli.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.6</version>
+            <version>${gson.version}</version>
         </dependency>
     </dependencies>
 
@@ -56,96 +62,85 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.0</version>
-          <executions>
-            <execution>
-              <id>test-jar</id>
-              <phase>package</phase>
-              <goals>
-                <goal>test-jar</goal>
-              </goals>
-            </execution>
-          </executions>
+          <version>${jar.plugin.version}</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
+          <version>${compiler.plugin.version}</version>
         </plugin>
       </plugins>
     </build>
 
     <profiles>
-      <profile>
-        <id>release</id>
-        <build>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-source-plugin</artifactId>
-              <version>2.2.1</version>
-              <executions>
-                <execution>
-                  <id>attach-sources</id>
-                  <goals>
-                    <goal>jar-no-fork</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <version>${javadoc.plugin.version}</version>
-              <executions>
-                <execution>
-                  <id>attach-javadocs</id>
-                  <goals>
-                    <goal>jar</goal>
-                  </goals>
-                </execution>
-              </executions>
-              <configuration>
-                <source>8</source>
-              </configuration>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-gpg-plugin</artifactId>
-              <version>${gpg.plugin.version}</version>
-              <executions>
-                <execution>
-                  <id>sign-artifacts</id>
-                  <phase>verify</phase>
-                  <goals>
-                    <goal>sign</goal>
-                  </goals>
-                  <configuration>
-                    <gpgArguments>
-                      <arg>--pinentry-mode</arg>
-                      <arg>loopback</arg>
-                    </gpgArguments>
-                  </configuration>
-                </execution>
-              </executions>
-            </plugin>
-
-
-              <plugin>
-                  <groupId>org.sonatype.plugins</groupId>
-                  <artifactId>nexus-staging-maven-plugin</artifactId>
-                  <version>1.6.7</version>
-                  <extensions>true</extensions>
-                  <configuration>
-                      <serverId>ossrh</serverId>
-                      <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                      <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                  </configuration>
-              </plugin>
-          </plugins>
-        </build>
-      </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${source.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${javadoc.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <source>8</source>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${gpg.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.staging.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <organization>
@@ -169,15 +164,15 @@
     <developers>
         <developer>
             <name>Debayan Sutradhar</name>
-            <email>debayansutradhar3@gmail.com</email>
+            <email>debayan@stream-pi.com</email>
             <organization>Stream-Pi</organization>
             <organizationUrl>https://www.stream-pi.com</organizationUrl>
         </developer>
         <developer>
             <name>Abhinay Agarwal</name>
-            <email>abhinay.agarwal@gluonhq.com</email>
-            <organization>Gluon</organization>
-            <organizationUrl>https://www.gluonhq.com</organizationUrl>
+            <email>abhinay_agarwal@live.com</email>
+            <organization>Stream-Pi</organization>
+            <organizationUrl>https://www.stream-pi.com/</organizationUrl>
         </developer>
     </developers>
 
