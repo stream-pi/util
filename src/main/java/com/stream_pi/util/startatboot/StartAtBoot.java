@@ -25,6 +25,7 @@ import com.stream_pi.util.platform.PlatformType;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.logging.Logger;
 
 public class StartAtBoot {
 
@@ -50,7 +51,7 @@ public class StartAtBoot {
         }
 
         File runnerFile = new File(runnerFileStr);
-        if(!runnerFile.exists() || !runnerFile.isFile())
+        if(!runnerFile.isFile())
         {
             throw new MinorException("Unable to find file at path '"+runnerFile.getAbsolutePath()+"'.\n" +
                     "Cannot enable start at boot.");
@@ -89,7 +90,12 @@ public class StartAtBoot {
             File sysDDirectoryFile = new File(sysDDirectoryPath);
 
             if(!sysDDirectoryFile.exists())
-                sysDDirectoryFile.mkdirs();
+            {
+                if(!sysDDirectoryFile.mkdirs())
+                {
+                    throw new Exception("Unable to create directories : '"+sysDDirectoryPath+"'");
+                }
+            }
 
             File sysDServiceFile = new File(sysDDirectoryPath+"stream-pi-"+ softwareType+".service");
 
