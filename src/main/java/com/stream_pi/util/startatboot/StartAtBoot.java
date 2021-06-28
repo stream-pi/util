@@ -16,6 +16,8 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.startatboot;
 
+import com.stream_pi.util.alert.StreamPiAlert;
+import com.stream_pi.util.alert.StreamPiAlertType;
 import com.stream_pi.util.platform.Platform;
 import com.stream_pi.util.exception.MinorException;
 import com.stream_pi.util.platform.PlatformType;
@@ -35,13 +37,25 @@ public class StartAtBoot {
         this.platform = platform;
     }
 
-    public void create(File runnerFile) throws MinorException
+    public void create(String runnerFileStr) throws MinorException
     {
-        create(runnerFile, true);
+        create(runnerFileStr, true);
     }
 
-    public void create(File runnerFile, boolean isXMode)  throws MinorException
+    public void create(String runnerFileStr, boolean isXMode)  throws MinorException
     {
+        if(runnerFileStr == null)
+        {
+            throw new MinorException("No Runner File Name Specified as startup arguments. Cant set run at boot.");
+        }
+
+        File runnerFile = new File(runnerFileStr);
+        if(!runnerFile.exists() || !runnerFile.isFile())
+        {
+            throw new MinorException("Unable to find file at path '"+runnerFile.getAbsolutePath()+"'.\n" +
+                    "Cannot enable start at boot.");
+        }
+
         if(platform == Platform.WINDOWS)
             createStarterForWindows(runnerFile);
         else if(platform == Platform.LINUX)
@@ -52,7 +66,8 @@ public class StartAtBoot {
             unknownPlatformException();
     }
 
-    public boolean delete() throws MinorException {
+    public boolean delete() throws MinorException
+    {
         if(platform == Platform.WINDOWS)
             return deleteStarterForWindows();
         else if (platform == Platform.LINUX)
