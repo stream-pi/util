@@ -27,7 +27,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.logging.Logger;
 
-public class StartAtBoot {
+public class StartAtBoot
+{
 
     PlatformType softwareType;
     Platform platform;
@@ -45,6 +46,8 @@ public class StartAtBoot {
 
     public void create(String runnerFileStr, boolean isXMode)  throws MinorException
     {
+        checkPlatformIsSupported();
+
         if(runnerFileStr == null)
         {
             throw new MinorException("No Runner File Name Specified as startup arguments. Cant set run at boot.");
@@ -61,22 +64,16 @@ public class StartAtBoot {
             createStarterForWindows(runnerFile);
         else if(platform == Platform.LINUX)
             createStarterForLinux(runnerFile, isXMode);
-        else if(platform == Platform.MAC)
-            createStarterForMac(runnerFile);
-        else if(platform == Platform.UNKNOWN)
-            unknownPlatformException();
     }
 
     public boolean delete() throws MinorException
     {
+        checkPlatformIsSupported();
+
         if(platform == Platform.WINDOWS)
             return deleteStarterForWindows();
         else if (platform == Platform.LINUX)
             return deleteStarterForLinux();
-        else if(platform == Platform.MAC)
-            deleteStarterForMac();
-        else if(platform == Platform.UNKNOWN)
-            unknownPlatformException();
 
         return false;
     }
@@ -190,20 +187,16 @@ public class StartAtBoot {
 
         return f1 && f2;
     }
-
-
-    private void createStarterForMac(File runnerFile) throws MinorException
-    {
-        throw new MinorException("Mac Starter feature is not implemented yet.");
-    }
-
-    private void deleteStarterForMac() throws MinorException
-    {
-        throw new MinorException("Mac Starter feature is not implemented yet.");
-    }
     
-    private void unknownPlatformException() throws MinorException
+    private void checkPlatformIsSupported() throws MinorException
     {
-        throw new MinorException("Cannot implemented starter feature. Unknown platform.");
+        if (platform == Platform.UNKNOWN)
+        {
+            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+        }
+        else if(platform == Platform.MAC)
+        {
+            throw new MinorException("Starter feature not yet implemented for MacOS");
+        }
     }
 }
