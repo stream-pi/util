@@ -62,33 +62,29 @@ public class StartAtBoot
 
         String runnerFileStr = argRunnerFileStr;
 
-        try
+        Logger.getLogger("").info("SDASLDJSAK : '"+StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()+"'");
+        Logger.getLogger("").info("sf2w2 : '"+runnerFileStr+"'");
+        Logger.getLogger("").info("dfddg : '"+isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation+"'");
+
+
+        if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
         {
-            if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+            if(platform == Platform.LINUX)
             {
-                if(platform == Platform.LINUX)
-                {
-                    runnerFileStr = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
-                            .toURI()).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
-                            "/bin/" + argRunnerFileStr;
-                }
-                else if(platform == Platform.MAC)
-                {
-                    runnerFileStr = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
-                            .toURI()).getParentFile().getParentFile().getAbsolutePath() +
-                            "/MacOS/" + argRunnerFileStr;
-                }
-                else
-                {
-                    throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
-                }
+                runnerFileStr = new File(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
+                        "/bin/" + argRunnerFileStr;
+            }
+            else if(platform == Platform.MAC)
+            {
+                runnerFileStr = new File(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation()
+                        .toExternalForm()).getParentFile().getParentFile().getAbsolutePath() +
+                        "/MacOS/" + argRunnerFileStr;
+            }
+            else
+            {
+                throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
             }
         }
-        catch (URISyntaxException e)
-        {
-            throw new MinorException(e.getMessage());
-        }
-
 
         File runnerFile = new File(runnerFileStr);
         if(!runnerFile.isFile())
