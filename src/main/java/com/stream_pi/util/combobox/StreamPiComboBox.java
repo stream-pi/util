@@ -52,17 +52,23 @@ public class StreamPiComboBox<T> extends HBox
     {
         stackPaneParent = parent;
         stackPaneParent.getStyleClass().add("combo_box_pane_parent");
+
+        Animation showAnimation = AlertComboBoxTransition.createShowTransition(stackPaneParent);
+        Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(stackPaneParent);
+
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
         {
             if(stackPaneParent.getChildren().size() > 0)
             {
-                stackPaneParent.setVisible(true);
+                stackPaneParent.setOpacity(0.0);
                 stackPaneParent.toFront();
+                showAnimation.play();
             }
             else
             {
-                stackPaneParent.setVisible(false);
-                stackPaneParent.toBack();
+                stackPaneParent.setOpacity(1.0);
+                closeAnimation.setOnFinished(actionEvent -> stackPaneParent.toBack());
+                closeAnimation.play();
             }
         });
     }
@@ -225,9 +231,7 @@ public class StreamPiComboBox<T> extends HBox
     {
         Platform.runLater(()->{
             popupNode = getPopupScrollPane();
-            popupNode.setOpacity(0.0);
             stackPaneParent.getChildren().add(popupNode);
-            AlertComboBoxTransition.createShowTransition(popupNode).play();
         });
     }
 
@@ -236,13 +240,7 @@ public class StreamPiComboBox<T> extends HBox
      */
     public void destroy()
     {
-        Platform.runLater(()-> {
-            Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(popupNode);
-            closeAnimation.setOnFinished(actionEvent -> {
-                stackPaneParent.getChildren().remove(popupNode);
-            });
-            closeAnimation.play();
-        });
+        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
     }
 
     private StreamPiComboBoxFactory<T> streamPiComboBoxFactory;
