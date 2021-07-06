@@ -26,16 +26,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 public class StartAtBoot
 {
+    private PlatformType softwareType;
+    private Platform platform;
+    private boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
 
-    PlatformType softwareType;
-    Platform platform;
-
-    public StartAtBoot(PlatformType softwareType, Platform platform)
+    public StartAtBoot(PlatformType softwareType, Platform platform, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
     {
+        this.isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation = isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
         this.softwareType = softwareType;
         this.platform = platform;
     }
@@ -45,17 +48,47 @@ public class StartAtBoot
         create(runnerFileStr, true);
     }
 
-    public void create(String runnerFileStr, boolean isXMode)  throws MinorException
+    public void create(String argRunnerFileStr, boolean isXMode)  throws MinorException
     {
         if (platform == Platform.UNKNOWN)
         {
             throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
         }
 
-        if(runnerFileStr == null)
+        if(argRunnerFileStr == null)
         {
             throw new MinorException("No Runner File Name Specified as startup arguments. Cant set run at boot.");
         }
+
+        String runnerFileStr = argRunnerFileStr;
+
+        try
+        {
+            if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+            {
+                if(platform == Platform.LINUX)
+                {
+                    runnerFileStr = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
+                            .toURI()).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
+                            "/bin/" + argRunnerFileStr;
+                }
+                else if(platform == Platform.MAC)
+                {
+                    runnerFileStr = new File(getClass().getProtectionDomain().getCodeSource().getLocation()
+                            .toURI()).getParentFile().getParentFile().getAbsolutePath() +
+                            "/MacOS/" + argRunnerFileStr;
+                }
+                else
+                {
+                    throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
+                }
+            }
+        }
+        catch (URISyntaxException e)
+        {
+            throw new MinorException(e.getMessage());
+        }
+
 
         File runnerFile = new File(runnerFileStr);
         if(!runnerFile.isFile())
