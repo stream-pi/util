@@ -25,6 +25,7 @@ import com.stream_pi.util.platform.PlatformType;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class StartAtBoot
@@ -46,7 +47,10 @@ public class StartAtBoot
 
     public void create(String runnerFileStr, boolean isXMode)  throws MinorException
     {
-        checkPlatformIsSupported();
+        if (platform == Platform.UNKNOWN)
+        {
+            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+        }
 
         if(runnerFileStr == null)
         {
@@ -64,16 +68,23 @@ public class StartAtBoot
             createStarterForWindows(runnerFile);
         else if(platform == Platform.LINUX)
             createStarterForLinux(runnerFile, isXMode);
+        else if(platform == Platform.MAC)
+            createStarterForMac(runnerFile);
     }
 
     public boolean delete() throws MinorException
     {
-        checkPlatformIsSupported();
+        if (platform == Platform.UNKNOWN)
+        {
+            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+        }
 
         if(platform == Platform.WINDOWS)
             return deleteStarterForWindows();
         else if (platform == Platform.LINUX)
             return deleteStarterForLinux();
+        else if(platform == Platform.MAC)
+            return deleteStarterForMac();
 
         return false;
     }
@@ -123,8 +134,8 @@ public class StartAtBoot
 
             bw.close();
 
-            Runtime.getRuntime().exec("systemctl --user daemon-reload");
-            Runtime.getRuntime().exec("systemctl --user enable stream-pi-"+softwareType+".service");
+            runCommand("systemctl --user daemon-reload");
+            runCommand("systemctl --user enable stream-pi-"+softwareType+".service");
         }
         catch (Exception e)
         {
@@ -140,7 +151,7 @@ public class StartAtBoot
             boolean f1 = new File(System.getProperty("user.home")+"/.local/share/systemd/user/stream-pi-"+
                     softwareType+".service").delete();
 
-            Runtime.getRuntime().exec("systemctl --user daemon-reload");
+            runCommand("systemctl --user daemon-reload");
 
             return f1;
         }
@@ -179,7 +190,7 @@ public class StartAtBoot
             throw new MinorException(e.getMessage());
         }
     }
-
+    
     private boolean deleteStarterForWindows()
     {
         boolean f1 = new File(System.getenv("APPDATA")+"/Microsoft/Windows/Start Menu/Programs/Startup/stream_pi_starter_"+ softwareType +".vbs").delete();
@@ -187,16 +198,62 @@ public class StartAtBoot
 
         return f1 && f2;
     }
-    
-    private void checkPlatformIsSupported() throws MinorException
+
+    private void createStarterForMac(File runnerFile) throws MinorException
     {
-        if (platform == Platform.UNKNOWN)
+        try
         {
-            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+            String label = "com.stream-pi."+softwareType;
+
+            File sysDServiceFile = new File(System.getProperty("user.home")+"/Library/LaunchAgents/"+label+".plist");
+
+            FileWriter fw = new FileWriter(sysDServiceFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                    "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n" +
+                    "<plist version=\"1.0\">\n" +
+                    "  <dict>\n" +
+                    "    <key>Label</key>\n" +
+                    "    <string>"+label+"</string>\n" +
+                    "    <key>Program</key>\n" +
+                    "    <string>"+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"</string>\n" +
+                    "    <key>RunAtLoad</key>\n" +
+                    "    <true/>\n" +
+                    "  </dict>\n" +
+                    "</plist>");
+
+            bw.close();
+
+            runCommand("launchctl load -w '"+sysDServiceFile.getAbsolutePath()+"'");
+            runCommand("launchctl stop "+label);
         }
-        else if(platform == Platform.MAC)
+        catch (Exception e)
         {
-            throw new MinorException("Starter feature not yet implemented for MacOS");
+            e.printStackTrace();
+            throw new MinorException("Unable to set start at boot",e.getMessage());
         }
+    }
+
+    private boolean deleteStarterForMac() throws MinorException
+    {
+        try
+        {
+            File pListFile = new File(System.getProperty("user.home")+"/Library/LaunchAgents/com.stream-pi."+softwareType+".plist");
+
+            runCommand("launchctl unload -w '"+pListFile.getAbsolutePath()+"'");
+
+            return pListFile.delete();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new MinorException("Unable to unset start at boot",e.getMessage());
+        }
+    }
+
+    private void runCommand(String command) throws IOException 
+    {
+        Runtime.getRuntime().exec(command);
     }
 }
