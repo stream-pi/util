@@ -64,7 +64,11 @@ public class StartAtBoot
         String runnerFileStr = argRunnerFileStr;
 
         Logger.getLogger("").info("SDASLDJSAK : '"+StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()+"'");
-        Logger.getLogger("").info("cvee3 : '"+ Paths.get(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toURI())+"'");
+        try {
+            Logger.getLogger("").info("cvee3 : '"+ Paths.get(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toURI())+"'");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         Logger.getLogger("").info("sf2w2 : '"+runnerFileStr+"'");
         Logger.getLogger("").info("dfddg : '"+isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation+"'");
 
