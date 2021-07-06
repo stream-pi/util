@@ -28,6 +28,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
@@ -36,9 +37,9 @@ public class StartAtBoot
     private PlatformType softwareType;
     private Platform platform;
     private boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
-    private String mainClassPath;
+    private URL mainClassPath;
 
-    public StartAtBoot(PlatformType softwareType, Platform platform, String mainClassPath, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+    public StartAtBoot(PlatformType softwareType, Platform platform, URL mainClassPath, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
     {
         this.softwareType = softwareType;
         this.platform = platform;
@@ -65,22 +66,29 @@ public class StartAtBoot
 
         String runnerFileStr = argRunnerFileStr;
 
-        if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+        try
         {
-            if(platform == Platform.LINUX)
+            if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
             {
-                runnerFileStr = new File(mainClassPath).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
-                        "/bin/" + argRunnerFileStr;
+                if(platform == Platform.LINUX)
+                {
+                    runnerFileStr = new File(mainClassPath.toURI()).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
+                            "/bin/" + argRunnerFileStr;
+                }
+                else if(platform == Platform.MAC)
+                {
+                    runnerFileStr = new File(mainClassPath.toURI()).getParentFile().getParentFile().getAbsolutePath() +
+                            "/MacOS/" + argRunnerFileStr;
+                }
+                else
+                {
+                    throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
+                }
             }
-            else if(platform == Platform.MAC)
-            {
-                runnerFileStr = new File(mainClassPath).getParentFile().getParentFile().getAbsolutePath() +
-                        "/MacOS/" + argRunnerFileStr;
-            }
-            else
-            {
-                throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
-            }
+        }
+        catch (URISyntaxException e)
+        {
+            throw new MinorException(e.getMessage());
         }
 
         File runnerFile = new File(runnerFileStr);
