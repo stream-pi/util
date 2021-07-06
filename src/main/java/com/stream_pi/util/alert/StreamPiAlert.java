@@ -56,17 +56,23 @@ public class StreamPiAlert
     {
         stackPaneParent = parent;
         stackPaneParent.getStyleClass().add("alert_pane_parent");
+
+        Animation showAnimation = AlertComboBoxTransition.createShowTransition(stackPaneParent);
+        Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(stackPaneParent);
+
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
         {
             if(stackPaneParent.getChildren().size() > 0)
             {
-                stackPaneParent.setVisible(true);
+                stackPaneParent.setOpacity(0.0);
                 stackPaneParent.toFront();
+                showAnimation.play();
             }
             else
             {
-                stackPaneParent.setVisible(false);
-                stackPaneParent.toBack();
+                stackPaneParent.setOpacity(1.0);
+                closeAnimation.setOnFinished(actionEvent -> stackPaneParent.toBack());
+                closeAnimation.play();
             }
         });
     }
@@ -302,9 +308,7 @@ public class StreamPiAlert
         Platform.runLater(()->
         {
             popupNode = getAlertPane(getTitle(), getContentPane());
-            popupNode.setOpacity(0.0);
             stackPaneParent.getChildren().add(popupNode);
-            AlertComboBoxTransition.createShowTransition(popupNode).play();
 
             if(isIsShowPopup())
             {
@@ -327,13 +331,7 @@ public class StreamPiAlert
      */
     public void destroy()
     {
-        Platform.runLater(()-> {
-            Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(popupNode);
-            closeAnimation.setOnFinished(actionEvent -> {
-                stackPaneParent.getChildren().remove(popupNode);
-            });
-            closeAnimation.play();
-        });
+        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
     }
 
     private static boolean isShowPopup = true;

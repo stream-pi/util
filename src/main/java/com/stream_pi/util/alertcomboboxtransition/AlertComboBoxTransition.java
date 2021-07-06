@@ -17,7 +17,7 @@ public class AlertComboBoxTransition
                         new KeyValue(node.opacityProperty(),
                                 0.0D, Interpolator.LINEAR)
                 ),
-                new KeyFrame(Duration.millis(1.0D),
+                new KeyFrame(Duration.millis(100.0D),
                         new KeyValue(node.opacityProperty(),
                                 1.0D, Interpolator.LINEAR)
                 )
@@ -36,7 +36,7 @@ public class AlertComboBoxTransition
                         new KeyValue(node.opacityProperty(),
                                 1.0D, Interpolator.LINEAR)
                 ),
-                new KeyFrame(Duration.millis(1.0D),
+                new KeyFrame(Duration.millis(100.0D),
                         new KeyValue(node.opacityProperty(),
                                 0.0D, Interpolator.LINEAR)
                 )
