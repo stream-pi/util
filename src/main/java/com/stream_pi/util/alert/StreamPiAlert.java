@@ -16,7 +16,9 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.alert;
 
+import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
 import com.stream_pi.util.uihelper.SpaceFiller;
+import javafx.animation.Animation;
 import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -300,8 +302,9 @@ public class StreamPiAlert
         Platform.runLater(()->
         {
             popupNode = getAlertPane(getTitle(), getContentPane());
+            popupNode.setOpacity(0.0);
             stackPaneParent.getChildren().add(popupNode);
-
+            AlertComboBoxTransition.createShowTransition(popupNode).play();
 
             if(isIsShowPopup())
             {
@@ -324,7 +327,13 @@ public class StreamPiAlert
      */
     public void destroy()
     {
-        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
+        Platform.runLater(()-> {
+            Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(popupNode);
+            closeAnimation.setOnFinished(actionEvent -> {
+                stackPaneParent.getChildren().remove(popupNode);
+            });
+            closeAnimation.play();
+        });
     }
 
     private static boolean isShowPopup = true;

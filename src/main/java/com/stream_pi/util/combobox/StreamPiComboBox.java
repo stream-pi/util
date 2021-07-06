@@ -18,8 +18,10 @@ package com.stream_pi.util.combobox;
 
 import java.util.List;
 
+import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
 import com.stream_pi.util.uihelper.SpaceFiller;
 
+import javafx.animation.Animation;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
@@ -223,7 +225,9 @@ public class StreamPiComboBox<T> extends HBox
     {
         Platform.runLater(()->{
             popupNode = getPopupScrollPane();
+            popupNode.setOpacity(0.0);
             stackPaneParent.getChildren().add(popupNode);
+            AlertComboBoxTransition.createShowTransition(popupNode).play();
         });
     }
 
@@ -232,7 +236,13 @@ public class StreamPiComboBox<T> extends HBox
      */
     public void destroy()
     {
-        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
+        Platform.runLater(()-> {
+            Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(popupNode);
+            closeAnimation.setOnFinished(actionEvent -> {
+                stackPaneParent.getChildren().remove(popupNode);
+            });
+            closeAnimation.play();
+        });
     }
 
     private StreamPiComboBoxFactory<T> streamPiComboBoxFactory;
