@@ -36,12 +36,14 @@ public class StartAtBoot
     private PlatformType softwareType;
     private Platform platform;
     private boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
+    private String mainClassPath;
 
-    public StartAtBoot(PlatformType softwareType, Platform platform, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+    public StartAtBoot(PlatformType softwareType, Platform platform, String mainClassPath, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
     {
-        this.isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation = isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
         this.softwareType = softwareType;
         this.platform = platform;
+        this.mainClassPath = mainClassPath;
+        this.isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation = isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
     }
 
     public void create(String runnerFileStr) throws MinorException
@@ -63,27 +65,16 @@ public class StartAtBoot
 
         String runnerFileStr = argRunnerFileStr;
 
-        Logger.getLogger("").info("SDASLDJSAK : '"+StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()+"'");
-        try {
-            Logger.getLogger("").info("cvee3 : '"+ Paths.get(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toURI())+"'");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        Logger.getLogger("").info("sf2w2 : '"+runnerFileStr+"'");
-        Logger.getLogger("").info("dfddg : '"+isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation+"'");
-
-
         if(isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
         {
             if(platform == Platform.LINUX)
             {
-                runnerFileStr = new File(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
+                runnerFileStr = new File(mainClassPath).getParentFile().getParentFile().getParentFile().getAbsolutePath() +
                         "/bin/" + argRunnerFileStr;
             }
             else if(platform == Platform.MAC)
             {
-                runnerFileStr = new File(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation()
-                        .toExternalForm()).getParentFile().getParentFile().getAbsolutePath() +
+                runnerFileStr = new File(mainClassPath).getParentFile().getParentFile().getAbsolutePath() +
                         "/MacOS/" + argRunnerFileStr;
             }
             else
