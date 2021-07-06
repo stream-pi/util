@@ -28,6 +28,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 public class StartAtBoot
@@ -63,6 +64,7 @@ public class StartAtBoot
         String runnerFileStr = argRunnerFileStr;
 
         Logger.getLogger("").info("SDASLDJSAK : '"+StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm()+"'");
+        Logger.getLogger("").info("cvee3 : '"+ Paths.get(StartAtBoot.class.getProtectionDomain().getCodeSource().getLocation().toURI())+"'");
         Logger.getLogger("").info("sf2w2 : '"+runnerFileStr+"'");
         Logger.getLogger("").info("dfddg : '"+isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation+"'");
 
