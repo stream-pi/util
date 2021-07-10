@@ -16,29 +16,22 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.exception;
 
-public class StreamPiException extends Exception {
+public class StreamPiException extends Exception
+{
 
     private String title = null;
-    private String message = null;
 
     public StreamPiException(String message)
     {
         super(message);
 
         this.title = "";
-        this.message = message;
     }
 
     public StreamPiException(String title, String message)
     {
         super(message);
         this.title = title;
-        this.message = message;
-    }
-
-    public String getShortMessage()
-    {
-        return message;
     }
 
     public String getTitle()
@@ -49,10 +42,5 @@ public class StreamPiException extends Exception {
     public void setTitle(String title)
     {
         this.title = title;
-    }
-
-    public void setShortMessage(String message)
-    {
-        this.message = message;
     }
 }
