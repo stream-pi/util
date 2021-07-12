@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -76,6 +77,7 @@ public class IOHelper
             File[] files = file.listFiles();
             if(files == null)
             {
+                Logger.getLogger("").severe("Unable to delete file because files is null");
                 return false;
             }
 
@@ -83,6 +85,7 @@ public class IOHelper
             {
                 if(!deleteFile(eachFile))
                 {
+                    Logger.getLogger("").severe("Unable to delete file "+file.getAbsolutePath());
                     return false;
                 }
             }
