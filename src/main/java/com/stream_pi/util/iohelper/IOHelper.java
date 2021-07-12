@@ -16,6 +16,8 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.iohelper;
 
+import com.stream_pi.util.exception.SevereException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -65,48 +67,33 @@ public class IOHelper
         fis.close();
     }
 
-    public static boolean deleteFile(String path)
+    public static void deleteFile(String path) throws SevereException
     {
-        return deleteFile(new File(path));
+        deleteFile(new File(path));
     }
 
-    public static boolean deleteFile(File file)
+    public static void deleteFile(File file) throws SevereException
     {
 
         if(file.isDirectory())
         {
-            logger.info("Delete directory '"+file.getAbsolutePath()+"' ...");
             File[] files = file.listFiles();
             if(files == null)
             {
-                logger.severe("Unable to delete file because files is null");
-                return false;
+                throw new SevereException("Unable to delete file because file '"+file.getAbsolutePath()+"'. is null");
             }
 
             for(File eachFile : files)
             {
-                if(!deleteFile(eachFile))
-                {
-                    return false;
-                }
+                deleteFile(eachFile);
             }
         }
         else
         {
-            logger.info("Delete file '"+file.getAbsolutePath()+"' ...");
-
-            boolean r = file.delete();
-
-            if(!r)
+            if(!file.delete())
             {
-                Logger.getLogger("").severe("Unable to delete file");
+                Logger.getLogger("").severe("Unable to delete file '"+file.getAbsolutePath()+"'");
             }
-
-            return r;
         }
-
-        return false;
     }
-
-    static Logger logger = Logger.getLogger(IOHelper.class.getName());
 }
