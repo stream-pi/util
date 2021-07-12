@@ -72,12 +72,14 @@ public class IOHelper
 
     public static boolean deleteFile(File file)
     {
+
         if(file.isDirectory())
         {
+            getLogger().info("Delete directory '"+file.getAbsolutePath()+"' ...");
             File[] files = file.listFiles();
             if(files == null)
             {
-                Logger.getLogger("").severe("Unable to delete file because files is null");
+                getLogger().severe("Unable to delete file because files is null");
                 return false;
             }
 
@@ -85,12 +87,29 @@ public class IOHelper
             {
                 if(!deleteFile(eachFile))
                 {
-                    Logger.getLogger("").severe("Unable to delete file "+file.getAbsolutePath());
                     return false;
                 }
             }
         }
+        else
+        {
+            getLogger().info("Delete file '"+file.getAbsolutePath()+"' ...");
 
-        return file.delete();
+            boolean r = file.delete();
+
+            if(!r)
+            {
+                Logger.getLogger("").severe("Unable to delete file");
+            }
+
+            return r;
+        }
+
+        return false;
+    }
+
+    private static Logger getLogger()
+    {
+        return Logger.getLogger("");
     }
 }
