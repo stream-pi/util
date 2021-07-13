@@ -64,13 +64,14 @@ public class StreamPiAlert
         {
             if(stackPaneParent.getChildren().size() > 0)
             {
-                stackPaneParent.setOpacity(0.0);
-                stackPaneParent.toFront();
-                showAnimation.play();
+                if(stackPaneParent.getOpacity() == 0)
+                {
+                    stackPaneParent.toFront();
+                    showAnimation.play();
+                }
             }
             else
             {
-                stackPaneParent.setOpacity(1.0);
                 closeAnimation.setOnFinished(actionEvent -> stackPaneParent.toBack());
                 closeAnimation.play();
             }
