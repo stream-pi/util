@@ -38,27 +38,27 @@ public class XMLConfigHelper {
 
     public static String getStringProperty(Node parentElement, String propertyName) throws Exception
     {
-        return getProperty(parentElement, propertyName, false, null, null);
+        return getProperty(parentElement, propertyName, false, null, null,null);
     }
 
     public static int getIntProperty(Node parentElement, String propertyName) throws Exception
     {
-        return Integer.parseInt(getProperty(parentElement, propertyName, false, null, null));
+        return Integer.parseInt(getProperty(parentElement, propertyName, false, null, null, null));
     }
 
 
     public static double getDoubleProperty(Node parentElement, String propertyName) throws Exception
     {
-        return Double.parseDouble(getProperty(parentElement, propertyName, false, null, null));
+        return Double.parseDouble(getProperty(parentElement, propertyName, false, null,null, null));
     }
 
 
     public static boolean getBooleanProperty(Node parentElement, String propertyName) throws Exception
     {
-        return getProperty(parentElement, propertyName, false, null, null).equals("true");
+        return getProperty(parentElement, propertyName, false, null, null, null).equals("true");
     }
 
-    public static String getProperty(Node parentElement, String propertyName, boolean createNewIfDoesntExist, Document document, File file) throws Exception
+    public static String getProperty(Node parentElement, String propertyName, boolean createNewIfDoesntExist, String defaultValue, Document document, File file) throws Exception
     {
         try 
         {
@@ -83,6 +83,7 @@ public class XMLConfigHelper {
             {
                 logger.warning("Creating new property by that name ...");
                 Element newProp = document.createElement(propertyName);
+                newProp.setTextContent(defaultValue);
                 parentElement.appendChild(newProp);
                 save(document, file);
             }
@@ -110,7 +111,7 @@ public class XMLConfigHelper {
         String tbr = ifNotPresent;
         try
         {
-            tbr = getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file);
+            tbr = getProperty(parentElement, propertyName, createNewIfDoesntExist, ifNotPresent, document, file);
         }
         catch(Exception e)
         {
@@ -139,7 +140,7 @@ public class XMLConfigHelper {
 
         try
         {
-            tbr = Integer.parseInt(getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file));
+            tbr = Integer.parseInt(getProperty(parentElement, propertyName, createNewIfDoesntExist, ifNotPresent+"", document, file));
         }
         catch(Exception e)
         {
@@ -166,7 +167,7 @@ public class XMLConfigHelper {
 
         try
         {
-            tbr = Double.parseDouble(getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file));
+            tbr = Double.parseDouble(getProperty(parentElement, propertyName, createNewIfDoesntExist,ifNotPresent+"",  document, file));
         }
         catch(Exception e)
         {
@@ -193,7 +194,7 @@ public class XMLConfigHelper {
 
         try
         {
-            tbr = getProperty(parentElement, propertyName, createNewIfDoesntExist, document, file).equals("true");
+            tbr = getProperty(parentElement, propertyName, createNewIfDoesntExist,ifNotPresent+"", document, file).equals("true");
         }
         catch(Exception e)
         {
