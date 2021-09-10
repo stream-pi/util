@@ -3,7 +3,7 @@ com.stream_pi.util.alert
 com.stream_pi.util.checkforupdates
 com.stream_pi.util.combobox
 com.stream_pi.util.comms
-com.stream_pi.util.contactlinks
+com.stream_pi.util.links
 com.stream_pi.util.exception
 com.stream_pi.util.iohelper
 com.stream_pi.util.loggerhelper
