@@ -18,7 +18,6 @@ module com.stream_pi.util
 {
     requires transitive org.kordamp.ikonli.javafx;
     requires transitive org.kordamp.ikonli.fontawesome5;
-    requires transitive javafx.base;
     requires transitive java.logging;
     requires transitive javafx.controls;
     requires transitive java.xml;

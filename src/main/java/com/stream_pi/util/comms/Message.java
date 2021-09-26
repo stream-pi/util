@@ -16,6 +16,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.comms;
 
+
 import java.io.Serializable;
 
 /**
@@ -32,6 +33,8 @@ public class Message implements Serializable
     private int[] intArrValue;
     private double doubleValue;
     private double[] doubleArrValue;
+
+    private Object object = null;
 
     /**
      * Default Constructor for Message
@@ -56,6 +59,16 @@ public class Message implements Serializable
     public double[] getDoubleArrValue()
     {
         return doubleArrValue;
+    }
+
+    public void setObject(Object object)
+    {
+        this.object = object;
+    }
+
+    public Object getObject()
+    {
+        return object;
     }
 
     /**
