@@ -22,7 +22,8 @@ module com.stream_pi.util
     requires transitive javafx.controls;
     requires transitive java.xml;
     requires com.google.gson;
-    
+
+    exports com.stream_pi.util;
     exports com.stream_pi.util.version;
     exports com.stream_pi.util.exception;
     exports com.stream_pi.util.platform;
