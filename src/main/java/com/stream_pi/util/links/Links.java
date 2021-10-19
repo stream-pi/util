@@ -57,7 +57,7 @@ public class Links
         return "https://stream-pi.com/about";
     }
 
-    public static String getPatreon()
+    public static String getDonateLink()
     {
         return "https://www.patreon.com/streampi";
     }
