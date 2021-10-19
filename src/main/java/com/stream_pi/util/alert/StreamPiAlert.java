@@ -162,6 +162,17 @@ public class StreamPiAlert
     }
 
     /**
+     * Constructor to create Alert Box with Alert Type, Body and button choices
+     * @param streamPiAlertType Alert Type
+     * @param contentPane Alert Body
+     * @param buttons Button choices
+     */
+    public StreamPiAlert(StreamPiAlertType streamPiAlertType, Pane contentPane, String... buttons)
+    {
+        set("Alert", streamPiAlertType, contentPane, buttons);
+    }
+
+    /**
      * Constructor to create Alert Box with Heading, content text, Alert Type
      * @param title Heading
      * @param contentText Body Text
