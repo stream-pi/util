@@ -8,7 +8,7 @@ com.stream_pi.util.exception
 com.stream_pi.util.iohelper
 com.stream_pi.util.loggerhelper
 com.stream_pi.util.platform
-com.stream_pi.util.startatboot
+com.stream_pi.util.startonboot
 com.stream_pi.util.uihelper
 com.stream_pi.util.version
 com.stream_pi.util.xmlconfighelper

@@ -18,6 +18,7 @@ package com.stream_pi.util.comms;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Message class to be sent between Server and Client using sockets
@@ -25,16 +26,8 @@ import java.io.Serializable;
 public class Message implements Serializable
 {
     private final String header;
+    private final HashMap<String, Object> values = new HashMap<>();
     private static final long serialVersionUID = 2004200019671976L;
-    private String[] stringArrValue;
-    private String stringValue;
-    private byte[] byteArrValue;
-    private int intValue;
-    private int[] intArrValue;
-    private double doubleValue;
-    private double[] doubleArrValue;
-
-    private Object object = null;
 
     /**
      * Default Constructor for Message
@@ -45,101 +38,18 @@ public class Message implements Serializable
         this.header = header;
     }
 
-    /**
-     * @param doubleArrValue Double Array
-     */
-    public void setDoubleArrValue(double... doubleArrValue)
-    {
-        this.doubleArrValue = doubleArrValue;
-    }
-
-    /**
-     * @return Double Array
-     */
-    public double[] getDoubleArrValue()
-    {
-        return doubleArrValue;
-    }
-
-    public void setObject(Object object)
-    {
-        this.object = object;
-    }
-
-    public Object getObject()
-    {
-        return object;
-    }
-
-    /**
-     * @param doubleValue Double argument
-     */
-    public void setDoubleValue(double doubleValue)
-    {
-        this.doubleValue = doubleValue;
-    }
-
-    /**
-     * @return Double argument
-     */
-    public double getDoubleValue()
-    {
-        return doubleValue;
-    }
-
-    public void setIntArrValue(int... intArrValue)
-    {
-        this.intArrValue = intArrValue;
-    }
-
-    public int[] getIntArrValue()
-    {
-        return intArrValue;
-    }
-
-    public void setIntValue(int intValue)
-    {
-        this.intValue = intValue;
-    }
-
-    public int getIntValue()
-    {
-        return intValue;
-    }
-
-    public void setByteArrValue(byte[] byteArrValue)
-    {
-        this.byteArrValue = byteArrValue;
-    }
-
-    public void setStringArrValue(String... stringArrValue)
-    {
-        this.stringArrValue = stringArrValue;
-    }
-
-    public void setStringValue(String stringValue)
-    {
-        this.stringValue = stringValue;
-    }
-
     public String getHeader()
     {
         return header;
     }
 
-    public byte[] getByteArrValue()
+    public void setValue(String key, Object value)
     {
-        return byteArrValue;
+        values.put(key, value);
     }
 
-    public String[] getStringArrValue()
+    public Object getValue(String key)
     {
-        return stringArrValue;
+        return values.getOrDefault(key, null);
     }
-
-    public String getStringValue()
-    {
-        return stringValue;
-    }
-
 }

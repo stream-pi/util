@@ -24,5 +24,5 @@ public abstract class StreamPiAlertListener
     /**
      * @param buttonClicked Button choice which was clicked
      */
-    public abstract void onClick(String buttonClicked);
+    public abstract void onClick(StreamPiAlertButton buttonClicked);
 }

@@ -16,23 +16,42 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.platform;
 
-public enum Platform {
-    WINDOWS("Windows"),
-    LINUX("Linux"), 
-    MAC("MacOS"),
-    ANDROID("Android"),
-    IOS("iOS"),
-    UNKNOWN("Unknown");
+import com.stream_pi.util.i18n.I18N;
 
-    final private String UIName;
-
-    Platform(String UIName)
-    {
-        this.UIName = UIName;
-    }
+public enum Platform
+{
+    WINDOWS,
+    LINUX,
+    MAC,
+    ANDROID,
+    IOS,
+    UNKNOWN;
 
     public String getUIName()
     {
-        return UIName;
+        if (this == WINDOWS)
+        {
+            return I18N.getString("platform.Platform.windows");
+        }
+        else if(this == LINUX)
+        {
+            return I18N.getString("platform.Platform.linux");
+        }
+        else if(this == MAC)
+        {
+            return I18N.getString("platform.Platform.mac");
+        }
+        else if(this == ANDROID)
+        {
+            return I18N.getString("platform.Platform.android");
+        }
+        else if(this == IOS)
+        {
+            return I18N.getString("platform.Platform.ios");
+        }
+        else
+        {
+            return I18N.getString("platform.Platform.unknown");
+        }
     }
 }

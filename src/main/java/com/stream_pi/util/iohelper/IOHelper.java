@@ -17,6 +17,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.iohelper;
 
 import com.stream_pi.util.exception.SevereException;
+import com.stream_pi.util.i18n.I18N;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -78,7 +79,7 @@ public class IOHelper
             File[] files = file.listFiles();
             if(files == null)
             {
-                throw new SevereException("Unable to delete file because file '"+file.getAbsolutePath()+"'. is null");
+                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFileBecausePathNull", file.getAbsolutePath()));
             }
 
             for(File eachFile : files)
@@ -90,7 +91,7 @@ public class IOHelper
         {
             if(!file.delete())
             {
-                throw new SevereException("Unable to delete file '"+file.getAbsolutePath()+"'");
+                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
             }
         }
     }

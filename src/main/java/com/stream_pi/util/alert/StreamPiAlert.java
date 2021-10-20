@@ -17,6 +17,7 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 package com.stream_pi.util.alert;
 
 import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
+import com.stream_pi.util.i18n.I18N;
 import com.stream_pi.util.uihelper.SpaceFiller;
 import javafx.animation.Animation;
 import javafx.stage.Stage;
@@ -42,7 +43,7 @@ import javafx.scene.layout.VBox;
 public class StreamPiAlert
 {
     private String title;
-    private String[] buttons;
+    private StreamPiAlertButton[] buttons;
     private StreamPiAlertType streamPiAlertType;
     private Pane contentPane;
 
@@ -92,7 +93,7 @@ public class StreamPiAlert
 
     public StreamPiAlert(String contextText)
     {
-        this("Alert", contextText);
+        this(I18N.getString("alert.StreamPiAlert.alert"), contextText);
     }
 
     /**
@@ -104,7 +105,7 @@ public class StreamPiAlert
     public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType,
      Pane contentPane)
     {
-       set(title, streamPiAlertType, contentPane, "OK");
+       set(title, streamPiAlertType, contentPane, StreamPiAlertButton.OK());
     }
 
     /**
@@ -144,7 +145,7 @@ public class StreamPiAlert
      * @param streamPiAlertType Alert Type
      * @param buttons Button choices
      */
-    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, String... buttons)
+    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, StreamPiAlertButton... buttons)
     {
         set(title, streamPiAlertType, null, buttons);
     }
@@ -156,7 +157,7 @@ public class StreamPiAlert
      * @param contentPane Alert Body
      * @param buttons Button choices
      */
-    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, Pane contentPane, String... buttons)
+    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, Pane contentPane, StreamPiAlertButton... buttons)
     {
         set(title, streamPiAlertType, contentPane, buttons);
     }
@@ -167,7 +168,7 @@ public class StreamPiAlert
      * @param contentPane Alert Body
      * @param buttons Button choices
      */
-    public StreamPiAlert(StreamPiAlertType streamPiAlertType, Pane contentPane, String... buttons)
+    public StreamPiAlert(StreamPiAlertType streamPiAlertType, Pane contentPane, StreamPiAlertButton... buttons)
     {
         set("Alert", streamPiAlertType, contentPane, buttons);
     }
@@ -183,7 +184,7 @@ public class StreamPiAlert
         Label label = new Label(contentText);
         label.setWrapText(true);
         VBox vBox = new VBox(label);
-        set(title, streamPiAlertType, vBox, "OK");
+        set(title, streamPiAlertType, vBox, StreamPiAlertButton.OK());
     }
 
     /**
@@ -194,7 +195,7 @@ public class StreamPiAlert
      * @param buttons Button choices
      */
     private void set(String title, StreamPiAlertType streamPiAlertType,
-    Pane contentPane, String... buttons)
+    Pane contentPane, StreamPiAlertButton... buttons)
     {
         this.title = title;
         this.buttons = buttons;
@@ -222,7 +223,7 @@ public class StreamPiAlert
     /**
      * @return Button Choices
      */
-    public String[] getButtons()
+    public StreamPiAlertButton[] getButtons()
     {
         return buttons;
     }
@@ -239,7 +240,7 @@ public class StreamPiAlert
      * Set all the button choices
      * @param buttons Array of button choices
      */
-    public void setButtons(String... buttons)
+    public void setButtons(StreamPiAlertButton... buttons)
     {
         this.buttons = buttons;
     }
@@ -270,13 +271,13 @@ public class StreamPiAlert
         HBox buttonBar = new HBox();
         buttonBar.getStyleClass().add("alert_button_bar");
 
-        for (String eachButtonString : buttons)
+        for (StreamPiAlertButton eachStreamPiAlertButton : buttons)
         {
-            Button button = new Button(eachButtonString);
+            Button button = eachStreamPiAlertButton.getButton();
             button.setOnAction(event -> {
                 if(this.streamPiAlertListener != null)
                 {
-                    this.streamPiAlertListener.onClick(eachButtonString);
+                    this.streamPiAlertListener.onClick(eachStreamPiAlertButton);
                 }
                 destroy();
             });

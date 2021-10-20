@@ -17,20 +17,21 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.platform;
 
-public enum ReleaseStatus {
+import com.stream_pi.util.i18n.I18N;
 
-    EA("Early Access"),
-    GA("General Availability");
-
-    private final String UIName;
-
-    ReleaseStatus(String UIName)
-    {
-        this.UIName = UIName;
-    }
+public enum ReleaseStatus
+{
+    EA, GA;
 
     public String getUIName()
     {
-        return UIName;
+        if (this == EA)
+        {
+            return I18N.getString("platform.ReleaseStatus.ea");
+        }
+        else
+        {
+            return I18N.getString("platform.ReleaseStatus.ga");
+        }
     }
 }

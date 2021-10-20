@@ -28,7 +28,7 @@ module com.stream_pi.util
     exports com.stream_pi.util.exception;
     exports com.stream_pi.util.platform;
     exports com.stream_pi.util.uihelper;
-    exports com.stream_pi.util.startatboot;
+    exports com.stream_pi.util.startonboot;
     exports com.stream_pi.util.alert;
     exports com.stream_pi.util.checkforupdates;
     exports com.stream_pi.util.combobox;
@@ -37,4 +37,5 @@ module com.stream_pi.util
     exports com.stream_pi.util.iohelper;
     exports com.stream_pi.util.comms;
     exports com.stream_pi.util.links;
+    exports com.stream_pi.util.i18n;
 }

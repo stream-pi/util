@@ -14,10 +14,9 @@ GNU General Public License for more details.
 Originally Written by : Debayan Sutradhar (rnayabed)
 */
 
-package com.stream_pi.util.startatboot;
+package com.stream_pi.util.startonboot;
 
-import com.stream_pi.util.alert.StreamPiAlert;
-import com.stream_pi.util.alert.StreamPiAlertType;
+import com.stream_pi.util.i18n.I18N;
 import com.stream_pi.util.platform.Platform;
 import com.stream_pi.util.exception.MinorException;
 import com.stream_pi.util.platform.PlatformType;
@@ -26,20 +25,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
-import java.util.logging.Logger;
 
-public class StartAtBoot
+public class StartOnBoot
 {
     private PlatformType softwareType;
     private Platform platform;
     private boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
     private URL mainClassPath;
 
-    public StartAtBoot(PlatformType softwareType, Platform platform, URL mainClassPath, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
+    public StartOnBoot(PlatformType softwareType, Platform platform, URL mainClassPath, boolean isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation)
     {
         this.softwareType = softwareType;
         this.platform = platform;
@@ -56,12 +52,12 @@ public class StartAtBoot
     {
         if (platform == Platform.UNKNOWN)
         {
-            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unknownPlatform"));
         }
 
         if(argRunnerFileStr == null)
         {
-            throw new MinorException("No Runner File Name Specified as startup arguments. Cant set run at boot.");
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.noRunnerFileSpecified"));
         }
 
         String runnerFileStr = argRunnerFileStr;
@@ -82,7 +78,7 @@ public class StartAtBoot
                 }
                 else
                 {
-                    throw new MinorException("Sorry","appendPathBeforeRunnerFileToOvercomeJPackageLimitation flag is not supported on this platform.");
+                    throw new MinorException(I18N.getString("startonboot.StartOnBoot.flagNotSupported", "appendPathBeforeRunnerFileToOvercomeJPackageLimitation"));
                 }
             }
         }
@@ -94,8 +90,7 @@ public class StartAtBoot
         File runnerFile = new File(runnerFileStr);
         if(!runnerFile.isFile())
         {
-            throw new MinorException("Unable to find file at path '"+runnerFile.getAbsolutePath()+"'.\n" +
-                    "Cannot enable start at boot.");
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.runnerFileNotFound", runnerFile.getAbsolutePath()));
         }
 
         if(platform == Platform.WINDOWS)
@@ -110,7 +105,7 @@ public class StartAtBoot
     {
         if (platform == Platform.UNKNOWN)
         {
-            throw new MinorException("Cannot enable start at boot since Stream-Pi could not identify the Platform of your computer.");
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unknownPlatform"));
         }
 
         if(platform == Platform.WINDOWS)
@@ -174,7 +169,7 @@ public class StartAtBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException("Unable to set start at boot",e.getMessage());
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
         }
     }
 
@@ -192,7 +187,7 @@ public class StartAtBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException("Unable to unset start at boot",e.getMessage());
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToUnsetStartOnBoot",e.getMessage()));
         }
     }
 
@@ -221,7 +216,8 @@ public class StartAtBoot
         }
         catch (Exception e)
         {
-            throw new MinorException(e.getMessage());
+            e.printStackTrace();
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
         }
     }
     
@@ -265,7 +261,7 @@ public class StartAtBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException("Unable to set start at boot",e.getMessage());
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
         }
     }
 
@@ -282,7 +278,7 @@ public class StartAtBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException("Unable to unset start at boot",e.getMessage());
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToUnsetStartOnBoot",e.getMessage()));
         }
     }
 

@@ -18,10 +18,12 @@ package com.stream_pi.util.version;
 
 
 import com.stream_pi.util.exception.MinorException;
+import com.stream_pi.util.i18n.I18N;
 
 import java.io.Serializable;
 
-public class Version implements Serializable {
+public class Version implements Serializable
+{
     private int major, minor, revision;
 
     public Version()
@@ -51,12 +53,12 @@ public class Version implements Serializable {
             }
             catch (NumberFormatException e)
             {
-                throw new MinorException("Invalid versioning!");
+                throw new MinorException(I18N.getString("version.Version.invalidVersion", version));
             }
         }
         else
         {
-            throw new MinorException("Invalid versioning!");
+            throw new MinorException(I18N.getString("version.Version.invalidVersion", version));
         }
     }
 

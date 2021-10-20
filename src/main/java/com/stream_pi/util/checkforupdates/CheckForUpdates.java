@@ -35,6 +35,8 @@ import java.net.URL;
 
 /**
  * Update checker class
+ *
+ * Currently, does NOT work.
  */
 public class CheckForUpdates extends Task<Void>
 {
