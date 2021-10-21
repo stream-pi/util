@@ -115,6 +115,8 @@ public class StreamPiComboBox<T> extends HBox
         FontIcon fontIcon = new FontIcon();
         fontIcon.getStyleClass().add("combo_box_drop_down_icon");
 
+        setMaxWidth(Double.NEGATIVE_INFINITY);
+
         getChildren().addAll(
             currentSelectedLabel,
             SpaceFiller.horizontal(),
@@ -165,10 +167,11 @@ public class StreamPiComboBox<T> extends HBox
             optionButton.setUserData(i);
             optionButton.setOnAction(event->
             {
+                int oldSelectedIndex = currentIndex;
                 setCurrentSelectedItemIndex((int) optionButton.getUserData());
 
                 if(streamPiComboBoxListener != null)
-                    streamPiComboBoxListener.onNewItemSelected(options.get(currentIndex));
+                    streamPiComboBoxListener.onNewItemSelected(options.get(oldSelectedIndex), options.get(currentIndex));
                 
                 destroy();
             });
@@ -181,7 +184,7 @@ public class StreamPiComboBox<T> extends HBox
     /**
      * @return Current Selected Option Index
      */
-    public int getCurrentIndex()
+    public int getCurrentSelectedItemIndex()
     {
         return currentIndex;
     }
@@ -201,6 +204,21 @@ public class StreamPiComboBox<T> extends HBox
     {
         this.currentIndex = index;
         setCurrentSelectedLabelText(streamPiComboBoxFactory.getOptionDisplayText(options.get(index)));
+    }
+
+    /**
+     * @param object Current item to be selected
+     */
+    public void setCurrentSelectedItem(Object object)
+    {
+        for (int i = 0; i<options.size(); i++)
+        {
+            if(options.get(i).equals(object))
+            {
+                setCurrentSelectedItemIndex(i);
+                break;
+            }
+        }
     }
 
     /**

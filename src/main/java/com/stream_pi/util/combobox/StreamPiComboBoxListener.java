@@ -22,7 +22,8 @@ package com.stream_pi.util.combobox;
 public abstract class StreamPiComboBoxListener<T>
 {
     /**
-     * @param selectedItem Choice which was clicked
+     * @param oldSelectedItem Choice which was clicked before
+     * @param selectedItem Choice which is clicked
      */
-    public abstract void onNewItemSelected(T selectedItem);
+    public abstract void onNewItemSelected(T oldSelectedItem, T selectedItem);
 }
