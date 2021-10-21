@@ -6,23 +6,23 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class StreamPiAlertButton
 {
-    private final String title;
+    private final String i18nString;
     private final String fontIconCode;
 
-    public StreamPiAlertButton(String title)
+    public StreamPiAlertButton(String i18nString)
     {
-        this(title, null);
+        this(i18nString, null);
     }
 
-    public StreamPiAlertButton(String title, String fontIconCode)
+    public StreamPiAlertButton(String i18nString, String fontIconCode)
     {
-        this.title = title;
+        this.i18nString = i18nString;
         this.fontIconCode = fontIconCode;
     }
 
     public Button getButton()
     {
-        Button button = new Button(title);
+        Button button = new Button(I18N.getString(i18nString));
 
         if(fontIconCode != null)
         {
@@ -32,23 +32,8 @@ public class StreamPiAlertButton
         return button;
     }
 
-    public static StreamPiAlertButton YES()
-    {
-        return new StreamPiAlertButton(I18N.getString("alert.StreamPiAlertButtonDefaults.yes"));
-    }
-
-    public static StreamPiAlertButton NO()
-    {
-        return new StreamPiAlertButton(I18N.getString("alert.StreamPiAlertButtonDefaults.no"));
-    }
-
-    public static StreamPiAlertButton OK()
-    {
-        return new StreamPiAlertButton(I18N.getString("alert.StreamPiAlertButtonDefaults.ok"));
-    }
-
-    public static StreamPiAlertButton CANCEL()
-    {
-        return new StreamPiAlertButton(I18N.getString("alert.StreamPiAlertButtonDefaults.cancel"));
-    }
+    public static final StreamPiAlertButton YES = new StreamPiAlertButton("alert.StreamPiAlertButtonDefaults.yes");
+    public static final StreamPiAlertButton NO = new StreamPiAlertButton("alert.StreamPiAlertButtonDefaults.no");
+    public static final StreamPiAlertButton OK = new StreamPiAlertButton("alert.StreamPiAlertButtonDefaults.ok");
+    public static final StreamPiAlertButton CANCEL = new StreamPiAlertButton("alert.StreamPiAlertButtonDefaults.cancel");
 }

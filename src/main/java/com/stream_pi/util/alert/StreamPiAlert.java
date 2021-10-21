@@ -105,7 +105,7 @@ public class StreamPiAlert
     public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType,
      Pane contentPane)
     {
-       set(title, streamPiAlertType, contentPane, StreamPiAlertButton.OK());
+       set(title, streamPiAlertType, contentPane, StreamPiAlertButton.OK);
     }
 
     /**
@@ -184,7 +184,7 @@ public class StreamPiAlert
         Label label = new Label(contentText);
         label.setWrapText(true);
         VBox vBox = new VBox(label);
-        set(title, streamPiAlertType, vBox, StreamPiAlertButton.OK());
+        set(title, streamPiAlertType, vBox, StreamPiAlertButton.OK);
     }
 
     /**

@@ -1,30 +1,15 @@
 package com.stream_pi.util.i18n;
 
-import com.stream_pi.util.exception.SevereException;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class I18N
 {
-    public static ResourceBundle RESOURCE_BUNDLE;
+    public static ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang");
 
     public static void init(Locale locale)
     {
-        try
-        {
-            RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang", locale);
-        }
-        catch (MissingResourceException e)
-        {
-            Logger.getLogger("").log(Level.SEVERE, "No language found for "+locale.toLanguageTag()+" ! Using default", e);
-
-            RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang");
-        }
+        RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang", locale);
     }
 
     public static String getString(String key, Object... args)

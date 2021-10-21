@@ -37,5 +37,4 @@ module com.stream_pi.util
     exports com.stream_pi.util.iohelper;
     exports com.stream_pi.util.comms;
     exports com.stream_pi.util.links;
-    exports com.stream_pi.util.i18n;
 }

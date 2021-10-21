@@ -9,7 +9,7 @@ public class Util
 {
     public static final Version VERSION = new Version(1,0,0);
 
-    public static void setLocale(Locale locale)
+    public static void initI18n(Locale locale)
     {
         I18N.init(locale);
     }
