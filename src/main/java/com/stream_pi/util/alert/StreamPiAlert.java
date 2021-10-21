@@ -39,6 +39,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Custom Alert Dialog for Server and Client
+ * TODO: NEEDS CLEANUP
  */
 public class StreamPiAlert
 {
@@ -129,25 +130,28 @@ public class StreamPiAlert
     }
 
     /**
-     * Constructor for alert with just "Alert" heading,
+     * Constructor for alert with just "Alert" (Localised) heading,
      * content text and alert type
      * @param contentText Body Text
      * @param alertType Alert Type
      */
     public StreamPiAlert(String contentText, StreamPiAlertType alertType)
     {
-        this("Alert", contentText, alertType);
+        this(I18N.getString("alert.StreamPiAlert.alert"), contentText, alertType);
     }
 
     /**
-     * Constructor to create Alert box with title, Alert Type and button choices
-     * @param title Heading
+     * Constructor to create Alert box with content text, Alert Type and button choices
+     * @param contentText Content Text
      * @param streamPiAlertType Alert Type
      * @param buttons Button choices
      */
-    public StreamPiAlert(String title, StreamPiAlertType streamPiAlertType, StreamPiAlertButton... buttons)
+    public StreamPiAlert(String contentText, StreamPiAlertType streamPiAlertType, StreamPiAlertButton... buttons)
     {
-        set(title, streamPiAlertType, null, buttons);
+        Label label = new Label(contentText);
+        label.setWrapText(true);
+        VBox vBox = new VBox(label);
+        set(I18N.getString("alert.StreamPiAlert.alert"), streamPiAlertType, vBox, buttons);
     }
 
     /**
@@ -170,7 +174,7 @@ public class StreamPiAlert
      */
     public StreamPiAlert(StreamPiAlertType streamPiAlertType, Pane contentPane, StreamPiAlertButton... buttons)
     {
-        set("Alert", streamPiAlertType, contentPane, buttons);
+        set(I18N.getString("alert.StreamPiAlert.alert"), streamPiAlertType, contentPane, buttons);
     }
 
     /**
@@ -254,7 +258,7 @@ public class StreamPiAlert
     private VBox getAlertPane(String title, Pane contentPane)
     {
         if(title.isEmpty())
-            title = "Alert";           
+            title = I18N.getString("alert.StreamPiAlert.alert");
 
         Label label = new Label(title);
         label.getStyleClass().add("alert_pane_header_text");
