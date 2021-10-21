@@ -19,7 +19,9 @@ package com.stream_pi.util.platform;
 
 import com.stream_pi.util.i18n.I18N;
 
-public enum ReleaseStatus
+import java.io.Serializable;
+
+public enum ReleaseStatus implements Serializable
 {
     EA, GA;
 
