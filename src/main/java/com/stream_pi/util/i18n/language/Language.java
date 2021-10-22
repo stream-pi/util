@@ -1,4 +1,4 @@
-package com.stream_pi.util.i18n;
+package com.stream_pi.util.i18n.language;
 
 import java.util.Locale;
 
