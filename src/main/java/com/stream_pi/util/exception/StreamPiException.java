@@ -16,6 +16,8 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 package com.stream_pi.util.exception;
 
+import com.stream_pi.util.i18n.I18N;
+
 public class StreamPiException extends Exception
 {
 
@@ -25,7 +27,7 @@ public class StreamPiException extends Exception
     {
         super(message);
 
-        this.title = "";
+        this.title = I18N.getString("exception.StreamPiException.alert");
     }
 
     public StreamPiException(String title, String message)
