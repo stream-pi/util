@@ -57,6 +57,7 @@ public class StreamPiAlert
     public static void setParent(StackPane parent)
     {
         stackPaneParent = parent;
+        stackPaneParent.setPadding(new Insets(10));
         stackPaneParent.getStyleClass().add("alert_pane_parent");
 
         Animation showAnimation = AlertComboBoxTransition.createShowTransition(stackPaneParent);

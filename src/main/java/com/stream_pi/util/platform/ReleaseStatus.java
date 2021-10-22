@@ -25,6 +25,8 @@ public enum ReleaseStatus implements Serializable
 {
     EA, GA;
 
+    private static final long serialVersionUID = 2039570019678396L;
+
     public String getUIName()
     {
         if (this == EA)

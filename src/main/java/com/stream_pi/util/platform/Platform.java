@@ -29,6 +29,8 @@ public enum Platform implements Serializable
     IOS,
     UNKNOWN;
 
+    private static final long serialVersionUID = 2038742019667976L;
+
     public String getUIName()
     {
         if (this == WINDOWS)

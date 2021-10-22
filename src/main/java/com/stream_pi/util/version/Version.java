@@ -24,6 +24,7 @@ import java.io.Serializable;
 
 public class Version implements Serializable
 {
+    private static final long serialVersionUID = 20395700196031176L;
     private int major, minor, revision;
 
     public Version()
