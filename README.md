@@ -5,6 +5,8 @@
 This library contains shared components between [Server](https://github.com/stream-pi/server) and
 [Client](https://github.com/stream-pi/client) like Alerts, Combo Boxes, URL to Discord, GitHub, etc.
 
+[Help us Translate!](https://github.com/stream-pi/util/blob/master/i18n.md)
+
 ## Prerequisites
 
 * Java >= 11
