@@ -95,7 +95,7 @@ public class StreamPiAlert
 
     public StreamPiAlert(String contextText)
     {
-        this(I18N.getString("alert.StreamPiAlert.alert"), contextText);
+        this(I18N.getString("alert"), contextText);
     }
 
     /**
@@ -138,7 +138,7 @@ public class StreamPiAlert
      */
     public StreamPiAlert(String contentText, StreamPiAlertType alertType)
     {
-        this(I18N.getString("alert.StreamPiAlert.alert"), contentText, alertType);
+        this(I18N.getString("alert"), contentText, alertType);
     }
 
     /**
@@ -152,7 +152,7 @@ public class StreamPiAlert
         Label label = new Label(contentText);
         label.setWrapText(true);
         VBox vBox = new VBox(label);
-        set(I18N.getString("alert.StreamPiAlert.alert"), streamPiAlertType, vBox, buttons);
+        set(I18N.getString("alert"), streamPiAlertType, vBox, buttons);
     }
 
     /**
@@ -175,7 +175,7 @@ public class StreamPiAlert
      */
     public StreamPiAlert(StreamPiAlertType streamPiAlertType, Pane contentPane, StreamPiAlertButton... buttons)
     {
-        set(I18N.getString("alert.StreamPiAlert.alert"), streamPiAlertType, contentPane, buttons);
+        set(I18N.getString("alert"), streamPiAlertType, contentPane, buttons);
     }
 
     /**
@@ -259,7 +259,7 @@ public class StreamPiAlert
     private VBox getAlertPane(String title, Pane contentPane)
     {
         if(title.isEmpty())
-            title = I18N.getString("alert.StreamPiAlert.alert");
+            title = I18N.getString("alert");
 
         Label label = new Label(title);
         label.getStyleClass().add("alert_pane_header_text");

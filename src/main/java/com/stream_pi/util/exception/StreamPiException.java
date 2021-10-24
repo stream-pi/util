@@ -21,13 +21,13 @@ import com.stream_pi.util.i18n.I18N;
 public class StreamPiException extends Exception
 {
 
-    private String title = null;
+    private String title;
 
     public StreamPiException(String message)
     {
         super(message);
 
-        this.title = I18N.getString("exception.StreamPiException.alert");
+        this.title = I18N.getString("alert");
     }
 
     public StreamPiException(String title, String message)

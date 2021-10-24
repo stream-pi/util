@@ -52,12 +52,18 @@ public class StartOnBoot
     {
         if (platform == Platform.UNKNOWN)
         {
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unknownPlatform"));
+            throw new MinorException(
+                    I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot"),
+                    I18N.getString("startonboot.StartOnBoot.unknownPlatform")
+            );
         }
 
         if(argRunnerFileStr == null)
         {
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.noRunnerFileSpecified"));
+            throw new MinorException(
+                    I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot"),
+                    I18N.getString("startonboot.StartOnBoot.noRunnerFileSpecified")
+            );
         }
 
         String runnerFileStr = argRunnerFileStr;
@@ -90,7 +96,10 @@ public class StartOnBoot
         File runnerFile = new File(runnerFileStr);
         if(!runnerFile.isFile())
         {
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.runnerFileNotFound", runnerFile.getAbsolutePath()));
+            throw new MinorException(
+                    I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot"),
+                    I18N.getString("startonboot.StartOnBoot.runnerFileNotFound", runnerFile.getAbsolutePath())
+            );
         }
 
         if(platform == Platform.WINDOWS)
@@ -105,7 +114,10 @@ public class StartOnBoot
     {
         if (platform == Platform.UNKNOWN)
         {
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unknownPlatform"));
+            throw new MinorException(
+                    I18N.getString("startonboot.StartOnBoot.unableToDisableStartOnBoot"),
+                    I18N.getString("startonboot.StartOnBoot.unknownPlatform")
+            );
         }
 
         if(platform == Platform.WINDOWS)
@@ -169,7 +181,7 @@ public class StartOnBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot"), e.getLocalizedMessage());
         }
     }
 
@@ -187,7 +199,7 @@ public class StartOnBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToUnsetStartOnBoot",e.getMessage()));
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToDisableStartOnBoot",e.getLocalizedMessage()));
         }
     }
 
@@ -217,7 +229,7 @@ public class StartOnBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot") ,e.getLocalizedMessage());
         }
     }
     
@@ -261,7 +273,7 @@ public class StartOnBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToSetStartOnBoot",e.getMessage()));
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToEnableStartOnBoot"), e.getLocalizedMessage());
         }
     }
 
@@ -278,7 +290,7 @@ public class StartOnBoot
         catch (Exception e)
         {
             e.printStackTrace();
-            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToUnsetStartOnBoot",e.getMessage()));
+            throw new MinorException(I18N.getString("startonboot.StartOnBoot.unableToDisableStartOnBoot"), e.getLocalizedMessage());
         }
     }
 
