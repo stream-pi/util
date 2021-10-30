@@ -6,15 +6,15 @@ import java.io.Serializable;
 
 public enum DisconnectReason implements Serializable
 {
-    COMM_STANDARD_MISMATCH;
+    COMMUNICATION_PROTOCOL_MISMATCH;
 
     private static final long serialVersionUID = 2039570019671976L;
 
     public String getMessage()
     {
-        if (this == COMM_STANDARD_MISMATCH)
+        if (this == COMMUNICATION_PROTOCOL_MISMATCH)
         {
-            return I18N.getString("comms.DisconnectReason.commStandardMismatch");
+            return I18N.getString("comms.DisconnectReason.communicationProtocolMismatch");
         }
 
         return null;
