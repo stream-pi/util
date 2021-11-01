@@ -64,7 +64,7 @@ public class RootChecker
         return true;
     }
 
-    public static String getRootNotAllowed()
+    public static String getRootNotAllowedI18NString()
     {
         return I18N.getString("rootchecker.RootChecker.rootNotAllowed");
     }
