@@ -14,6 +14,7 @@
 
 package com.stream_pi.util.rootchecker;
 
+import com.stream_pi.util.i18n.I18N;
 import com.stream_pi.util.platform.Platform;
 
 import java.io.File;
@@ -61,5 +62,10 @@ public class RootChecker
             }
         }
         return true;
+    }
+
+    public static String getRootNotAllowed()
+    {
+        return I18N.getString("rootchecker.RootChecker.rootNotAllowed");
     }
 }
