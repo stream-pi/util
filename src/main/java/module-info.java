@@ -22,6 +22,7 @@ module com.stream_pi.util
     requires transitive javafx.controls;
     requires transitive java.xml;
     requires com.google.gson;
+    requires java.prefs;
 
     exports com.stream_pi.util;
     exports com.stream_pi.util.version;
@@ -38,4 +39,5 @@ module com.stream_pi.util
     exports com.stream_pi.util.comms;
     exports com.stream_pi.util.links;
     exports com.stream_pi.util.i18n;
+    exports com.stream_pi.util.rootchecker;
 }
