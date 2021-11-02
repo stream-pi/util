@@ -20,6 +20,7 @@ import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
 import com.stream_pi.util.uihelper.SpaceFiller;
 
 import javafx.animation.Animation;
+import javafx.geometry.Pos;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
@@ -160,6 +161,8 @@ public class StreamPiComboBox<T> extends HBox
             String displayText = streamPiComboBoxFactory.getOptionDisplayText(eachOptionObj);
 
             ToggleButton optionButton = new ToggleButton(displayText);
+            optionButton.prefWidthProperty().bind(vBox.widthProperty());
+            optionButton.setAlignment(Pos.CENTER);
             optionButton.getStyleClass().add("combo_box_list_option_button");
             optionButton.setSelected(i == currentIndex);
             optionButton.setUserData(i);
