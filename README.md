@@ -8,7 +8,6 @@
 This library contains shared components between [Server](https://github.com/stream-pi/server) and
 [Client](https://github.com/stream-pi/client) like Alerts, Combo Boxes, Update checker, etc.
 
-
 ![version](https://img.shields.io/badge/Version-1.0.0--SNAPSHOT-green)
 
 [![Discord](https://discordapp.com/api/guilds/582313435149238295/widget.png?style=shield)](https://discord.gg/BExqGmk)
