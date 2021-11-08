@@ -5,7 +5,7 @@
 
 *Free, Open-Source, Modular, Cross-Platform and Programmable Macro Pad*
 
-This library contains shared components between [Server](https://github.com/stream-pi/server) and
+Library containing shared components between [Server](https://github.com/stream-pi/server) and
 [Client](https://github.com/stream-pi/client) like Alerts, Combo Boxes, Update checker, etc.
 
 ![version](https://img.shields.io/badge/Version-1.0.0--SNAPSHOT-green)
@@ -22,7 +22,7 @@ This library contains shared components between [Server](https://github.com/stre
 
 ## Bugs and Support
 
-If you found a bug in the util library, please report it by creating a [GitHub issue](https://github.com/stream-pi/util/issues).
+If you found a bug in util, please report it by creating a [GitHub issue](https://github.com/stream-pi/util/issues).
 
 You may also reach us via any of the following platforms:
 * [E-mail](mailto:contact@stream-pi.com)
