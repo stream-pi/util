@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/stream-pi/client/master/logo.png" height="150" alt="logo">
 
-# Stream-Pi Utilities Library
+# Stream-Pi Util
 
 *Free, Open-Source, Modular, Cross-Platform and Programmable Macro Pad*
 
