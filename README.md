@@ -14,7 +14,6 @@ This library contains shared components between [Server](https://github.com/stre
 [![Discord](https://discordapp.com/api/guilds/582313435149238295/widget.png?style=shield)](https://discord.gg/BExqGmk)
 [![Matrix](https://img.shields.io/matrix/stream-pi-general:matrix.org?label=Matrix)](https://matrix.to/#/!hTwUYZonUXThjkMhCD:matrix.org?via=matrix.org)
 [![Become a patron](https://img.shields.io/badge/dynamic/json?color=%23e85b46&label=Donate&query=data.attributes.patron_count&suffix=%20patrons&url=https%3A%2F%2Fwww.patreon.com%2Fapi%2Fcampaigns%2F5789155)](https://www.patreon.com/streampi)
-![Total Downloads](https://img.shields.io/github/downloads/stream-pi/client/total?label=Total%20Downloads)
 
 ### [Website](https://stream-pi.com)
 #### [Documentation](https://stream-pi.github.io/util/)
