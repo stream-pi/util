@@ -85,12 +85,10 @@ public class IOHelper
                 deleteFile(eachFile);
             }
         }
-        else
+
+        if(!file.delete())
         {
-            if(!file.delete())
-            {
-                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
-            }
+            throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
         }
     }
 }
