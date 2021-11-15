@@ -16,8 +16,8 @@ package com.stream_pi.util.loggerhelper;
 
 import java.util.logging.ConsoleHandler;
 
-public class StreamPiLogFallbackHandler extends ConsoleHandler{
-
+public class StreamPiLogFallbackHandler extends ConsoleHandler
+{
     public StreamPiLogFallbackHandler()
     {
         super();

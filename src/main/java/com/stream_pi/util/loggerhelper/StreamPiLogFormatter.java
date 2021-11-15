@@ -17,7 +17,8 @@ package com.stream_pi.util.loggerhelper;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 
-public class StreamPiLogFormatter extends SimpleFormatter{
+public class StreamPiLogFormatter extends SimpleFormatter
+{
     @Override
     public String format(LogRecord record)
     {
