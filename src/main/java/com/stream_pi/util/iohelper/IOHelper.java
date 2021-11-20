@@ -64,12 +64,12 @@ public class IOHelper
         fis.close();
     }
 
-    public static void deleteFile(String path) throws SevereException
+    public static void deleteFile(String path, boolean deleteOnExit) throws SevereException
     {
-        deleteFile(new File(path));
+        deleteFile(new File(path), deleteOnExit);
     }
 
-    public static void deleteFile(File file) throws SevereException
+    public static void deleteFile(File file, boolean deleteOnExit) throws SevereException
     {
 
         if(file.isDirectory())
@@ -82,13 +82,20 @@ public class IOHelper
 
             for(File eachFile : files)
             {
-                deleteFile(eachFile);
+                deleteFile(eachFile, deleteOnExit);
             }
         }
 
-        if(!file.delete())
+        if(deleteOnExit)
         {
-            throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
+            file.deleteOnExit();
+        }
+        else
+        {
+            if(!file.delete())
+            {
+                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
+            }
         }
     }
 }
