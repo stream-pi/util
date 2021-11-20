@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -72,6 +73,11 @@ public class IOHelper
     public static void deleteFile(File file, boolean deleteOnExit) throws SevereException
     {
 
+        if(deleteOnExit)
+        {
+            file.deleteOnExit();
+        }
+
         if(file.isDirectory())
         {
             File[] files = file.listFiles();
@@ -86,11 +92,9 @@ public class IOHelper
             }
         }
 
-        if(deleteOnExit)
-        {
-            file.deleteOnExit();
-        }
-        else
+        Logger.getLogger(IOHelper.class.getName()).info("Deleting file "+file.getAbsolutePath()+" ...");
+
+        if(!deleteOnExit)
         {
             if(!file.delete())
             {
