@@ -55,7 +55,6 @@ public class StreamPiAlert
     public static void setParent(StackPane parent)
     {
         stackPaneParent = parent;
-        stackPaneParent.setPadding(new Insets(10));
         stackPaneParent.getStyleClass().add("alert_pane_parent");
 
         Animation showAnimation = AlertComboBoxTransition.createShowTransition(stackPaneParent);
@@ -268,9 +267,6 @@ public class StreamPiAlert
         HBox header = new HBox(label, SpaceFiller.horizontal(), fontIcon);
         header.getStyleClass().add("alert_header");
 
-
-        header.setPadding(new Insets(10));
-
         HBox buttonBar = new HBox();
         buttonBar.getStyleClass().add("alert_button_bar");
 
@@ -282,7 +278,12 @@ public class StreamPiAlert
                 {
                     this.streamPiAlertListener.onClick(eachStreamPiAlertButton);
                 }
-                destroy();
+
+                System.out.println(destroyAfterButtonClick);
+                if(destroyAfterButtonClick)
+                {
+                    destroy();
+                }
             });
 
             button.getStyleClass().add("alert_button");
@@ -306,6 +307,18 @@ public class StreamPiAlert
         return alertVBox;
     }
 
+    private boolean destroyAfterButtonClick = true;
+
+    public void setDestroyAfterButtonClick(boolean destroyAfterButtonClick)
+    {
+        this.destroyAfterButtonClick = destroyAfterButtonClick;
+    }
+
+    public boolean isDestroyAfterButtonClick()
+    {
+        return destroyAfterButtonClick;
+    }
+
     /**
      * @return The body node of the Alert Box
      */
@@ -323,7 +336,8 @@ public class StreamPiAlert
     {
         Platform.runLater(()->
         {
-            popupNode = getAlertPane(getTitle(), getContentPane());
+            popupNode = new StackPane(getAlertPane(getTitle(), getContentPane()));
+            popupNode.getStyleClass().add("alert_pane_popup_node_parent");
             stackPaneParent.getChildren().add(popupNode);
 
             if(isIsShowPopup())

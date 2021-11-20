@@ -20,6 +20,7 @@ import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
 import com.stream_pi.util.uihelper.SpaceFiller;
 
 import javafx.animation.Animation;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -249,7 +250,8 @@ public class StreamPiComboBox<T> extends HBox
     public void show()
     {
         Platform.runLater(()->{
-            popupNode = getPopupScrollPane();
+            popupNode = new StackPane(getPopupScrollPane());
+            popupNode.getStyleClass().add("combobox_pane_popup_node_parent");
             stackPaneParent.getChildren().add(popupNode);
         });
     }
