@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class I18N
 {
     public static ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang");
+    private static final ResourceBundle BASE_RESOURCE_BUNDLE = ResourceBundle.getBundle(I18N.class.getPackageName()+".lang", new Locale("en"));
 
     public static void init(Locale locale)
     {
@@ -36,7 +37,7 @@ public class I18N
         }
         else
         {
-            result = key;
+            result = BASE_RESOURCE_BUNDLE.getString(key);
         }
 
         if (args.length == 0)
