@@ -14,9 +14,6 @@
 
 package com.stream_pi.util.iohelper;
 
-import com.stream_pi.util.exception.SevereException;
-import com.stream_pi.util.i18n.I18N;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,10 +24,18 @@ import java.util.zip.ZipInputStream;
 
 public class IOHelper
 {
-    public static void unzip(InputStream inputStream, String destDir) throws IOException
+    public static boolean unzip(InputStream inputStream, String destDir) throws IOException
     {
         File dir = new File(destDir);
-        if(!dir.exists()) dir.mkdirs();
+
+        if(!dir.exists())
+        {
+            if(!dir.mkdirs())
+            {
+                return false;
+            }
+        }
+
         InputStream fis;
         byte[] buffer = new byte[1024];
 
@@ -45,7 +50,10 @@ public class IOHelper
 
             if(ze.isDirectory())
             {
-                newFile.mkdirs();
+                if(!newFile.mkdirs())
+                {
+                    return false;
+                }
             }
             else
             {
@@ -63,16 +71,17 @@ public class IOHelper
         zis.closeEntry();
         zis.close();
         fis.close();
+
+        return true;
     }
 
-    public static void deleteFile(String path, boolean deleteOnExit) throws SevereException
+    public static boolean deleteFile(String path, boolean deleteOnExit)
     {
-        deleteFile(new File(path), deleteOnExit);
+        return deleteFile(new File(path), deleteOnExit);
     }
 
-    public static void deleteFile(File file, boolean deleteOnExit) throws SevereException
+    public static boolean deleteFile(File file, boolean deleteOnExit)
     {
-
         if(deleteOnExit)
         {
             file.deleteOnExit();
@@ -83,7 +92,7 @@ public class IOHelper
             File[] files = file.listFiles();
             if(files == null)
             {
-                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFileBecausePathNull", file.getAbsolutePath()));
+                return false;
             }
 
             for(File eachFile : files)
@@ -96,10 +105,9 @@ public class IOHelper
 
         if(!deleteOnExit)
         {
-            if(!file.delete())
-            {
-                throw new SevereException(I18N.getString("iohelper.IOHelper.unableToDeleteFile", file.getAbsolutePath()));
-            }
+            return file.delete();
         }
+
+        return true;
     }
 }
