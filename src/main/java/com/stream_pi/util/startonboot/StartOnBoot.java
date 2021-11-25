@@ -149,6 +149,8 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
+            String execStart =  "/usr/bin/env \""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+" Stream-Pi.startMinimised=true \"\n";
+
             if(isXMode)
             {
                 bw.write("[Unit]\n" +
@@ -156,7 +158,7 @@ public class StartOnBoot
                         "[Service]\n" +
                         "Type=simple\n" +
                         "Environment=\"DISPLAY=:0\"\n" +
-                        "ExecStart=/usr/bin/env \""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\"\n" +
+                        "ExecStart=" + execStart +
                         "[Install]\n" +
                         "WantedBy=default.target\n");
             }
@@ -166,7 +168,7 @@ public class StartOnBoot
                         "Description=Stream-Pi "+softwareType+"\n" +
                         "[Service]\n" +
                         "Type=oneshot\n" +
-                        "ExecStart=/usr/bin/env \""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\"\n" +
+                        "ExecStart=" + execStart +
                         "[Install]\n" +
                         "WantedBy=default.target\n");
             }
@@ -210,7 +212,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("cd \""+runnerFile.getAbsoluteFile().getParent()+"\"\r\n" +
-                    "start \"\" \""+runnerFile.getName()+"\"");
+                    "start \"\" \""+runnerFile.getName()+"\" Stream-Pi.startMinimised=true");
             bw.close();
 
 
@@ -258,6 +260,10 @@ public class StartOnBoot
                     "    <string>"+label+"</string>\n" +
                     "    <key>Program</key>\n" +
                     "    <string>"+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"</string>\n" +
+                    "    <key>ProgramArguments</key>\n" +
+                    "    <array>\n" +
+                    "       <string>Stream-Pi.startMinimised=true</string>\n" +
+                    "    </array>\n"+
                     "    <key>RunAtLoad</key>\n" +
                     "    <true/>\n" +
                     "  </dict>\n" +
