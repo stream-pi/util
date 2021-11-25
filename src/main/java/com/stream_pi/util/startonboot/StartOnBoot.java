@@ -157,6 +157,7 @@ public class StartOnBoot
                         "Description=Stream-Pi "+softwareType+"\n" +
                         "[Service]\n" +
                         "Type=simple\n" +
+                        "ExecStartPre=/bin/sleep 3\n"+
                         "Environment=\"DISPLAY=:0\"\n" +
                         "ExecStart=" + execStart +
                         "[Install]\n" +
