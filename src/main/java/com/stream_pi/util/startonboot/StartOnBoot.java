@@ -149,7 +149,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String execStart =  "/usr/bin/env \""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+" Stream-Pi.startMinimised=true \"\n";
+            String execStart =  "\""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\" Stream-Pi.startMinimised=true\n";
 
             if(isXMode)
             {
