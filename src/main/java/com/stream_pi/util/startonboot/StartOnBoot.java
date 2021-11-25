@@ -41,12 +41,12 @@ public class StartOnBoot
         this.isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation = isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
     }
 
-    public void create(String runnerFileStr) throws MinorException
+    public void create(String runnerFileStr, String runtimeArguments) throws MinorException
     {
-        create(runnerFileStr, true);
+        create(runnerFileStr, true, runtimeArguments);
     }
 
-    public void create(String argRunnerFileStr, boolean isXMode)  throws MinorException
+    public void create(String argRunnerFileStr, boolean isXMode, String runtimeArguments)  throws MinorException
     {
         if (platform == Platform.UNKNOWN)
         {
@@ -101,11 +101,11 @@ public class StartOnBoot
         }
 
         if(platform == Platform.WINDOWS)
-            createStarterForWindows(runnerFile);
+            createStarterForWindows(runnerFile, runtimeArguments);
         else if(platform == Platform.LINUX)
-            createStarterForLinux(runnerFile, isXMode);
+            createStarterForLinux(runnerFile, isXMode, runtimeArguments);
         else if(platform == Platform.MAC)
-            createStarterForMac(runnerFile);
+            createStarterForMac(runnerFile, runtimeArguments);
     }
 
     public boolean delete() throws MinorException
@@ -128,7 +128,7 @@ public class StartOnBoot
         return false;
     }
 
-    private void createStarterForLinux(File runnerFile, boolean isXMode) throws MinorException
+    private void createStarterForLinux(File runnerFile, boolean isXMode, String runtimeArguments) throws MinorException
     {
         try
         {
@@ -149,7 +149,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String execStart =  "\""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\" Stream-Pi.startMinimised=true\n";
+            String execStart =  "\""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\" "+runtimeArguments+"\n";
 
             if(isXMode)
             {
@@ -203,7 +203,7 @@ public class StartOnBoot
         }
     }
 
-    private void createStarterForWindows(File runnerFile) throws MinorException
+    private void createStarterForWindows(File runnerFile, String runtimeArguments) throws MinorException
     {
         try
         {
@@ -212,7 +212,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("cd \""+runnerFile.getAbsoluteFile().getParent()+"\"\r\n" +
-                    "start \"\" \""+runnerFile.getName()+"\" Stream-Pi.startMinimised=true");
+                    "start \"\" \""+runnerFile.getName()+"\" "+runtimeArguments);
             bw.close();
 
 
@@ -241,7 +241,7 @@ public class StartOnBoot
         return f1 && f2;
     }
 
-    private void createStarterForMac(File runnerFile) throws MinorException
+    private void createStarterForMac(File runnerFile, String runtimeArguments) throws MinorException
     {
         try
         {
@@ -262,7 +262,7 @@ public class StartOnBoot
                     "    <string>"+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"</string>\n" +
                     "    <key>ProgramArguments</key>\n" +
                     "    <array>\n" +
-                    "       <string>Stream-Pi.startMinimised=true</string>\n" +
+                    "       <string>"+runtimeArguments+"</string>\n" +
                     "    </array>\n"+
                     "    <key>RunAtLoad</key>\n" +
                     "    <true/>\n" +
