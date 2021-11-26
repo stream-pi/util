@@ -41,12 +41,12 @@ public class StartOnBoot
         this.isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation = isAppendPathBeforeRunnerFileToOvercomeJPackageLimitation;
     }
 
-    public void create(String runnerFileStr, String runtimeArguments) throws MinorException
+    public void create(String runnerFileStr, String[] runtimeArguments) throws MinorException
     {
         create(runnerFileStr, true, runtimeArguments);
     }
 
-    public void create(String argRunnerFileStr, boolean isXMode, String runtimeArguments)  throws MinorException
+    public void create(String argRunnerFileStr, boolean isXMode, String[] runtimeArguments)  throws MinorException
     {
         if (platform == Platform.UNKNOWN)
         {
@@ -128,7 +128,7 @@ public class StartOnBoot
         return false;
     }
 
-    private void createStarterForLinux(File runnerFile, boolean isXMode, String runtimeArguments) throws MinorException
+    private void createStarterForLinux(File runnerFile, boolean isXMode, String[] runtimeArguments) throws MinorException
     {
         try
         {
@@ -149,7 +149,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String execStart =  "\""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\" "+runtimeArguments+"\n";
+            String execStart =  "\""+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"\" "+String.join(" ", runtimeArguments)+"\n";
 
             if(isXMode)
             {
@@ -204,16 +204,17 @@ public class StartOnBoot
         }
     }
 
-    private void createStarterForWindows(File runnerFile, String runtimeArguments) throws MinorException
+    private void createStarterForWindows(File runnerFile, String[] runtimeArguments) throws MinorException
     {
         try
         {
             File initFile = new File(System.getenv("APPDATA")+"/stream_pi_starter_batch_"+ softwareType +".bat");
 
+
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("cd \""+runnerFile.getAbsoluteFile().getParent()+"\"\r\n" +
-                    "start \"\" \""+runnerFile.getName()+"\" "+runtimeArguments);
+                    "cmd /k \"\""+runnerFile.getName()+"\" \""+String.join("\"", runtimeArguments)+"\"");
             bw.close();
 
 
@@ -242,7 +243,7 @@ public class StartOnBoot
         return f1 && f2;
     }
 
-    private void createStarterForMac(File runnerFile, String runtimeArguments) throws MinorException
+    private void createStarterForMac(File runnerFile, String[] runtimeArguments) throws MinorException
     {
         try
         {
@@ -253,6 +254,16 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(sysDServiceFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
+            StringBuilder arrayStrings = new StringBuilder();
+
+            for (String arg : runtimeArguments)
+            {
+                arrayStrings
+                        .append("<string>")
+                        .append(arg)
+                        .append("</string>\n");
+            }
+
             bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                     "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n" +
                     "<plist version=\"1.0\">\n" +
@@ -262,9 +273,7 @@ public class StartOnBoot
                     "    <key>Program</key>\n" +
                     "    <string>"+runnerFile.getAbsoluteFile().getParent()+"/"+runnerFile.getName()+"</string>\n" +
                     "    <key>ProgramArguments</key>\n" +
-                    "    <array>\n" +
-                    "       <string>"+runtimeArguments+"</string>\n" +
-                    "    </array>\n"+
+                    "    <array>\n" + arrayStrings + "</array>\n"+
                     "    <key>RunAtLoad</key>\n" +
                     "    <true/>\n" +
                     "  </dict>\n" +
