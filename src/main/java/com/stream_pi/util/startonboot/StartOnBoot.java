@@ -214,7 +214,7 @@ public class StartOnBoot
             FileWriter fw = new FileWriter(initFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("cd \""+runnerFile.getAbsoluteFile().getParent()+"\"\r\n" +
-                    "cmd /k \"\""+runnerFile.getName()+"\" \""+String.join("\" \"", runtimeArguments)+"\"");
+                    "cmd /k \"\""+runnerFile.getName()+"\" \""+String.join("\" \"", runtimeArguments)+"\"\"");
             bw.close();
 
 
