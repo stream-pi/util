@@ -339,7 +339,7 @@ public class StreamPiAlert
         {
             popupNode = new StackPane(getAlertPane(getTitle(), getContentPane()));
             popupNode.setCache(true);
-            popupNode.setCacheHint(CacheHint.SPEED);
+            popupNode.setCacheHint(CacheHint.QUALITY);
             popupNode.getStyleClass().add("alert_pane_popup_node_parent");
             stackPaneParent.getChildren().add(popupNode);
 
