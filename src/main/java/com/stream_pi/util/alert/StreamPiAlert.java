@@ -18,6 +18,7 @@ import com.stream_pi.util.alertcomboboxtransition.AlertComboBoxTransition;
 import com.stream_pi.util.i18n.I18N;
 import com.stream_pi.util.uihelper.SpaceFiller;
 import javafx.animation.Animation;
+import javafx.scene.CacheHint;
 import javafx.stage.Stage;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -337,6 +338,8 @@ public class StreamPiAlert
         Platform.runLater(()->
         {
             popupNode = new StackPane(getAlertPane(getTitle(), getContentPane()));
+            popupNode.setCache(true);
+            popupNode.setCacheHint(CacheHint.SPEED);
             popupNode.getStyleClass().add("alert_pane_popup_node_parent");
             stackPaneParent.getChildren().add(popupNode);
 
@@ -356,12 +359,20 @@ public class StreamPiAlert
         });
     }
 
+    private boolean isDestroyed=false;
+
     /**
      * Removes the alert from the parent pane
      */
     public void destroy()
     {
         Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
+        isDestroyed = true;
+    }
+
+    public boolean isDestroyed()
+    {
+        return isDestroyed;
     }
 
     private static boolean isShowPopup = true;
