@@ -22,6 +22,7 @@ import com.stream_pi.util.uihelper.SpaceFiller;
 import javafx.animation.Animation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
@@ -146,14 +147,13 @@ public class StreamPiComboBox<T> extends HBox
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.getStyleClass().add("combo_box_popup");
         scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
 
         VBox vBox = new VBox();
         vBox.getStyleClass().add("combo_box_popup_vbox");
 
-        scrollPane.setContent(vBox);
+        scrollPane.maxHeightProperty().bind(vBox.heightProperty().add(20));
 
-        //scrollPane.setMaxHeight(Double.NEGATIVE_INFINITY);
+        scrollPane.setContent(vBox);
 
         for(int i = 0;i<options.size();i++)
         {
@@ -249,6 +249,8 @@ public class StreamPiComboBox<T> extends HBox
     {
         Platform.runLater(()->{
             popupNode = new StackPane(getPopupScrollPane());
+            popupNode.setCache(true);
+            popupNode.setCacheHint(CacheHint.QUALITY);
             popupNode.getStyleClass().add("combobox_pane_popup_node_parent");
             stackPaneParent.getChildren().add(popupNode);
         });
