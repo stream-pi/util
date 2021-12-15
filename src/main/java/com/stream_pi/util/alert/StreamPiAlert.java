@@ -292,14 +292,14 @@ public class StreamPiAlert
         }
 
         ScrollPane scrollPane = new ScrollPane(contentPane);
-        scrollPane.prefHeightProperty().bind(contentPane.heightProperty().add(20));
         scrollPane.getStyleClass().add("alert_scroll_pane");
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
         contentPane.getStyleClass().add("alert_content_pane");
-        contentPane.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
 
         VBox alertVBox = new VBox( header, scrollPane, buttonBar);
         alertVBox.getStyleClass().add("alert_pane");

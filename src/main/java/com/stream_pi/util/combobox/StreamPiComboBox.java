@@ -145,12 +145,11 @@ public class StreamPiComboBox<T> extends HBox
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         scrollPane.getStyleClass().add("combo_box_popup");
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
 
         VBox vBox = new VBox();
         vBox.getStyleClass().add("combo_box_popup_vbox");
-        vBox.prefWidthProperty().bind(scrollPane.widthProperty().subtract(10));
-
-        scrollPane.maxHeightProperty().bind(vBox.heightProperty().add(20));
 
         scrollPane.setContent(vBox);
 
@@ -158,8 +157,7 @@ public class StreamPiComboBox<T> extends HBox
 
         for(int i = 0;i<options.size();i++)
         {
-            T eachOptionObj = options.get(i);
-            String displayText = streamPiComboBoxFactory.getOptionDisplayText(eachOptionObj);
+            String displayText = streamPiComboBoxFactory.getOptionDisplayText(options.get(i));
 
             ToggleButton optionButton = new ToggleButton(displayText);
             optionButton.prefWidthProperty().bind(vBox.widthProperty());
