@@ -20,7 +20,7 @@
 
     <groupId>com.stream-pi</groupId>
     <artifactId>util</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 
     <name>Stream-Pi Utilities</name>
     <description>Utilities library for the Stream-Pi Client and Server</description>
