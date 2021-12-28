@@ -18,7 +18,6 @@ import com.stream_pi.util.i18n.I18N;
 
 public class StreamPiException extends Exception
 {
-
     private String title;
 
     public StreamPiException(String message)
