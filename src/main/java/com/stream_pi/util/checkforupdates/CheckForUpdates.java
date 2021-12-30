@@ -14,8 +14,6 @@
 
 package com.stream_pi.util.checkforupdates;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.stream_pi.util.alert.StreamPiAlert;
 import com.stream_pi.util.alert.StreamPiAlertType;
 import com.stream_pi.util.platform.PlatformType;
@@ -26,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -34,7 +33,7 @@ import java.net.URL;
 /**
  * Update checker class
  *
- * Currently, does NOT work.
+ * does NOT work. To be updated when website API is finalised.
  */
 public class CheckForUpdates extends Task<Void>
 {
@@ -83,10 +82,10 @@ public class CheckForUpdates extends Task<Void>
             String content = readUrl(url_pre);
 
 
-            JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
+            JSONObject jsonObject = new JSONObject(content);
 
-            String latestVersionRaw = jsonObject.get("Version").getAsString();
-            String releasePage = jsonObject.get("Release Page").getAsString();
+            String latestVersionRaw = jsonObject.getString("Version");
+            String releasePage = jsonObject.getString("Release Page");
 
             Version latestVersion = new Version(latestVersionRaw);
 

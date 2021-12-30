@@ -25,8 +25,10 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+
 public class IOHelper
 {
+
     public static void unzip(InputStream inputStream, String destDir) throws MinorException
     {
         try

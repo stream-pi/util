@@ -16,10 +16,12 @@ Originally Written by : Debayan Sutradhar (rnayabed)
 
 module com.stream_pi.util
 {
-    requires transitive org.kordamp.ikonli.javafx;
-    requires transitive org.kordamp.ikonli.fontawesome5;
-    requires transitive javafx.controls;
-    requires com.google.gson;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.fontawesome5;
+    requires javafx.controls;
+    requires org.json;
+    requires java.logging;
+    requires java.xml;
 
     exports com.stream_pi.util;
     exports com.stream_pi.util.version;
@@ -37,4 +39,5 @@ module com.stream_pi.util
     exports com.stream_pi.util.links;
     exports com.stream_pi.util.rootchecker;
     exports com.stream_pi.util.i18n.language;
+
 }
