@@ -14,17 +14,10 @@
 
 package com.stream_pi.util.checkforupdates;
 
-import com.stream_pi.util.alert.StreamPiAlert;
-import com.stream_pi.util.alert.StreamPiAlertType;
 import com.stream_pi.util.platform.PlatformType;
 import com.stream_pi.util.version.Version;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -64,7 +57,7 @@ public class CheckForUpdates extends Task<Void>
     @Override
     protected Void call()
     {
-        try
+        /*try
         {
             Platform.runLater(()->checkForUpdatesButton.setDisable(true));
 
@@ -125,7 +118,7 @@ public class CheckForUpdates extends Task<Void>
         finally
         {
             Platform.runLater(()->checkForUpdatesButton.setDisable(false));
-        }
+        }*/
         return null;
     }
 

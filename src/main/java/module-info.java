@@ -19,7 +19,6 @@ module com.stream_pi.util
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.fontawesome5;
     requires javafx.controls;
-    requires org.json;
     requires java.logging;
     requires java.xml;
 
