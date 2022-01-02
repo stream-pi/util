@@ -1,6 +1,6 @@
 /*
- * Stream-Pi - Free & Open-Source Modular Cross-Platform Programmable Macro Pad
- * Copyright (C) 2019-2021  Debayan Sutradhar (rnayabed),  Samuel Quiñones (SamuelQuinones)
+ * Stream-Pi - Free, Open-Source, Modular, Cross-Platform and Programmable Macro Pad
+ * Copyright (C) 2019-2022 Debayan Sutradhar (rnayabed),  Samuel Quiñones (SamuelQuinones)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -380,7 +380,8 @@ public class StreamPiAlert
     /**
      * Sets whether Alert will act as a popup when shown.
      * In other words, the parent window (Server/Client) will act as a popup and appear on top
-     * of all windows, if this is set true
+     * of all windows, if this is set true.
+     * @param isShowPopup Set show popup mode
      */
     public static void setIsShowPopup(boolean isShowPopup)
     {
