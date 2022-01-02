@@ -1,4 +1,3 @@
-
 /*
  * Stream-Pi - Free, Open-Source, Modular, Cross-Platform and Programmable Macro Pad
  * Copyright (C) 2019-2022 Debayan Sutradhar (rnayabed),  Samuel Quiñones (SamuelQuinones)
