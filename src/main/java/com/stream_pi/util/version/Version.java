@@ -18,11 +18,14 @@ package com.stream_pi.util.version;
 import com.stream_pi.util.exception.MinorException;
 import com.stream_pi.util.i18n.I18N;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Version implements Serializable
 {
+    @Serial
     private static final long serialVersionUID = 20395700196031176L;
+
     private int major, minor, revision;
 
     public Version()

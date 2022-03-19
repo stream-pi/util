@@ -28,10 +28,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
 
-        <javafx.version>17.0.0.1</javafx.version>
-        <ikonli.version>12.2.0</ikonli.version>
+        <javafx.version>18</javafx.version>
+        <ikonli.version>12.3.1</ikonli.version>
 
         <maven.test.skip>true</maven.test.skip>
 
@@ -157,7 +157,7 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Stream-Pi/util/issues</url>
+        <url>https://github.com/stream-pi/util/issues</url>
     </issueManagement>
 
     <licenses>
@@ -171,7 +171,7 @@
     <developers>
         <developer>
             <name>Debayan Sutradhar</name>
-            <email>debayan@stream-pi.com</email>
+            <email>debayansutradhar3@gmail.com</email>
             <organization>Stream-Pi</organization>
             <organizationUrl>https://www.stream-pi.com</organizationUrl>
         </developer>

@@ -38,7 +38,6 @@ import javafx.scene.layout.VBox;
 
 /**
  * Custom Alert Dialog for Server and Client
- * TODO: NEEDS CLEANUP
  */
 public class StreamPiAlert
 {
