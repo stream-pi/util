@@ -16,23 +16,66 @@ package com.stream_pi.util.uihelper;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
+// TODO: Remove this after remove of references of this from Server/Client
 public class HBoxInputBox extends HBox {
 
     private TextField textField;
 
-    public HBoxInputBox(String labelText, TextField textField, int prefWidth, CheckBox enablerCheckBox)
+    public HBoxInputBox(String labelText, ValidatedTextField validatedTextField, double prefWidth, CheckBox enablerCheckBox)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), prefWidth, enablerCheckBox);
+    }
+
+    public HBoxInputBox(String labelText, TextField textField, double prefWidth, CheckBox enablerCheckBox)
+    {
+        init(labelText, null, textField, prefWidth, enablerCheckBox);
+    }
+
+
+    public HBoxInputBox(String labelText, TextField textField, CheckBox enablerCheckBox)
+    {
+        init(labelText, null, textField, 100, enablerCheckBox);
+    }
+
+    public HBoxInputBox(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), 100, enablerCheckBox);
+    }
+
+    public HBoxInputBox(String labelText, TextField textField)
+    {
+        init(labelText, null, textField, 100, null);
+    }
+
+    public HBoxInputBox(String labelText, ValidatedTextField validatedTextField)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), 100, null);
+    }
+
+    public HBoxInputBox(String labelText, TextField textField, int prefWidth)
+    {
+        init(labelText, null, textField, prefWidth, null);
+    }
+
+    public HBoxInputBox(String labelText, ValidatedTextField validatedTextField, int prefWidth)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), prefWidth,null);
+    }
+
+    private void init(String labelText, ValidatedTextField enclosure, TextField textField, double prefWidth, CheckBox enablerCheckBox)
     {
         textField.setPrefWidth(prefWidth);
         Label label = new Label(labelText);
         label.setWrapText(true);
         label.setAlignment(Pos.CENTER_LEFT);
         label.prefHeightProperty().bind(heightProperty());
-        getChildren().addAll(label, SpaceFiller.horizontal(), textField);
+        getChildren().addAll(label, SpaceFiller.horizontal(), (enclosure == null) ? textField : enclosure);
 
         if(enablerCheckBox != null)
         {
@@ -41,21 +84,6 @@ public class HBoxInputBox extends HBox {
             getChildren().add(enablerCheckBox);
         }
         this.textField = textField;
-    }
-
-    public HBoxInputBox(String labelText, TextField textField, CheckBox enablerCheckBox)
-    {
-        this(labelText, textField, 100, enablerCheckBox);
-    }
-
-    public HBoxInputBox(String labelText, TextField textField)
-    {
-        this(labelText, textField, 100, null);
-    }
-
-    public HBoxInputBox(String labelText, TextField textField, int prefWidth)
-    {
-        this(labelText, textField, prefWidth, null);
     }
 
     public TextField getTextField()

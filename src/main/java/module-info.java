@@ -19,6 +19,7 @@ module com.stream_pi.util
     requires javafx.controls;
     requires java.logging;
     requires java.xml;
+    requires org.controlsfx.controls;
 
     exports com.stream_pi.util;
     exports com.stream_pi.util.version;
@@ -36,5 +37,6 @@ module com.stream_pi.util
     exports com.stream_pi.util.links;
     exports com.stream_pi.util.rootchecker;
     exports com.stream_pi.util.i18n.language;
+    exports com.stream_pi.util.validation;
 
 }

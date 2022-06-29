@@ -25,6 +25,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 
+// TODO: Deprecated. To be replaced with FileChooserField
 public class HBoxInputBoxWithFileChooser extends HBox
 {
     private static File initialDirectory = null;
@@ -32,19 +33,37 @@ public class HBoxInputBoxWithFileChooser extends HBox
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, null, true, extensionFilters);
+        init(labelText, null, textField, null, 150, true, true,extensionFilters);
+    }
+
+    public HBoxInputBoxWithFileChooser(String labelText, ValidatedTextField validatedTextField,
+                                       FileChooser.ExtensionFilter... extensionFilters)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), null, 150, true, true,extensionFilters);
     }
 
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, enablerCheckBox, 150, useLast, true, extensionFilters);
+        init(labelText, null, textField, enablerCheckBox, 150, useLast, true, extensionFilters);
+    }
+
+    public HBoxInputBoxWithFileChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
+                                       boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, useLast, true, extensionFilters);
     }
 
     public HBoxInputBoxWithFileChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        this(labelText, textField, enablerCheckBox, 150, true, true, extensionFilters);
+        init(labelText, null, textField, enablerCheckBox, 150, true, true, extensionFilters);
+    }
+
+    public HBoxInputBoxWithFileChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
+                                       FileChooser.ExtensionFilter... extensionFilters)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, true, true, extensionFilters);
     }
 
     FileChooser fileChooser;
@@ -54,7 +73,7 @@ public class HBoxInputBoxWithFileChooser extends HBox
         fileChooser.setInitialDirectory(initialDirectory);
     }
 
-    private final Button fileChooseButton;
+    private Button fileChooseButton;
 
     public Button getFileChooseButton()
     {
@@ -77,12 +96,34 @@ public class HBoxInputBoxWithFileChooser extends HBox
                                        int prefWidth, boolean useLast, boolean rememberThis,
                                        FileChooser.ExtensionFilter... extensionFilter)
     {
+        init(labelText, null, textField, enablerCheckBox, prefWidth, useLast, rememberThis, extensionFilter);
+    }
+
+    public HBoxInputBoxWithFileChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
+                                       int prefWidth, boolean useLast, boolean rememberThis,
+                                       FileChooser.ExtensionFilter... extensionFilter)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), enablerCheckBox, prefWidth, useLast, rememberThis, extensionFilter);
+    }
+
+    public void init(String labelText, ValidatedTextField validatedTextField, TextField textField, CheckBox enablerCheckBox,
+                                       int prefWidth, boolean useLast, boolean rememberThis,
+                                       FileChooser.ExtensionFilter... extensionFilter)
+    {
         this.useLast = useLast;
         this.rememberThis = rememberThis;
 
         textField.setDisable(true);
 
-        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, prefWidth);
+        HBoxInputBox hBoxInputBox;
+        if(validatedTextField == null)
+        {
+            hBoxInputBox=new HBoxInputBox(labelText, textField , prefWidth);
+        }
+        else
+        {
+            hBoxInputBox= new HBoxInputBox(labelText, validatedTextField, prefWidth);
+        }
         setHgrow(hBoxInputBox, Priority.ALWAYS);
         getChildren().addAll(hBoxInputBox);
         setSpacing(5.0);

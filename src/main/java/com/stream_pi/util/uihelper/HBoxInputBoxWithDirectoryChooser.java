@@ -15,6 +15,7 @@
 package com.stream_pi.util.uihelper;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -25,30 +26,69 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 
+// TODO: Deprecated. To be replaced with DirectoryChooserField
 public class HBoxInputBoxWithDirectoryChooser extends HBox
 {
     public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField)
     {
-        this(labelText, textField, null);
+        init(labelText, null, textField, null, 150, null);
+    }
+
+    public HBoxInputBoxWithDirectoryChooser(String labelText, ValidatedTextField validatedTextField)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), null, 150, null);
     }
 
     public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox)
     {
-        this(labelText, textField, enablerCheckBox, 150, null);
+        init(labelText,null, textField, enablerCheckBox, 150, null);
+    }
+
+    public HBoxInputBoxWithDirectoryChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox)
+    {
+        init(labelText,validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, null);
     }
 
     public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
                                        File initialDirectory)
     {
-        this(labelText, textField, enablerCheckBox, 150, initialDirectory);
+        init(labelText, null, textField, enablerCheckBox, 150, initialDirectory);
     }
 
+    public HBoxInputBoxWithDirectoryChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
+                                            File initialDirectory)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, initialDirectory);
+    }
+
+
     public HBoxInputBoxWithDirectoryChooser(String labelText, TextField textField, CheckBox enablerCheckBox,
-                                       int prefWidth,  File initialDirectory)
+                                            int prefWidth,  File initialDirectory)
+    {
+        init(labelText, null, textField, enablerCheckBox, prefWidth, initialDirectory);
+    }
+
+    public HBoxInputBoxWithDirectoryChooser(String labelText, ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
+                                            int prefWidth,  File initialDirectory)
+    {
+        init(labelText, validatedTextField, validatedTextField.getTextField(), enablerCheckBox, prefWidth, initialDirectory);
+    }
+
+    private void init(String labelText, ValidatedTextField validatedTextField, TextField textField, CheckBox enablerCheckBox,
+                      int prefWidth, File initialDirectory)
     {
         textField.setDisable(true);
 
-        HBoxInputBox hBoxInputBox = new HBoxInputBox(labelText, textField, prefWidth);
+        HBoxInputBox hBoxInputBox;
+        if(validatedTextField == null)
+        {
+            hBoxInputBox=new HBoxInputBox(labelText, textField , prefWidth);
+        }
+        else
+        {
+            hBoxInputBox=new HBoxInputBox(labelText, validatedTextField , prefWidth);
+        }
+
         setHgrow(hBoxInputBox, Priority.ALWAYS);
         getChildren().addAll(hBoxInputBox);
         setSpacing(5.0);

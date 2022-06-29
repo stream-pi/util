@@ -32,6 +32,7 @@
 
         <javafx.version>19-ea+8</javafx.version>
         <ikonli.version>12.3.1</ikonli.version>
+        <controlsfx.version>11.1.1</controlsfx.version>
 
         <maven.test.skip>true</maven.test.skip>
 
@@ -60,6 +61,12 @@
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-fontawesome5-pack</artifactId>
             <version>${ikonli.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>${controlsfx.version}</version>
         </dependency>
     </dependencies>
 

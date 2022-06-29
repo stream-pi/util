@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+// TODO: Remove this after remove of references of this from Server/Client
 public class HBoxWithSpaceBetween extends HBox
 {
     public HBoxWithSpaceBetween(Node node1, Node node2, double spacing)
