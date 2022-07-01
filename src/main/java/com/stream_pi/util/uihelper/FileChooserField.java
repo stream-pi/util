@@ -14,40 +14,41 @@ import java.util.Objects;
 
 public class FileChooserField extends HBox
 {
+    private final double DEFAULT_PREF_WIDTH = 300;
     public FileChooserField(TextField textField,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(null, textField, null, 150, true, true,extensionFilters);
+        init(null, textField, null, DEFAULT_PREF_WIDTH, true, true,extensionFilters);
     }
 
     public FileChooserField(ValidatedTextField validatedTextField,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(validatedTextField, validatedTextField.getTextField(), null, 150, true, true,extensionFilters);
+        init(validatedTextField, validatedTextField.getTextField(), null, DEFAULT_PREF_WIDTH, true, true,extensionFilters);
     }
 
     public FileChooserField(TextField textField, CheckBox enablerCheckBox,
                                        boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(null, textField, enablerCheckBox, 150, useLast, true, extensionFilters);
+        init(null, textField, enablerCheckBox, DEFAULT_PREF_WIDTH, useLast, true, extensionFilters);
     }
 
     public FileChooserField(ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
                                        boolean useLast, FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, useLast, true, extensionFilters);
+        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, DEFAULT_PREF_WIDTH, useLast, true, extensionFilters);
     }
 
     public FileChooserField(TextField textField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(null, textField, enablerCheckBox, 150, true, true, extensionFilters);
+        init(null, textField, enablerCheckBox, DEFAULT_PREF_WIDTH, true, true, extensionFilters);
     }
 
     public FileChooserField(ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
                                        FileChooser.ExtensionFilter... extensionFilters)
     {
-        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, true, true, extensionFilters);
+        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, DEFAULT_PREF_WIDTH, true, true, extensionFilters);
     }
 
 
@@ -80,14 +81,14 @@ public class FileChooserField extends HBox
     }
 
     public void init(ValidatedTextField validatedTextField, TextField textField, CheckBox enablerCheckBox,
-                     int prefWidth, boolean useLast, boolean rememberThis,
+                     double prefWidth, boolean useLast, boolean rememberThis,
                      FileChooser.ExtensionFilter... extensionFilter)
     {
         this.useLast = useLast;
         this.rememberThis = rememberThis;
 
         textField.setDisable(true);
-
+        setPrefWidth(prefWidth);
         setSpacing(5.0);
 
         button = new Button();

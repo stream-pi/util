@@ -91,7 +91,7 @@ public class DoubleField extends ValidatedTextField {
 
     private void init()
     {
-
+        getTextField().setPrefWidth(100);
         resetToDefaultValue();
 
         //TODO: Implement I18N support for below

@@ -23,6 +23,7 @@ public class ValidatedTextField extends VBox implements ValidatedControl
         errorLabel = new Label();
         errorLabel.getStyleClass().add("validated_text_field_error_prompt_label");
 
+        setSpacing(5.0);
         getChildren().addAll(textField, errorLabel);
         getStyleClass().add("validated_text_field");
     }

@@ -14,36 +14,37 @@ import java.util.Objects;
 
 public class DirectoryChooserField extends HBox
 {
+    private final double DEFAULT_PREF_WIDTH = 300;
     public DirectoryChooserField(TextField textField)
     {
-        init(null, textField, null, 150, null);
+        init(null, textField, null, DEFAULT_PREF_WIDTH, null);
     }
 
     public DirectoryChooserField(ValidatedTextField validatedTextField)
     {
-        init(validatedTextField, validatedTextField.getTextField(), null, 150, null);
+        init(validatedTextField, validatedTextField.getTextField(), null, DEFAULT_PREF_WIDTH, null);
     }
 
     public DirectoryChooserField(TextField textField, CheckBox enablerCheckBox)
     {
-        init(null, textField, enablerCheckBox, 150, null);
+        init(null, textField, enablerCheckBox, DEFAULT_PREF_WIDTH, null);
     }
 
     public DirectoryChooserField(ValidatedTextField validatedTextField, CheckBox enablerCheckBox)
     {
-        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, null);
+        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, DEFAULT_PREF_WIDTH, null);
     }
 
     public DirectoryChooserField(TextField textField, CheckBox enablerCheckBox,
                                             File initialDirectory)
     {
-        init(null, textField, enablerCheckBox, 150, initialDirectory);
+        init(null, textField, enablerCheckBox, DEFAULT_PREF_WIDTH, initialDirectory);
     }
 
     public DirectoryChooserField(ValidatedTextField validatedTextField, CheckBox enablerCheckBox,
                                             File initialDirectory)
     {
-        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, 150, initialDirectory);
+        init(validatedTextField, validatedTextField.getTextField(), enablerCheckBox, DEFAULT_PREF_WIDTH, initialDirectory);
     }
 
 
@@ -60,12 +61,11 @@ public class DirectoryChooserField extends HBox
     }
 
     private void init(ValidatedTextField validatedTextField, TextField textField, CheckBox enablerCheckBox,
-                      int prefWidth, File initialDirectory)
+                      double prefWidth, File initialDirectory)
     {
+        textField.setDisable(true);
         setPrefWidth(prefWidth);
         setSpacing(5.0);
-
-        textField.setDisable(true);
 
         Button button = new Button();
         FontIcon fontIcon = new FontIcon("far-folder");
