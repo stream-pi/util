@@ -14,6 +14,9 @@
 
 package com.stream_pi.util.exception;
 
+import com.stream_pi.util.alert.StreamPiAlert;
+import com.stream_pi.util.alert.StreamPiAlertType;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +28,7 @@ public class GlobalUncaughtExceptionHandler implements Thread.UncaughtExceptionH
     public void uncaughtException(Thread t, Throwable e)
     {
         logger.log(Level.SEVERE, "Uncaught exception occurred!", e);
+        new StreamPiAlert("Uncaught Exception Occurred!", e.getLocalizedMessage(), StreamPiAlertType.ERROR).show();
     }
 
     public static void init()

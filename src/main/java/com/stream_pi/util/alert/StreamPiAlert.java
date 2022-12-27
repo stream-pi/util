@@ -57,23 +57,15 @@ public class StreamPiAlert
         stackPaneParent = parent;
         stackPaneParent.getStyleClass().add("alert_pane_parent");
 
-        Animation showAnimation = AlertComboBoxTransition.createShowTransition(stackPaneParent);
-        Animation closeAnimation = AlertComboBoxTransition.createCloseTransition(stackPaneParent);
-
         stackPaneParent.getChildren().addListener((ListChangeListener<Node>) c ->
         {
             if(stackPaneParent.getChildren().size() > 0)
             {
-                if(stackPaneParent.getOpacity() == 0)
-                {
-                    stackPaneParent.toFront();
-                    showAnimation.play();
-                }
+                stackPaneParent.toFront();
             }
             else
             {
-                closeAnimation.setOnFinished(actionEvent -> stackPaneParent.toBack());
-                closeAnimation.play();
+                stackPaneParent.toBack();
             }
         });
     }
@@ -280,7 +272,6 @@ public class StreamPiAlert
                     this.streamPiAlertListener.onClick(eachStreamPiAlertButton);
                 }
 
-                System.out.println(destroyAfterButtonClick);
                 if(destroyAfterButtonClick)
                 {
                     destroy();
@@ -340,7 +331,10 @@ public class StreamPiAlert
             popupNode.setCache(true);
             popupNode.setCacheHint(CacheHint.QUALITY);
             popupNode.getStyleClass().add("alert_pane_popup_node_parent");
+            popupNode.setOpacity(0.0);
             stackPaneParent.getChildren().add(popupNode);
+
+            AlertComboBoxTransition.createShowTransition(popupNode).play();
 
             if(isIsShowPopup())
             {
@@ -365,7 +359,11 @@ public class StreamPiAlert
      */
     public void destroy()
     {
-        Platform.runLater(()-> stackPaneParent.getChildren().remove(popupNode));
+        Platform.runLater(()->{
+            Animation closeTransition = AlertComboBoxTransition.createCloseTransition(popupNode);
+            closeTransition.setOnFinished(actionEvent -> stackPaneParent.getChildren().remove(popupNode));
+            closeTransition.play();
+        });
         isDestroyed = true;
     }
 
